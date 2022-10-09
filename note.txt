@@ -1,0 +1,21 @@
+--NOTE--
+
+// Penggunaan Model
+    1. Penamaan Model menggunakan Camel Case, Co/. "HomeManagement"
+
+// Penggunaan View
+    1. View Frontend dan Backend *WAJIB DIPISAH*
+    2. Penamaan folder atau file jika lebih dari 2 kata *WAJIB menggunakan tanda penghubung strip(-) atau Kebab Case dan menggunakan huruf kecil*, 
+       Co/. "home-management"
+
+// Penggunaan Controler 
+    1. Controller Frontend dan Backend *WAJIB DIPISAH*
+    2. Penamaan Controller menggunakan Camel Case, Co/. "HomeController"
+
+// Penggunaan Route
+    1. Route Frontend dan Backend *WAJIB DIPISAH BERDASARKAN PEMBATAS*
+
+// Perhatikan Kerapihan Kode
+
+// Penamaan variable, function, dan parameter harus sesuai dengan kondisi *DILARANG ASAL*, Co/. "function & parameter = getDataUser($idUser, $namaUser)", "variable = arrayDataUser"
+
