@@ -12,6 +12,7 @@ use App\Http\Controllers\backend\MaterialController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\InventoryProductController;
 use App\Http\Controllers\backend\StockInProductController;
+use App\Http\Controllers\backend\StockOutProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -84,8 +85,11 @@ use Illuminate\Support\Facades\Route;
             // inventory Product
             Route::resource('inventory_product', InventoryProductController::class);
 
-            // inventory Product
+            // Product Stock In
             Route::resource('stock_in_product', StockInProductController::class);
+
+            // Product Stock Out
+            Route::resource('stock_out_product', StockOutProductController::class);
 
             // absen
             Route::resource('absen', AbsenController::class);

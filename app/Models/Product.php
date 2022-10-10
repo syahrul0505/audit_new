@@ -19,6 +19,11 @@ class Product extends Model
         return $this->hasMany(StockInProduct::class);
     }
 
+    public function stockOutProduct()
+    {
+        return $this->hasMany(StockOutProduct::class);
+    }
+
     public function inventoryProduct()
     {
         return $this->hasOne(InventoryProduct::class);

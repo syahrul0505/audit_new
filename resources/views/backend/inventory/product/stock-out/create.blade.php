@@ -32,9 +32,9 @@
     <div class="col-lg-6 col-xl-6 col-sm-12">
         <div class="card card-primary">
             <div class="card-header text-center bg-gray1" style="border-radius:10px 10px 0px 0px;">
-                <h3 class="card-title text-white">Add Absen</h3>
+                <h3 class="card-title text-white">{{ $page_title }}</h3>
             </div>
-            <form method="POST" action="{{ route('backend.stock_in_product.store') }}" novalidate>
+            <form method="POST" action="{{ route('backend.stock_out_product.store') }}" novalidate>
                 @csrf
                 <div class="card-body">
 
@@ -59,10 +59,10 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="product_incoming">Product Incoming</label>
-                        <input class="form-control @error('product_incoming') is-invalid @enderror" id="product_incoming" type="number" name="product_incoming" placeholder="Product Incoming" required value="{{ old('product_incoming') }}">
+                        <label for="product_outgoing">Product Outgoing</label>
+                        <input class="form-control @error('product_outgoing') is-invalid @enderror" id="product_outgoing" type="number" name="product_outgoing" placeholder="Product OutGoing" required value="{{ old('product_outgoing') }}">
 
-                        @error('product_incoming')
+                        @error('product_outgoing')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -100,7 +100,7 @@
                    
                 <div class="card-footer bg-gray1" style="border-radius:0px 0px 10px 10px;">
                     <button type="submit" id="submit_button" class="btn btn-success btn-footer">Add</button>
-                    <a href="{{ route('backend.stock_in_product.index') }}" class="btn btn-secondary btn-footer">Back</a>
+                    <a href="{{ route('backend.stock_out_product.index') }}" class="btn btn-secondary btn-footer">Back</a>
                 </div>
             </form>
         </div>

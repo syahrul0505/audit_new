@@ -38,7 +38,7 @@
 
                         @can('departement-create')
                         <div class="col-lg-6 col-md-6 col-sm-6 d-flex justify-content-end">
-                            <a href="{{ route('backend.inventory_product.create') }}" class="btn btn-md btn-info">
+                            <a href="{{ route('backend.stock_out_product.create') }}" class="btn btn-md btn-info">
                                 <i class="fa fa-plus"></i> 
                                 Add New
                             </a>
@@ -49,35 +49,6 @@
                 </div>
 
                 <div class="card-header" style="background-color: white !important; border-radius:10px 10px 0px 0px;">
-                    <div class="row align-items-center justify-content-between flex-wrap">
-                        <div class="col-4 col-sm-3 col-md-4 col-lg-4 col-xl-4">
-                            <div class="main-title">
-                                <a href="{{ route('backend.inventory_product.create') }}">
-                                    <div class="btn btn-warning btn-sm ml-10">
-                                        <i class="ti-back-left"></i>
-                                        Back
-                                    </div>
-                                </a>
-                            </div>
-                        </div>
-                        <div class="col-8 col-sm-9 col-md-8 col-lg-8 col-xl-8 text-right">
-                            <a href="{{ route('backend.stock_in_product.index') }}">
-                                <div class="btn btn-success btn-sm ml-10">
-                                    <i class=""></i>
-                                    Stock In
-                                </div>
-                            </a>
-    
-                            <a href="{{ route('backend.stock_out_product.index') }}">
-                                <div class="btn btn-danger btn-sm ml-10">
-                                    <i class=""></i>
-                                    Stock Out 
-                                </div>
-                            </a>
-    
-                        </div>
-                    </div>
-
                     <div class="row">
                         <div class="col-6">
                             @include('backend.components.flash-message')
@@ -91,10 +62,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Date </th>
                                     <th>Product Name</th>
-                                    <th>Begin Stock</th>
-                                    <th>Total Stock</th>
+                                    <th>Outgoing</th>
+                                    <th>Employee</th>
                                     <th>Description</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
@@ -103,19 +73,18 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($inventory_product as $inventory_products)
+                                @foreach ($stock_out as $stock_outs)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $inventory_products->date}}</td>
-                                    <td>{{ $inventory_products->date}}</td>
-                                    <td>{{ $inventory_products->begin_stock}}</td>
-                                    <td>{{ $inventory_products->totalStock($inventory_products->product_id)}}</td>
-                                    <td>{{ $inventory_products->description }}</td>
+                                    <td>{{ $stock_outs->product->name}}</td>
+                                    <td>{{ $stock_outs->product_incoming}}</td>
+                                    <td>{{ $stock_outs->employee->name   }}</td>
+                                    <td>{{ $stock_outs->description }}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
                                         <div class="btn-group">
                                             @can('departement-edit')
-                                            <a href="{{ route('backend.inventory_product.edit', $inventory_products->id) }}"
+                                            <a href="{{ route('backend.stock_out_product.edit', $stock_outs->id) }}"
                                                 class="btn btn-warning text-white">
                                                 <i class="far fa-edit"></i>
                                                 Edit
@@ -123,7 +92,7 @@
                                             @endcan
 
                                             @can('departement-delete')
-                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Inventory Product', '{{ $inventory_products->name }}', '/aduitt/admin/master-data/inventory_product/' + {{ $inventory_products->id }}, '/aduitt/admin/master-data/inventory_product/')">
+                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Stock Out', '{{ $stock_outs->name }}', '/aduitt/admin/stock_out_product/' + {{ $stock_outs->id }}, '/aduitt/admin/stock_out_product/')">
                                                 <i class="far fa-trash-alt"></i>
                                                 Delete
                                             </a>

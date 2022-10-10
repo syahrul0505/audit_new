@@ -23,8 +23,8 @@ class InventoryProduct extends Model
         $product = Product::findOrfail($id);
         $begin = $product->inventoryProduct->begin_stock;
         $incoming = $product->stockInProduct->sum('product_incoming');
-        // $outgoing = $product->stockInProduct->sum('product_outgoing');
-        $result = $begin + $incoming;
+        $outgoing = $product->stockOutProduct->sum('product_outgoing');
+        $result = $begin + $incoming - $outgoing;
         return $result;
    }
 }
