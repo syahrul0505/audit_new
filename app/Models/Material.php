@@ -13,4 +13,19 @@ class Material extends Model
     
 
     protected $guarded = [];
+
+    public function stockInMaterial()
+    {
+        return $this->hasMany(StockInMaterial::class);
+    }
+
+    public function stockOutMaterial()
+    {
+        return $this->hasMany(StockOutMaterial::class);
+    }
+
+    public function inventoryMaterial()
+    {
+        return $this->hasOne(InventoryMaterial::class);
+    }
 }

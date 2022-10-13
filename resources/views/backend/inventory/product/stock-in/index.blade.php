@@ -49,6 +49,19 @@
                 </div>
 
                 <div class="card-header" style="background-color: white !important; border-radius:10px 10px 0px 0px;">
+                    <div class="row align-items-center justify-content-between flex-wrap">
+                        <div class="col-4 col-sm-3 col-md-4 col-lg-4 col-xl-4">
+                            <div class="main-title">
+                                <a href="{{ route('backend.inventory_product.index') }}">
+                                    <div class="btn btn-warning btn-sm ml-10">
+                                        <i class="ti-back-left"></i>
+                                        Back
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="row">
                         <div class="col-6">
                             @include('backend.components.flash-message')
@@ -76,7 +89,7 @@
                                 @foreach ($stock_in as $stock_ins)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $stock_ins->inventoryProduct->product->name}}</td>
+                                    <td>{{ $stock_ins->product->name}}</td>
                                     <td>{{ $stock_ins->product_incoming}}</td>
                                     <td>{{ $stock_ins->employee->name   }}</td>
                                     <td>{{ $stock_ins->description }}</td>
@@ -92,7 +105,7 @@
                                             @endcan
 
                                             @can('departement-delete')
-                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Inventory Product', '{{ $stock_ins->name }}', '/aduitt/admin/master-data/inventory_product/' + {{ $stock_ins->id }}, '/aduitt/admin/master-data/inventory_product/')">
+                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Inventory Product', '{{ $stock_ins->name }}', '/aduitt/admin/stock_in_product/' + {{ $stock_ins->id }}, '/aduitt/admin/stock_in_product/')">
                                                 <i class="far fa-trash-alt"></i>
                                                 Delete
                                             </a>

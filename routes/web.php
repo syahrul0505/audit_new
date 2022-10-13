@@ -13,6 +13,11 @@ use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\InventoryProductController;
 use App\Http\Controllers\backend\StockInProductController;
 use App\Http\Controllers\backend\StockOutProductController;
+use App\Http\Controllers\backend\InventoryMaterialController;
+use App\Http\Controllers\backend\StockInMaterialController;
+use App\Http\Controllers\backend\StockOutMaterialController;
+use App\Http\Controllers\backend\ForecastController;
+use App\Http\Controllers\backend\ReportInventoryMaterialController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -75,21 +80,38 @@ use Illuminate\Support\Facades\Route;
                 // Product
                 Route::resource('product', ProductController::class);
                 
+                
                 // Users
                 Route::patch('change-password', [UserController::class, 'changePassword'])->name('users.change-password');
                 Route::resource('users', UserController::class)->except([
                     'show'
                 ]);;
             });
-
+            
             // inventory Product
             Route::resource('inventory_product', InventoryProductController::class);
-
+            
             // Product Stock In
             Route::resource('stock_in_product', StockInProductController::class);
-
+            Route::get('stok-product',[StockInProductController::class, 'getStockById'])->name('inventory-product.get-stock');
+            
             // Product Stock Out
             Route::resource('stock_out_product', StockOutProductController::class);
+            Route::get('stok-out-product',[StockOutProductController::class, 'getStockById'])->name('stock-out-product.get-stock');
+            
+            // inventory Material
+            Route::resource('inventory_material', InventoryMaterialController::class);
+
+            // Stock In Material
+            Route::resource('stock_in_material', StockInMaterialController::class);
+            Route::get('stok-material',[StockInMaterialController::class, 'getStockById'])->name('inventory-material.get-stock');
+
+             // Stock Out Material
+             Route::resource('stock_out_material', StockOutMaterialController::class);
+            
+            // Forecast
+            Route::resource('forecast', ForecastController::class);
+            Route::get('get-gramasi',[ForecastController::class, 'getGramasiById'])->name('product.get-gramasi');
 
             // absen
             Route::resource('absen', AbsenController::class);
@@ -97,7 +119,12 @@ use Illuminate\Support\Facades\Route;
 
             // Report
             Route::get('report', [ReportController::class, 'index'])->name('report.index');
-            Route::post('/report-absen-export', [ReportController::class, 'ReportExport'])->name('report-absen-export');
+            Route::get('/report-absen-export', [ReportController::class, 'ReportExport'])->name('report-absen-export');
+
+            // Report Inventory Material
+            Route::get('report-inventory-material', [ReportInventoryMaterialController::class, 'index'])->name('report-inventory-material.index');
+            Route::get('/report-inventory-material-export', [ReportInventoryMaterialController::class, 'ReportExport'])->name('report-inventory-material-export');
+
 
             // Filter
             Route::resource('filter', FilterController::class);

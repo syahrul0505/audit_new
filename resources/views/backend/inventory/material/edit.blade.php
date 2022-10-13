@@ -36,9 +36,9 @@ cursor: crosshair;
     <div class="col-md-6">
         <div class="card card-primary">
             <div class="card-header text-center bg-gray1" style="border-radius:10px 10px 0px 0px;">
-                <h3 class="card-title text-white">Employee Edit</h3>
+                <h3 class="card-title text-white">{{ $page_title }}</h3>
             </div>
-            <form action="{{ route('backend.inventory_product.update', $inventory_product->id) }}" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('backend.inventory_product.update', $inventory_material->id) }}" method="POST" enctype="multipart/form-data">
                 @method('patch')
                 @csrf
 
@@ -48,7 +48,7 @@ cursor: crosshair;
                   
                     <div class="form-group mb-3">
                         <label for="date">Date</label>
-                        <input class="form-control @error('date') is-invalid @enderror" id="date" type="date" name="date" placeholder="date " required value="{{ old('date') ?? $inventory_product->date }}">
+                        <input class="form-control @error('date') is-invalid @enderror" id="date" type="date" name="date" placeholder="date " required value="{{ old('date') ?? $inventory_material->date }}">
 
                         @error('date')
                             <span class="invalid-feedback" role="alert">
@@ -57,21 +57,23 @@ cursor: crosshair;
                         @enderror
                     </div>
 
-                    <div class="form-group mb-3">
-                        <label>Product Name</label>
-                        <select class="form-select @error('productid') is-invalid @enderror" name="product_id">
-                            <option disabled selected>Choose Product</option>
-                            @foreach ($product as $products)
-                                <option value="{{ $products->id ?? '' }}"
-                                    {{ (old('product_id') ?? ($inventory_product->product->id ?? '')) == $products->id ?? '' ? 'selected' : '' }}>
-                                    {{ $products->name ?? '' }}</option>
-                            @endforeach
-                        </select>
-                        @error('Product_id_id')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>*Product Wajib Diisi!</strong>
-                            </span>
-                        @enderror
+                    <div class="col-lg-6 ml-20">
+                        <div class="form-group">
+                            <label>Material Name</label>
+                            <select class="form-control @error('material_id') is-invalid @enderror" name="material_id">
+                                <option disabled selected>Choose material</option>
+                                @foreach ($material as $material)
+                                    <option value="{{ $material->id ?? '' }}"
+                                        {{ (old('product_id') ?? ($inventory_product->product->id ?? '')) == $material->id ?? '' ? 'selected' : '' }}>
+                                        {{ $material->name ?? '' }}</option>
+                                @endforeach
+                            </select>
+                            @error('Product_id_id')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>*Material Wajib Diisi!</strong>
+                                </span>
+                            @enderror
+                        </div>
                     </div>
 
                     <div class="form-group mb-3">

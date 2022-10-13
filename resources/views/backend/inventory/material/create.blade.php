@@ -18,7 +18,7 @@
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item active"><a href="{{ route('backend.absen.index') }}">Absen</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('backend.inventory_material.index') }}">Inventory</a></li>
                 </ol>
             </div>
 
@@ -34,7 +34,7 @@
             <div class="card-header text-center bg-gray1" style="border-radius:10px 10px 0px 0px;">
                 <h3 class="card-title text-white">{{ $page_title }}</h3>
             </div>
-            <form method="POST" action="{{ route('backend.inventory_product.store') }}" novalidate>
+            <form method="POST" action="{{ route('backend.inventory_material.store') }}" novalidate>
                 @csrf
                 <div class="card-body">
 
@@ -54,15 +54,15 @@
                     <div class="form-group mb-3">
                         <label>Product</label>
 
-                        <select class="form-control @error('product_id') is-invalid @enderror" name="product_id">
-                            <option disabled selected>Choose Product</option>
-                            @foreach ($product as $products)
-                            <option value="{{ $products->id }}"
-                                {{ old('product_id') == $products->id ? 'selected' : '' }}>
-                                {{ $products->name }} </option>
+                        <select class="form-control @error('material_id') is-invalid @enderror" name="material_id">
+                            <option disabled selected>Choose Material</option>
+                            @foreach ($material as $materials)
+                            <option value="{{ $materials->id }}"
+                                {{ old('product_id') == $materials->id ? 'selected' : '' }}>
+                                {{ $materials->name }} </option>
                             @endforeach
                         </select>
-                        @error('product_id')
+                        @error('material_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -93,7 +93,7 @@
                    
                 <div class="card-footer bg-gray1" style="border-radius:0px 0px 10px 10px;">
                     <button type="submit" id="submit_button" class="btn btn-success btn-footer">Add</button>
-                    <a href="{{ route('backend.inventory.index') }}" class="btn btn-secondary btn-footer">Back</a>
+                    <a href="{{ route('backend.inventory_material.index') }}" class="btn btn-secondary btn-footer">Back</a>
                 </div>
             </form>
         </div>

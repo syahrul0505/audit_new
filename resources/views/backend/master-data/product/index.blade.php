@@ -60,7 +60,10 @@
                                     <th>No</th>
                                     <th>Product Code </th>
                                     <th>Product Name</th>
-                                    <th>Dimension</th>
+                                    <th>Gramsi</th>
+                                    <th>Thickness</th>
+                                    <th>Panjang</th>
+                                    <th>Lebar</th>
                                     <th>Description</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
@@ -74,7 +77,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $products->code}}</td>
                                     <td>{{ $products->name}}</td>
-                                    <td>{{ $products->dimension}}</td>
+                                    <td>{{ $products->gramasi}}</td>
+                                    <td>{{ $products->thickness}}</td>
+                                    <td>{{ $products->panjang}}</td>
+                                    <td>{{ $products->lebar}}</td>
                                     <td>{{ $products->description }}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>

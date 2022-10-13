@@ -52,7 +52,7 @@
                     <div class="row align-items-center justify-content-between flex-wrap">
                         <div class="col-4 col-sm-3 col-md-4 col-lg-4 col-xl-4">
                             <div class="main-title">
-                                <a href="{{ route('backend.inventory_product.create') }}">
+                                <a href="{{ route('backend.inventory.index') }}">
                                     <div class="btn btn-warning btn-sm ml-10">
                                         <i class="ti-back-left"></i>
                                         Back
@@ -106,8 +106,8 @@
                                 @foreach ($inventory_product as $inventory_products)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $inventory_products->date}}</td>
-                                    <td>{{ $inventory_products->date}}</td>
+                                    <td>{{ date('d-m-Y', strtotime($inventory_products->date));}}</td>
+                                    <td>{{ $inventory_products->product->name ?? ''}}</td>
                                     <td>{{ $inventory_products->begin_stock}}</td>
                                     <td>{{ $inventory_products->totalStock($inventory_products->product_id)}}</td>
                                     <td>{{ $inventory_products->description }}</td>
@@ -123,7 +123,7 @@
                                             @endcan
 
                                             @can('departement-delete')
-                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Inventory Product', '{{ $inventory_products->name }}', '/aduitt/admin/master-data/inventory_product/' + {{ $inventory_products->id }}, '/aduitt/admin/master-data/inventory_product/')">
+                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Inventory Product', '{{ $inventory_products->name }}', '/aduitt/admin/inventory_product/' + {{ $inventory_products->id }}, '/aduitt/admin/inventory_product/')">
                                                 <i class="far fa-trash-alt"></i>
                                                 Delete
                                             </a>

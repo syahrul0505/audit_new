@@ -75,7 +75,7 @@ class InventoryProductController extends Controller
         
         $inventory_product->save();
 
-        return redirect()->route('backend.employee.index')->with(['success' => 'Inventory Product edited successfully!']);
+        return redirect()->route('backend.inventory_product.index')->with(['success' => 'Inventory Product edited successfully!']);
     }
 
     public function destroy($id)
@@ -85,7 +85,7 @@ class InventoryProductController extends Controller
             $inventory_product->delete();
         });
         
-        Session::flash('success', 'Employee deleted successfully!');
+        Session::flash('success', 'Inventory Product deleted successfully!');
         return response()->json(['status' => '200']);
     }
 

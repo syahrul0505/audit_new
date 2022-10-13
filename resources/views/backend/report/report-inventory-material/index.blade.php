@@ -70,7 +70,7 @@
                             <div>
                                 <p class="tx-black" style="display: inline;">Download :</p>
                             </div>
-                                <a href="{{ route('backend.report-absen-export') }}" class="btn btn-sm btn-danger">
+                                <a href="{{ route('backend.report-inventory-material-export') }}" class="btn btn-sm btn-danger">
                                     PDF
                                 </a>
                             {{-- <div id="buttons" style="padding: 10px; margin-bottom: 10px; width: 100%; border-radius:5px; display:inline;"></div> --}}
@@ -87,13 +87,13 @@
                             </thead>
                     
                             <tbody>
-                                @foreach ($inventory_product as $inventory_products)
+                                @foreach ($inventory_material as $inventory_materials)
                                 <tr >
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($inventory_products->created_at));}}</td>
-                                    <td>{{ $inventory_products->product->name ?? ''}}</td>
-                                    <td>{{ $inventory_products->begin_stock ?? ''}}</td>
-                                    <td>{{ $inventory_products->begin_stock ?? ''}}</td>
+                                    <td>{{ date('d-m-Y', strtotime($inventory_materials->created_at));}}</td>
+                                    <td>{{ $inventory_materials->product->name ?? ''}}</td>
+                                    <td>{{ $inventory_materials->begin_stock ?? ''}}</td>
+                                    <td>{{ $inventory_materials->begin_stock ?? ''}}</td>
                                    
                                 </tr>
                                 @endforeach

@@ -14,25 +14,45 @@
                 @if(auth()->user()->can('dashboard'))
                 <li>
                     <a href="{{ route('backend.inventory.index') }}" class="waves-effect">
-                        <i class="fas fa-address-card"></i>
+                        <i class="bx bx-box"></i>
                         <span key="t-dashboards">Inventory</span>
                     </a>
                 </li>
                 @endif
 
+                <li>
+                    <a href="javascript: void(0);" class="has-arrow waves-effect">
+                        <i class="fas fa-clipboard"></i>
+                        <span key="t-dashboards">Report</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{ route('backend.report.index') }}" key="t-default">Report Inventory Product</a></li>
+                        <li><a href="{{ route('backend.report-inventory-material.index') }}" key="t-default">Report Inventory Material</a></li>
+                    </ul>
+                </li>
+
                 @if(auth()->user()->can('dashboard'))
                 <li>
-                    <a href="{{ route('backend.report.index') }}" class="waves-effect">
-                        <i class="bx bx-receipt"></i>
-                        <span key="t-dashboards">Report</span>
+                    <a href="{{ route('backend.forecast.index') }}" class="waves-effect">
+                        <i class="fas fa-address-card"></i>
+                        <span key="t-dashboards">Forecast</span>
                     </a>
                 </li>
                 @endif
 
+                {{-- @if(auth()->user()->can('dashboard'))
+                <li>
+                    <a href="{{ route('backend.report.index') }}" class="waves-effect">
+                        <i class="fas fa-clipboard"></i>
+                        <span key="t-dashboards">Report</span>
+                    </a>
+                </li>
+                @endif --}}
+
                 @if(auth()->user()->can('dashboard'))
                 <li>
                     <a href="{{ route('backend.master-data.index') }}" class="waves-effect">
-                        <i class="bx bx-receipt"></i>
+                        <i class="far fa-folder"></i>
                         <span key="t-dashboards">Master Data</span>
                     </a>
                 </li>

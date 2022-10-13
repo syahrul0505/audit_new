@@ -18,7 +18,7 @@
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
-                    <li class="breadcrumb-item active"><a href="{{ route('backend.absen.index') }}">Absen</a></li>
+                    <li class="breadcrumb-item active"><a href="{{ route('backend.stock_in_product.index') }}">Stock In Material</a></li>
                 </ol>
             </div>
 
@@ -34,24 +34,24 @@
             <div class="card-header text-center bg-gray1" style="border-radius:10px 10px 0px 0px;">
                 <h3 class="card-title text-white">{{ $page_title }}</h3>
             </div>
-            <form method="POST" action="{{ route('backend.stock_out_product.store') }}" novalidate>
+            <form method="POST" action="{{ route('backend.stock_in_material.store') }}" novalidate>
                 @csrf
                 <div class="card-body">
 
                     @include('backend.components.form-message')
 
                     <div class="form-group mb-3">
-                        <label>Product</label>
+                        <label>Material</label>
 
-                        <select class="form-control @error('product_id') is-invalid @enderror" id="product_id" name="product_id">
-                            <option disabled selected>Choose Product</option>
-                            @foreach ($product as $products)
-                            <option value="{{ $products->id }}"
-                                {{ old('product_id') == $products->id ? 'selected' : '' }}>
-                                {{ $products->name }} </option>
+                        <select class="form-select @error('material_id') is-invalid @enderror" id="material_id" name="material_id">
+                            <option disabled selected>Choose Material</option>
+                            @foreach ($material as $materials)
+                            <option value="{{ $materials->id }}"
+                                {{ old('material_id') == $materials->id ? 'selected' : '' }}>
+                                {{ $materials->name }} </option>
                             @endforeach
                         </select>
-                        @error('inventory_product_id')
+                        @error('material_id')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -59,10 +59,21 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="product_outgoing">Product Outgoing</label>
-                        <input class="form-control @error('product_outgoing') is-invalid @enderror" onkeyup="calculateStock()" id="product_outgoing" type="number" name="product_outgoing" placeholder="Product outgoing" required value="{{ old('product_outgoing') }}">
+                        <label for="material_incoming">Material Incoming</label>
+                        <input class="form-control @error('material_incoming') is-invalid @enderror" id="material_incoming" type="number" name="material_incoming" placeholder="material Incoming" required value="{{ old('material_incoming') }}">
 
-                        @error('product_outgoing')
+                        @error('material_incoming')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="date">Date</label>
+                        <input class="form-control @error('date') is-invalid @enderror" id="date" type="date" name="date" placeholder="Date" required value="{{ old('date') }}">
+
+                        @error('date')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -72,7 +83,7 @@
                     <div class="form-group mb-3">
                         <label>Employee</label>
 
-                        <select class="form-control @error('employee_id') is-invalid @enderror" name="employee_id">
+                        <select class="form-select @error('employee_id') is-invalid @enderror" name="employee_id">
                             <option disabled selected>Choose Employee</option>
                             @foreach ($employee as $employees)
                             <option value="{{ $employees->id }}"
@@ -90,7 +101,7 @@
                     <div class="form-group mb-3">
                         <label for="available_stock">Stok Tersedia</label>
                         <input type="number" readonly
-                            class="form-control @error('available_stock') is-invalid @enderror" name="current_stock"
+                            class="form-control @error('available_stock') is-invalid @enderror" name="available_stock"
                             id="available_stock">
                     </div>
 
@@ -107,7 +118,7 @@
                    
                 <div class="card-footer bg-gray1" style="border-radius:0px 0px 10px 10px;">
                     <button type="submit" id="submit_button" class="btn btn-success btn-footer">Add</button>
-                    <a href="{{ route('backend.stock_out_product.index') }}" class="btn btn-secondary btn-footer">Back</a>
+                    <a href="{{ route('backend.stock_in_material.index') }}" class="btn btn-secondary btn-footer">Back</a>
                 </div>
             </form>
         </div>
@@ -118,13 +129,13 @@
 @section('script')
 <script>
     let stok_tersedia = 0;
-    $('#product_id').change(function () {
-        let product_id = $('#product_id').val();
+    $('#material_id').change(function () {
+        let material_id = $('#material_id').val();
         $.ajax({
-            url: "{{ route('backend.stock-out-product.get-stock') }}",
+            url: "{{ route('backend.inventory-material.get-stock') }}",
             type: "GET",
             data: {
-                product_id: product_id
+                material_id: material_id
             },
             success: function (data) {
                 stok_tersedia = data.total_stock;
@@ -135,8 +146,8 @@
 
 
     function calculateStock() {
-        let qty = $('#product_outgoing').val();
-        $('#available_stock').val(stok_tersedia - Number(qty));
+        let qty = $('#qty').val();
+        $('#available_stock').val(stok_tersedia + Number(qty));
     }
 
 </script>

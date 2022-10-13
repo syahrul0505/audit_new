@@ -27,4 +27,16 @@ class InventoryProduct extends Model
         $result = $begin + $incoming - $outgoing;
         return $result;
    }
+
+   public function stok_tersedia($id)
+    {
+        $product = Product::findOrfail($id);
+        $begin = $product->inventoryProduct->begin_stock;
+        $incoming = $product->stockInProduct->sum('product_incoming');
+        $outgoing = $product->stockOutProduct->sum('product_outgoing');
+
+        $total_stock = ($begin + $incoming) - $outgoing;
+
+        return $total_stock;
+    }
 }

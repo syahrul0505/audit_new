@@ -13,7 +13,7 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">home</li>
                     <li class="breadcrumb-item">/</li>
-                    <li class="breadcrumb-item"><a href="{{ route('backend.inventory_product.index') }}">Inventory Product</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('backend.inventory_product.index') }}">Inventory Material</a></li>
                 </ol>
             </div>
 
@@ -38,7 +38,7 @@
 
                         @can('departement-create')
                         <div class="col-lg-6 col-md-6 col-sm-6 d-flex justify-content-end">
-                            <a href="{{ route('backend.stock_out_product.create') }}" class="btn btn-md btn-info">
+                            <a href="{{ route('backend.inventory_material.create') }}" class="btn btn-md btn-info">
                                 <i class="fa fa-plus"></i> 
                                 Add New
                             </a>
@@ -52,13 +52,29 @@
                     <div class="row align-items-center justify-content-between flex-wrap">
                         <div class="col-4 col-sm-3 col-md-4 col-lg-4 col-xl-4">
                             <div class="main-title">
-                                <a href="{{ route('backend.inventory_product.index') }}">
+                                <a href="{{ route('backend.inventory_product.create') }}">
                                     <div class="btn btn-warning btn-sm ml-10">
                                         <i class="ti-back-left"></i>
                                         Back
                                     </div>
                                 </a>
                             </div>
+                        </div>
+                        <div class="col-8 col-sm-9 col-md-8 col-lg-8 col-xl-8 text-right">
+                            <a href="{{ route('backend.stock_in_material.index') }}">
+                                <div class="btn btn-success btn-sm ml-10">
+                                    <i class=""></i>
+                                    Stock In
+                                </div>
+                            </a>
+    
+                            <a href="{{ route('backend.stock_out_material.index') }}">
+                                <div class="btn btn-danger btn-sm ml-10">
+                                    <i class=""></i>
+                                    Stock Out 
+                                </div>
+                            </a>
+    
                         </div>
                     </div>
 
@@ -75,9 +91,10 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Product Name</th>
-                                    <th>Outgoing</th>
-                                    <th>Employee</th>
+                                    <th>Date </th>
+                                    <th>Material Name</th>
+                                    <th>Begin Stock</th>
+                                    <th>Total Stock</th>
                                     <th>Description</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
@@ -86,26 +103,27 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($stock_out as $stock_outs)
+                                @foreach ($inventory_material as $inventory_materials)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $stock_outs->product->name ?? ''}}</td>
-                                    <td>{{ $stock_outs->product_outgoing}}</td>
-                                    <td>{{ $stock_outs->employee->name ?? ''}}</td>
-                                    <td>{{ $stock_outs->description }}</td>
+                                    <td>{{ $inventory_materials->date}}</td>
+                                    <td>{{ $inventory_materials->date}}</td>
+                                    <td>{{ $inventory_materials->begin_stock}}</td>
+                                    <td>{{ $inventory_materials->totalStock($inventory_materials->material_id)}}</td>
+                                    <td>{{ $inventory_materials->description }}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
                                         <div class="btn-group">
-                                            {{-- @can('departement-edit')
-                                            <a href="{{ route('backend.stock_out_product.edit', $stock_outs->id) }}"
+                                            @can('departement-edit')
+                                            <a href="{{ route('backend.inventory_material.edit', $inventory_materials->id) }}"
                                                 class="btn btn-warning text-white">
                                                 <i class="far fa-edit"></i>
                                                 Edit
                                             </a>
-                                            @endcan --}}
+                                            @endcan
 
                                             @can('departement-delete')
-                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Stock Out', '{{ $stock_outs->name }}', '/aduitt/admin/stock_out_product/' + {{ $stock_outs->id }}, '/aduitt/admin/stock_out_product/')">
+                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Inventory Material', '{{ $inventory_materials->name }}', '/aduitt/admin/inventory/inventory_material/' + {{ $inventory_materials->id }}, '/aduitt/admin/inventory/inventory_material/')">
                                                 <i class="far fa-trash-alt"></i>
                                                 Delete
                                             </a>

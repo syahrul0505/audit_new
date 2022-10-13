@@ -125,6 +125,22 @@ margin-left: .776rem;
             </div>
         </div>
     </div>
+
+    <div class="col-lg-3 col-md-6" id="product" onclick="location.href='{{ route('backend.inventory_material.index')}}'">
+        <div class="box card">
+            <div class="box-body">
+                <div class="d-flex align-items-center">
+                    <div class="me-15 bg-success h-50 w-50 l-h-50 rounded text-center">
+                        <img src="{{ asset('img/archive.svg') }}" style="height: 30px" alt="">
+                    </div>
+                    <div class="d-flex flex-column tx-xs-medium">
+                        <span class="text-dark font-weight-bold" style="font-size: 16.5px;">Material</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </div>
 @endsection
 

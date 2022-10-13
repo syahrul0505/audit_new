@@ -8,6 +8,8 @@ use App\Models\InventoryProduct;
 use App\Models\StockOutProduct;
 use App\Models\Employee;
 use App\Models\Product;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 
 class StockOutProductController extends Controller
@@ -49,5 +51,29 @@ class StockOutProductController extends Controller
         $inventory_product->save();
 
         return redirect()->route('backend.stock_out_product.index')->with('success','Stock Out created successfully');
+    }
+
+    public function getStockById(Request $request)
+    {
+        $product_id = $request->product_id;
+        $product = InventoryProduct::where('product_id',$product_id)->first();
+        $total_stock = $product->stok_tersedia($product->product->id);
+
+        $data = [
+            'total_stock' => $total_stock
+        ];
+        return response($data);
+
+    }
+    
+    public function destroy($id)
+    {
+        DB::transaction(function () use ($id) {
+            $stock_out = StockOutProduct::findOrFail($id);
+            $stock_out->delete();
+        });
+        
+        Session::flash('success', 'Stock Out deleted successfully!');
+        return response()->json(['status' => '200']);
     }
 }

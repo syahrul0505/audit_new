@@ -37,11 +37,56 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->code = $request->code;
-        $product->dimension = $request->dimension;
+        $product->gramasi = $request->gramasi;
+        $product->thickness = $request->thickness;
+        $product->lebar = $request->lebar;
+        $product->panjang = $request->panjang;
         $product->description = $request->description;
         
         $product->save();
 
         return redirect()->route('backend.product.index')->with('success','Product created successfully');
     }
+
+    public function edit($id)
+    {
+        $data['page_title'] = 'Edit Forecast';
+        $data['product'] = Product::findOrfail($id);
+
+        return view('backend.master-data.product.edit', $data);
+    }
+
+
+    public function update(Request $request, $id)
+    {
+        $validateData = $request->validate([
+            'product_id'   => 'nullable',
+            'description' => 'nullable',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->name = $request->name;
+        $product->code = $request->code;
+        $product->gramasi = $request->gramasi;
+        $product->thickness = $request->thickness;
+        $product->lebar = $request->lebar;
+        $product->panjang = $request->panjang;
+        $product->description = $request->description;
+        
+        $product->save();
+
+        return redirect()->route('backend.product.index')->with(['success' => 'Product edited successfully!']);
+    }
+
+    public function destroy($id)
+    {
+        DB::transaction(function () use ($id) {
+            $product = Product::findOrFail($id);
+            $product->delete();
+        });
+        
+        Session::flash('success', 'Product deleted successfully!');
+        return response()->json(['status' => '200']);
+    }
+
 }

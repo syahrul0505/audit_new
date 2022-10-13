@@ -82,7 +82,7 @@
             @if(auth()->user()->can('user-list'))
             <div class="col-md-4 col-sm-6 col-12 p-1" onclick="location.href='{{ route('backend.employee.index') }}';">
                 <div class="info-box bg-gradient-info master-data">
-                    <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-user text-white"></i></span>
+                    <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-address-card text-white"></i></span>
 
                     <div class="info-box-content">
                         <span class="info-box-text font-size-18 text-bold">Employee</span>
@@ -96,7 +96,7 @@
             @if(auth()->user()->can('user-list'))
             <div class="col-md-4 col-sm-6 col-12 p-1" onclick="location.href='{{ route('backend.material.index') }}';">
                 <div class="info-box bg-gradient-info master-data">
-                    <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-user text-white"></i></span>
+                    <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-layer-group text-white"></i></span>
 
                     <div class="info-box-content">
                         <span class="info-box-text font-size-18 text-bold">Material</span>
@@ -110,7 +110,7 @@
             @if(auth()->user()->can('user-list'))
             <div class="col-md-4 col-sm-6 col-12 p-1" onclick="location.href='{{ route('backend.product.index') }}';">
                 <div class="info-box bg-gradient-info master-data">
-                    <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-user text-white"></i></span>
+                    <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-boxes text-white"></i></span>
 
                     <div class="info-box-content">
                         <span class="info-box-text font-size-18 text-bold">Product</span>
