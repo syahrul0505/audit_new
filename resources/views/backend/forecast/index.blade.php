@@ -62,7 +62,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Employee Name</th>
+                                    {{-- <th>Employee Name</th> --}}
                                     <th>Product Name</th>
                                     <th>Quantity</th>
                                     <th>Date</th>
@@ -76,7 +76,7 @@
                                 @foreach ($forecast as $forecasts)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $forecasts->employee->name ?? ''}}</td>
+                                    {{-- <td>{{ $forecasts->employee->name ?? ''}}</td> --}}
                                     <td>{{ $forecasts->product->name ?? ''}}</td>
                                     <td>{{ $forecasts->qty}}</td>
                                     <td>{{ $forecasts->date}}</td>

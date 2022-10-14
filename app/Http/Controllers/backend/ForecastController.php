@@ -43,7 +43,7 @@ class ForecastController extends Controller
         ]);
         $forecast = new Forecast();
         $forecast->product_id = $request->product_id;
-        $forecast->employee_id = $request->employee_id;
+        // $forecast->employee_id = $request->employee_id;
         $forecast->date = $request->date;
         $forecast->qty = $request->qty;
         $forecast->description = $request->description;
@@ -58,6 +58,7 @@ class ForecastController extends Controller
         $data['page_title'] = 'Edit Forecast';
         $data['forecast'] = Forecast::findOrfail($id);
         $data['employee'] = employee::get();
+        $data['product'] = Product::get();
 
         return view('backend.forecast.edit', $data);
     }
@@ -72,7 +73,7 @@ class ForecastController extends Controller
 
         $forecast = Forecast::findOrFail($id);
         $forecast->product_id = $request->product_id;
-        $forecast->employee_id = $request->employee_id;
+        // $forecast->employee_id = $request->employee_id;
         $forecast->date = $request->date;
         $forecast->qty = $request->qty;
         $forecast->description = $request->description;

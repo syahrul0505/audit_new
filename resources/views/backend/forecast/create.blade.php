@@ -40,7 +40,7 @@
 
                     @include('backend.components.form-message')
 
-                    <div class="form-group mb-3">
+                    {{-- <div class="form-group mb-3">
                         <label>Employee</label>
 
                         <select class="form-select @error('employee_id') is-invalid @enderror" name="employee_id">
@@ -56,7 +56,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                         @enderror
-                    </div>
+                    </div> --}}
 
                     <div class="form-group mb-3">
                         <label>Product</label>
