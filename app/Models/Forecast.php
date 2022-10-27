@@ -22,4 +22,15 @@ class Forecast extends Model
     {
         return $this->belongsTo(Employee::class);
     }
+
+    public function forecastProduct()
+    {
+        return $this->hasMany(ForecastProduct::class);
+    }
+
+    public function inventoryProduct()
+    {
+        return $this->hasOne(InventoryProduct::class);
+    }
+
 }

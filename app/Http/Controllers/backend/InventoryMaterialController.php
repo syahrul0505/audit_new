@@ -40,6 +40,7 @@ class InventoryMaterialController extends Controller
         $inventory_material = new InventoryMaterial();
         $inventory_material->date = $request->date;
         $inventory_material->material_id = $request->material_id;
+        $inventory_material->unit = $request->unit;
         $inventory_material->begin_stock = $request->begin_stock;
         $inventory_material->total_stock = $request->total_stock;
         $inventory_material->description = $request->description;

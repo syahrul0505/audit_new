@@ -26,7 +26,7 @@
                         <span key="t-dashboards">Report</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('backend.report.index') }}" key="t-default">Report Inventory Product</a></li>
+                        <li><a href="{{ route('backend.report-inventory-product.index') }}" key="t-default">Report Inventory Product</a></li>
                         <li><a href="{{ route('backend.report-inventory-material.index') }}" key="t-default">Report Inventory Material</a></li>
                     </ul>
                 </li>

@@ -41,17 +41,6 @@
                     @include('backend.components.form-message')
 
                     <div class="form-group mb-3">
-                        <label for="date">Date</label>
-                        <input class="form-control @error('date') is-invalid @enderror" id="date" type="date" name="date" placeholder="Date" required value="{{ old('date') }}">
-
-                        @error('date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
                         <label>Product</label>
 
                         <select class="form-control @error('material_id') is-invalid @enderror" name="material_id">
@@ -70,6 +59,17 @@
                     </div>
 
                     <div class="form-group mb-3">
+                        <label for="date">Date</label>
+                        <input class="form-control @error('date') is-invalid @enderror" id="date" type="date" name="date" placeholder="Date" required value="{{ old('date') }}">
+
+                        @error('date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="begin_stock">Begin Stock</label>
                         <input class="form-control @error('begin_stock') is-invalid @enderror" id="begin_stock" type="number" name="begin_stock" placeholder="Begin Stock" required value="{{ old('begin_stock') }}">
 
@@ -81,6 +81,16 @@
                     </div>
 
                     <div class="form-group mb-3">
+                        <label for="">Unit </label> <br>
+                        <select class="form-select" @error('unit') is-invalid @enderror name="unit" >
+                            <option disabled selected>Choose Unit</option>
+                            <option value="Pcs">Pcs</option>
+                            <option value="Box">Box</option>
+                            <option value="Roll">Roll</option>
+                        </select>
+                    </div>
+
+                    {{-- <div class="form-group mb-3">
                         <label for="description">Description</label>
                         <textarea name="description" class="form-control" rows="3" placeholder="Description"></textarea>
 
@@ -89,7 +99,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
+                    </div> --}}
                    
                 <div class="card-footer bg-gray1" style="border-radius:0px 0px 10px 10px;">
                     <button type="submit" id="submit_button" class="btn btn-success btn-footer">Add</button>

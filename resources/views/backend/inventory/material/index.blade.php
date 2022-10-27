@@ -95,7 +95,7 @@
                                     <th>Material Name</th>
                                     <th>Begin Stock</th>
                                     <th>Total Stock</th>
-                                    <th>Description</th>
+                                    <th>Unit</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -110,7 +110,7 @@
                                     <td>{{ $inventory_materials->date}}</td>
                                     <td>{{ $inventory_materials->begin_stock}}</td>
                                     <td>{{ $inventory_materials->totalStock($inventory_materials->material_id)}}</td>
-                                    <td>{{ $inventory_materials->description }}</td>
+                                    <td>{{ $inventory_materials->unit }}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
                                         <div class="btn-group">

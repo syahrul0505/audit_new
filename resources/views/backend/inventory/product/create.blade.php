@@ -41,21 +41,10 @@
                     @include('backend.components.form-message')
 
                     <div class="form-group mb-3">
-                        <label for="date">Date</label>
-                        <input class="form-control @error('date') is-invalid @enderror" id="date" type="date" name="date" placeholder="Date" required value="{{ old('date') }}">
-
-                        @error('date')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
                         <label>Product</label>
 
-                        <select class="form-control @error('product_id') is-invalid @enderror" name="product_id">
-                            <option disabled selected>Choose Product</option>
+                        <select class="form-control js-example-basic-single @error('product_id') is-invalid @enderror" name="product_id">
+                            <option disabled selected>Choose Production</option>
                             @foreach ($product as $products)
                             <option value="{{ $products->id }}"
                                 {{ old('product_id') == $products->id ? 'selected' : '' }}>
@@ -68,6 +57,45 @@
                         </span>
                         @enderror
                     </div>
+
+                    <div class="form-group mb-3">
+                        <label>Product</label>
+
+                        <select class="form-control js-example-basic-single @error('forecast_id') is-invalid @enderror" name="forecast_id">
+                            <option disabled selected>Choose Production</option>
+                            @foreach ($forecast as $forecasts)
+                            <option value="{{ $forecasts->id }}"
+                                {{ old('forecast_id') == $forecasts->id ? 'selected' : '' }}>
+                                {{ $forecasts->product->name }} </option>
+                            @endforeach
+                        </select>
+                        @error('forecast_id')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="date">Date</label>
+                        <input class="form-control @error('date') is-invalid @enderror" id="date" type="date" name="date" placeholder="Date" required value="{{ old('date') }}">
+
+                        @error('date')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    {{-- <div class="form-group mb-3">
+                        <select class="" name="state">
+                            <option value="AL">Alabama</option>
+                              ...
+                            <option value="WY">Wyoming</option>
+                          </select>
+                    </div> --}}
+
+                    
 
                     <div class="form-group mb-3">
                         <label for="begin_stock">Begin Stock</label>
@@ -102,5 +130,9 @@
 @endsection
 
 @section('script')
-
+<script>
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+    });
+</script>
 @endsection

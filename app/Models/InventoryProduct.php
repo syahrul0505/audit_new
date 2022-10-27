@@ -18,6 +18,11 @@ class InventoryProduct extends Model
         return $this->belongsTo(Product::class);
     }
 
+    public function forecast()
+    {
+        return $this->belongsTo(Forecast::class);
+    }
+
    public function totalStock($id)
    {
         $product = Product::findOrfail($id);

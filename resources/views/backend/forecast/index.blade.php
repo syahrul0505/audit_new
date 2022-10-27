@@ -64,8 +64,8 @@
                                     <th>No</th>
                                     {{-- <th>Employee Name</th> --}}
                                     <th>Product Name</th>
-                                    <th>Quantity</th>
                                     <th>Date</th>
+                                    <th>Employee</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -78,12 +78,17 @@
                                     <td>{{ $loop->iteration }}</td>
                                     {{-- <td>{{ $forecasts->employee->name ?? ''}}</td> --}}
                                     <td>{{ $forecasts->product->name ?? ''}}</td>
-                                    <td>{{ $forecasts->qty}}</td>
                                     <td>{{ $forecasts->date}}</td>
-                                    
+                                    <td>{{ $forecasts->employee->name ?? ''}}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
                                         <div class="btn-group">
+
+                                            <a href="{{route('backend.forecast.show', $forecasts->id)}}"
+                                                class="btn btn-info text-white">
+                                                <i class="fas fa-eye"></i>
+                                            </a>
+
                                             @can('departement-edit')
                                             <a href="{{ route('backend.forecast.edit', $forecasts->id) }}"
                                                 class="btn btn-warning text-white">

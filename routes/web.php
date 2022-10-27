@@ -18,6 +18,7 @@ use App\Http\Controllers\backend\StockInMaterialController;
 use App\Http\Controllers\backend\StockOutMaterialController;
 use App\Http\Controllers\backend\ForecastController;
 use App\Http\Controllers\backend\ReportInventoryMaterialController;
+use App\Http\Controllers\backend\ReportInventoryProductController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -124,6 +125,10 @@ use Illuminate\Support\Facades\Route;
             // Report Inventory Material
             Route::get('report-inventory-material', [ReportInventoryMaterialController::class, 'index'])->name('report-inventory-material.index');
             Route::get('/report-inventory-material-export', [ReportInventoryMaterialController::class, 'ReportExport'])->name('report-inventory-material-export');
+
+            // Report Inventory Product
+            Route::get('report-inventory-product', [ReportInventoryProductController::class, 'index'])->name('report-inventory-product.index');
+            Route::get('/report-inventory-product-export', [ReportInventoryProductController::class, 'ReportExport'])->name('report-inventory-product-export');
 
 
             // Filter
