@@ -20,6 +20,15 @@
                 </li>
                 @endif
 
+                @if(auth()->user()->can('dashboard'))
+                <li>
+                    <a href="{{ route('backend.vendor.create') }}" class="waves-effect">
+                        <i class="bx bx-box"></i>
+                        <span key="t-dashboards">Vendor</span>
+                    </a>
+                </li>
+                @endif
+
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="fas fa-clipboard"></i>

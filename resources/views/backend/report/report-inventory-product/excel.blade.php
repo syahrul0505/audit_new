@@ -23,7 +23,7 @@
         <tr>
             <td style="border: 1px solid black">{{ $loop->iteration }}</td>
             <td style="border: 1px solid black">{{$item->product->name}}</td>
-            <td style="border: 1px solid black">{{$item->calculateStock($item->product->id)}}</td>
+            {{-- <td style="border: 1px solid black">{{$item->calculateStock($item->product->id)}}</td> --}}
             {{-- <td style="border: 1px solid black">{{$item->stok_awal}}</td> --}}
             {{-- <td style="border: 1px solid black">{{$item->stockIncoming($item->product->id)}}</td> --}}
             {{-- <td style="border: 1px solid black">{{$item->stockOutgoing($item->product->id)}}</td> --}}

@@ -19,6 +19,7 @@ use App\Http\Controllers\backend\StockOutMaterialController;
 use App\Http\Controllers\backend\ForecastController;
 use App\Http\Controllers\backend\ReportInventoryMaterialController;
 use App\Http\Controllers\backend\ReportInventoryProductController;
+use App\Http\Controllers\backend\VendorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -91,6 +92,9 @@ use Illuminate\Support\Facades\Route;
             
             // inventory Product
             Route::resource('inventory_product', InventoryProductController::class);
+
+             // Vendor
+             Route::resource('vendor', VendorController::class);
             
             // Product Stock In
             Route::resource('stock_in_product', StockInProductController::class);

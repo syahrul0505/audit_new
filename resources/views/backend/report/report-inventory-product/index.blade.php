@@ -33,7 +33,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 mt-1 text-white" style="font-size:1.2rem;">
                             <span class="tx-bold tx-dark text-white text-lg">
                                 <i class="far fa-building text-lg"></i>
-                                {{-- {{$page_title}} --}}
+                                {{$page_title}}
                             </span>
                         </div>
 
