@@ -81,19 +81,23 @@
                                     <th>No</th>
                                     <th>Date</th>
                                     <th>Product</th>
-                                    <th>Begin Stock</th>
                                     <th>Total Stock</th>
+                                    <th>Stock Awal</th>
+                                    <th>Stock In</th>
+                                    <th>Stock Out</th>
                                 </tr>
                             </thead>
                     
                             <tbody>
-                                @foreach ($inventory_material as $inventory_materials)
+                                @foreach ($inventory_product as $inventory_products)
                                 <tr >
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ date('d-m-Y', strtotime($inventory_materials->created_at));}}</td>
-                                    <td>{{ $inventory_materials->product->name ?? ''}}</td>
-                                    <td>{{ $inventory_materials->begin_stock ?? ''}}</td>
-                                    <td>{{ $inventory_materials->begin_stock ?? ''}}</td>
+                                    <td>{{ date('d-m-Y', strtotime($inventory_products->created_at));}}</td>
+                                    <td>{{ $inventory_products->product->name ?? ''}}</td>
+                                    <td>{{ $inventory_products->totalStock($inventory_products->product->id) ?? ''}}</td>
+                                    <td>{{ $inventory_products->begin_stock ?? ''}}</td>
+                                    <td>{{ $inventory_products->stockIncoming($inventory_products->product->id) ?? ''}}</td>
+                                    <td>{{ $inventory_products->stockOutgoing($inventory_products->product->id) ?? ''}}</td>
                                    
                                 </tr>
                                 @endforeach

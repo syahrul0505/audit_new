@@ -20,6 +20,8 @@ use App\Http\Controllers\backend\ForecastController;
 use App\Http\Controllers\backend\ReportInventoryMaterialController;
 use App\Http\Controllers\backend\ReportInventoryProductController;
 use App\Http\Controllers\backend\VendorController;
+use App\Http\Controllers\backend\CutOffController;
+use App\Http\Controllers\backend\WarehouseController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -95,6 +97,7 @@ use Illuminate\Support\Facades\Route;
 
              // Vendor
              Route::resource('vendor', VendorController::class);
+             Route::get('test', [VendorController::class,'test'])->name('test');
             
             // Product Stock In
             Route::resource('stock_in_product', StockInProductController::class);
@@ -134,6 +137,11 @@ use Illuminate\Support\Facades\Route;
             Route::get('report-inventory-product', [ReportInventoryProductController::class, 'index'])->name('report-inventory-product.index');
             Route::get('/report-inventory-product-export', [ReportInventoryProductController::class, 'ReportExport'])->name('report-inventory-product-export');
 
+            // Warehouse
+            Route::resource('warehouse', WarehouseController::class);
+
+            // Cut off
+            Route::get('cut-off', [CutOffController::class, 'index'])->name('cut-off.index');
 
             // Filter
             Route::resource('filter', FilterController::class);

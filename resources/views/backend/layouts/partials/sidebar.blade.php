@@ -15,10 +15,20 @@
                 <li>
                     <a href="{{ route('backend.inventory.index') }}" class="waves-effect">
                         <i class="bx bx-box"></i>
+                        <span key="t-dashboards">Purchase Order</span>
+                    </a>
+                </li>
+                @endif
+
+                @if(auth()->user()->can('dashboard'))
+                <li>
+                    <a href="{{ route('backend.inventory.index') }}" class="waves-effect">
+                        <i class="bx bx-box"></i>
                         <span key="t-dashboards">Inventory</span>
                     </a>
                 </li>
                 @endif
+
 
                 @if(auth()->user()->can('dashboard'))
                 <li>
@@ -44,7 +54,7 @@
                 <li>
                     <a href="{{ route('backend.forecast.index') }}" class="waves-effect">
                         <i class="fas fa-address-card"></i>
-                        <span key="t-dashboards">Forecast</span>
+                        <span key="t-dashboards">Production</span>
                     </a>
                 </li>
                 @endif
@@ -63,6 +73,15 @@
                     <a href="{{ route('backend.master-data.index') }}" class="waves-effect">
                         <i class="far fa-folder"></i>
                         <span key="t-dashboards">Master Data</span>
+                    </a>
+                </li>
+                @endif
+
+                @if(auth()->user()->can('dashboard'))
+                <li>
+                    <a href="{{ route('backend.cut-off.index') }}" class="waves-effect">
+                        <i class="far fa-folder"></i>
+                        <span key="t-dashboards">List Apporval</span>
                     </a>
                 </li>
                 @endif

@@ -18,9 +18,34 @@ class VendorController extends Controller
         return view('backend.vendor.index', $data);
     }
 
+    function checkAccr($ponum,$podate){
+        $conn = curl_init();
+        curl_setopt_array($conn, array(
+            CURLOPT_URL => "http://megahpita.wiqi.co/api/index.php/Api/get/".$ponum."/".$podate."",// your preferred link
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_TIMEOUT => 30000,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                // Set Here Your Requesred Headers
+                'Content-Type: application/json',
+            ),
+        ));
+        $response = curl_exec($conn);
+        $err = curl_error($conn);
+        curl_close($conn);
+        
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+           return json_decode($response);
+        }
+    }
+
     public function create()
     {
-        $data['page_title'] = 'Vendor Create';
+        $data['page_title'] = 'Tanda Terima';
         $data['vendor'] = Vendor::get();
 
         return view('backend.vendor.create', $data);
@@ -30,7 +55,7 @@ class VendorController extends Controller
     {
         $request->validate([
             'tanggal_po' => 'required',
-           
+            'no_po' => 'required',
         ]);
         $vendor = new Vendor();
         $vendor->tanggal_po = $request->tanggal_po;
@@ -38,10 +63,16 @@ class VendorController extends Controller
         $vendor->no_inv_vendor = $request->no_inv_vendor;
         $vendor->tanggal_kirim = $request->tanggal_kirim;
         $vendor->email = $request->email_vendor;
-        
-        $vendor->save();
+        $check = $this->checkAccr($request->po_no,$request->po_date);
+        if ($check){
+            echo "success";
+            echo $check;
+        }else{
+            echo "Gagal Save";
+        }
+        //$vendor->save();
 
-        return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
+        //return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
     }
 
     public function edit($id)
@@ -82,5 +113,17 @@ class VendorController extends Controller
         
         Session::flash('success', 'Employee deleted successfully!');
         return response()->json(['status' => '200']);
+    }
+
+    
+
+    public function test(Request $request){
+        $check = $this->checkAccr($request->po_no,$request->po_date);
+        if ($check){
+            echo "success";
+            echo $check;
+        }else{
+            echo "Gagal Save";
+        }
     }
 }

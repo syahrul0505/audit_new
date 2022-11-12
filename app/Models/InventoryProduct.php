@@ -22,6 +22,19 @@ class InventoryProduct extends Model
     {
         return $this->belongsTo(Forecast::class);
     }
+    
+    public function stockIncoming($id)
+    {
+        $product = product::findOrFail($id);
+        $stock_in = $product->stockInProduct->sum('product_incoming');
+        return $stock_in;
+    }
+    public function stockOutgoing($id)
+    {
+        $product = product::findOrFail($id);
+        $stock_out = $product->stockOutProduct->sum('product_outgoing');
+        return $stock_out;
+    }
 
    public function totalStock($id)
    {

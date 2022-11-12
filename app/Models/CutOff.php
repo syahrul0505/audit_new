@@ -5,14 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vendor extends Model
+class CutOff extends Model
 {
     use HasFactory;
-
-    protected $table = 'vendor';
-    
-
-    protected $guarded = [];
-
-    
 }

@@ -18,6 +18,19 @@ class InventoryMaterial extends Model
         return $this->belongsTo(Material::class);
     }
 
+    public function stockIncoming($id)
+    {
+        $material = Material::findOrFail($id);
+        $stock_in = $material->stockInMaterial->sum('material_incoming');
+        return $stock_in;
+    }
+    public function stockOutgoing($id)
+    {
+        $material = Material::findOrFail($id);
+        $stock_out = $material->stockOutMaterial->sum('material_outgoing');
+        return $stock_out;
+    }
+
    public function totalStock($id)
    {
         $material = Material::findOrfail($id);

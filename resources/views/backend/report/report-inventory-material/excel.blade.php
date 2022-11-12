@@ -11,7 +11,7 @@
         <tr style="background-color:black">
             <td rowspan="2" style="width: 25px; margin: auto; text-align: center; border: 1px solid black;">No</td>
             {{-- <td rowspan="2" style="width: 25px; margin: auto; text-align: center; border: 1px solid black;">Date</td> --}}
-            <td rowspan="2" style="width: 150px; margin: auto; text-align: center; border: 1px solid black;">Product</td>
+            <td rowspan="2" style="width: 150px; margin: auto; text-align: center; border: 1px solid black;">Material</td>
             <td rowspan="2" style="width: 150px; margin: auto; text-align: center; border: 1px solid black;">Total Stock</td>
             <td rowspan="2" style="width: 150px; margin: auto; text-align: center; border: 1px solid black;">Stock Awal</td>
             <td rowspan="2" style="width: 150px; margin: auto; text-align: center; border: 1px solid black;">Stock In</td>
@@ -19,15 +19,15 @@
         </tr>
         <tr></tr>
 
-        @foreach ($products as $item)
+        @foreach ($materials as $item)
         <tr>
             <td style="border: 1px solid black">{{ $loop->iteration }}</td>
             {{-- <td style="border: 1px solid black">{{date('d-m-Y', strtotime($products->created_at))}}</td> --}}
-            <td style="border: 1px solid black">{{$item->product->name}}</td>
-            <td style="border: 1px solid black">{{$item->totalStock($item->product->id)}}</td>
+            <td style="border: 1px solid black">{{$item->material->name}}</td>
+            <td style="border: 1px solid black">{{$item->totalStock($item->material->id)}}</td>
             <td style="border: 1px solid black">{{$item->begin_stock}}</td>
-            <td style="border: 1px solid black">{{$item->stockIncoming($item->product->id)}}</td>
-            <td style="border: 1px solid black">{{$item->stockOutgoing($item->product->id)}}</td>
+            <td style="border: 1px solid black">{{$item->stockIncoming($item->material->id)}}</td>
+            <td style="border: 1px solid black">{{$item->stockOutgoing($item->material->id)}}</td>
         </tr>
         @endforeach
     </tbody>

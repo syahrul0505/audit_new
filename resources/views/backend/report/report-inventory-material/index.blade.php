@@ -33,7 +33,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 mt-1 text-white" style="font-size:1.2rem;">
                             <span class="tx-bold tx-dark text-white text-lg">
                                 <i class="far fa-building text-lg"></i>
-                                {{-- {{$page_title}} --}}
+                                {{$page_title}}
                             </span>
                         </div>
 
@@ -70,9 +70,9 @@
                             <div>
                                 <p class="tx-black" style="display: inline;">Download :</p>
                             </div>
-                                <a href="{{ route('backend.report-inventory-material-export') }}" class="btn btn-sm btn-danger">
-                                    PDF
-                                </a>
+                            <div class="col-xl-4 mb-3">
+                                <button type="submit" name="do_excel" value="do_excel" class="btn text-white btn-block" style="background-color:#1f6d43;"><i class="bi bi-file-earmark-excel-fill"></i> Excel</button>
+                            </div>
                             {{-- <div id="buttons" style="padding: 10px; margin-bottom: 10px; width: 100%; border-radius:5px; display:inline;"></div> --}}
                         </div>
                         <table class="table datatable table-hover" id="reportTable">
@@ -80,9 +80,11 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Date</th>
-                                    <th>Product</th>
-                                    <th>Begin Stock</th>
+                                    <th>Material</th>
                                     <th>Total Stock</th>
+                                    <th>Stock Awal</th>
+                                    <th>Stock In</th>
+                                    <th>Stock Out</th>
                                 </tr>
                             </thead>
                     
@@ -91,9 +93,11 @@
                                 <tr >
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ date('d-m-Y', strtotime($inventory_materials->created_at));}}</td>
-                                    <td>{{ $inventory_materials->product->name ?? ''}}</td>
+                                    <td>{{ $inventory_materials->material->name ?? ''}}</td>
+                                    <td>{{ $inventory_materials->totalStock($inventory_materials->material->id) ?? ''}}</td>
                                     <td>{{ $inventory_materials->begin_stock ?? ''}}</td>
-                                    <td>{{ $inventory_materials->begin_stock ?? ''}}</td>
+                                    <td>{{ $inventory_materials->stockIncoming($inventory_materials->material->id) ?? ''}}</td>
+                                    <td>{{ $inventory_materials->stockOutgoing($inventory_materials->material->id) ?? ''}}</td>
                                    
                                 </tr>
                                 @endforeach

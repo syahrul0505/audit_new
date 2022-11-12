@@ -38,7 +38,7 @@ class ReportInventoryProductController extends Controller
         if ($request->do_excel) {
             return Excel::download(new InventoryProductExport($data_inven) , 'Report Inventory Product ' . '.xlsx');
         } else {
-            $data['inventory_material'] = $data_inven;
+            $data['inventory_product'] = $data_inven;
             return view('backend.report.report-inventory-product.index', $data);
         }
 

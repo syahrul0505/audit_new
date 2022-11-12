@@ -10,11 +10,11 @@
         <div class="card card-primary" style="border-radius:18px;">
             <div class="card-header text-center " style="border-radius:10px 10px 0px 0px;">
             </div>
-            <form method="POST" action="{{ route('backend.vendor.store') }}" id="formPO">
+            <form method="POST" action="{{ route('backend.forecast.store') }}" id="formPO">
                 @csrf
                 <div class="card-body">
                     <h4 class="card-title text-center">{{$page_title}}</h4>
-                    <h6> <small class="text-danger">*</small><b> Tanggal Kirim Sesuai Dengan tanggal surat jalan </b></h6>
+                    <h4> <small class="text-danger">*</small></h4>
                     <hr>
                     <div class="row mt-2">
                         <div class="col-lg-12">
@@ -40,16 +40,16 @@
                                     <tbody>
                                         <tr>
                                             <td>
-                                                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="No Po"  type="text" name="no_po[]" id="qty1">
+                                                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="No Po" disabled type="text" name="description[]" id="qty1">
                                             </td>
                                             <td>
-                                                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="No Invoice" type="text" name="no_inv[]" id="qty1">
+                                                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="No Invoice" disabled type="text" name="description[]" id="qty1">
                                             </td>
                                             <td>
-                                                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="Tanggal Po"  type="date"  name="tanggal_po[]" id="qty1">
+                                                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="Tanggal Po" disabled type="date" name="description[]" id="qty1">
                                             </td>
                                             <td>
-                                                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="Tanggal Kirim" type="date" name="Tanggal_kirim[]" id="qty1">
+                                                <input class="form-control {{ $errors->has('description') ? 'is-invalid' : '' }}" placeholder="Tanggal Kirim" type="date" name="description[]" id="qty1">
                                             </td>
                                             {{-- <td>
                                                 <select class="form-select" id="">pending
@@ -164,47 +164,14 @@
     </script>
 
 <script>
-    ajaxVendor();
-    function ajaxVendor() {
-    //     $.ajax({
-    //     url: "http://megahpita.wiqi.co/api/index.php/Api/get/P2000023/21.04.2020",
-    //     type: 'GET',
-    //     dataType: 'json', // added data type
-    //     cors: true ,
-    //     contentType:'application/json',
-    //     secure: true,
-    //     headers: {
-    //         'Access-Control-Allow-Origin': '*',
-    //         'Access-Control-Allow-Credentials': 'true'
-    //     },
-    //     beforeSend: function (xhr) {
-    //         xhr.setRequestHeader ("Authorization", "Basic " + btoa(""));
-    //     },
-    //     success: function(res) {
-    //         console.log(res);
+    function calculatePrice(number)
+    {
+        var qty = $('#qty'+number).val();
+        var unitPrice = $('#unit_price'+number).val();
+        var total = parseInt(unitPrice * qty);
 
-    //     }
-    // });
-   
-
-    // $('#no_po').change(function () {
-    //     $.ajax({
-    //         url: "{{ route('vendor.api') }}",
-    //         type: "GET",
-    //         data: {
-    //             no_po: no_po
-    //         },
-    //         success: function (data) {
-    //             stok_tersedia = data.total_stock;
-    //             $('#available_stock').val(stok_tersedia);
-    //         }
-    //     });
-    // });
-    
-
-    // $.post( "ajax/test.html", function( data ) {
-    // $( ".result" ).html( data );
-    // });
+        $('#total_price'+number).val(total);
+    }
 </script>
 
 @endsection
