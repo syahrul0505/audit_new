@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
+use App\Models\VendorPivot;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
@@ -54,25 +55,64 @@ class VendorController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'tanggal_po' => 'required',
+            // 'no_po.*' => 'required',
+            // 'tanggal_po.*' => 'required',
             'no_po' => 'required',
+            'tanggal_po' => 'required',
+            'no_invoice' => 'required',
+            'tanggal_kirim' => 'required',
         ]);
-        $vendor = new Vendor();
-        $vendor->tanggal_po = $request->tanggal_po;
-        $vendor->no_po = $request->no_po;
-        $vendor->no_inv_vendor = $request->no_inv_vendor;
-        $vendor->tanggal_kirim = $request->tanggal_kirim;
-        $vendor->email = $request->email_vendor;
-        $check = $this->checkAccr($request->po_no,$request->po_date);
-        if ($check){
-            echo "success";
-            echo $check;
-        }else{
-            echo "Gagal Save";
-        }
+
+        // foreach ($request->no_po as $key => $value) {
+        //     $vendor = new Vendor();
+        //     $vendor->tanggal_po = $request->tanggal_po[$key];
+        //     $vendor->no_po = $request->no_po[$key];
+        //     $vendor->no_inv_vendor = $request->no_inv[$key];
+        //     // $vendor->tanggal_kirim = $request->tanggal_kirim[$key];
+        //     $vendor->email = $request->email_vendor;
+        //     $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]);
+        // }
+        // if ($check){
+        //     echo "success";
+        //     // echo $check;
+        //     return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
+        // }else{
+        //     echo "Gagal Save";
+        // }
+
+        
+            $vendor = new Vendor();
+            $vendor->email = $request->email;
+            $vendor->description = $request->description;
+            
+            $vendorPivot = [];
+            foreach ($request->no_po as $key => $value) {
+
+                $vendorPivot[] = [
+                    'vendor_id' => $vendor->id,
+                    'no_po' => $request->no_po[$key],
+                    'tanggal_po' => $request->tanggal_po[$key],
+                    'no_invoice' => $request->no_invoice[$key],
+                    'tanggal_kirim' => $request->tanggal_kirim[$key],
+                    
+                ];
+            }
+            $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]);
+            
+            if ($check){
+                echo "success";
+                // echo $check;
+                    $vendor->save();
+                    VendorPivot::insert($vendorPivot);
+                    return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
+                }else{
+                    echo "Gagal Save";
+                    return redirect()->route('backend.vendor.create')->with('failed','Data Is Not Competible');
+                }
+            // return redirect()->route('backend.forecast.index')->with(['success' => 'Data berhasil dibuat !']);
+
         //$vendor->save();
 
-        //return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
     }
 
     public function edit($id)
@@ -82,6 +122,10 @@ class VendorController extends Controller
         $data['vendor'] = Vendor::findOrFail($id);
 
         return view('backend.vendor.edit', $data);
+    }
+
+    public function show(){
+        
     }
 
 
@@ -111,7 +155,7 @@ class VendorController extends Controller
             $employee->delete();
         });
         
-        Session::flash('success', 'Employee deleted successfully!');
+        Session::flash('success', 'Vendor deleted successfully!');
         return response()->json(['status' => '200']);
     }
 
@@ -126,4 +170,29 @@ class VendorController extends Controller
             echo "Gagal Save";
         }
     }
+    // public function getData(){
+    //     $conn = curl_init();
+    //     curl_setopt_array($conn, array(
+    //         CURLOPT_URL => "http://megahpita.wiqi.co/api/index.php/Api/get/P2000023/21.04.2020",// your preferred link
+    //         CURLOPT_RETURNTRANSFER => true,
+    //         CURLOPT_ENCODING => "",
+    //         CURLOPT_TIMEOUT => 30000,
+    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+    //         CURLOPT_CUSTOMREQUEST => "GET",
+    //         CURLOPT_HTTPHEADER => array(
+    //             // Set Here Your Requesred Headers
+    //             'Content-Type: application/json',
+    //         ),
+    //     ));
+    //     $response = curl_exec($conn);
+    //     $err = curl_error($conn);
+    //     curl_close($conn);
+    //     $decode = json_decode($response);
+    //     if ($err) {
+    //         echo "cURL Error #:" . $err;
+    //     } else {
+    //         // return (json_decode($response));
+    //         return $decode[0];
+    //     }
+    // }
 }

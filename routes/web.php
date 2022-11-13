@@ -98,6 +98,7 @@ use Illuminate\Support\Facades\Route;
              // Vendor
              Route::resource('vendor', VendorController::class);
              Route::get('test', [VendorController::class,'test'])->name('test');
+             Route::get('get-data-api', [VendorController::class,'getData'])->name('get-data-api');
             
             // Product Stock In
             Route::resource('stock_in_product', StockInProductController::class);

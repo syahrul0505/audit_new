@@ -5,14 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vendor extends Model
+class VendorPivot extends Model
 {
     use HasFactory;
 
-    protected $table = 'vendorr';
+    protected $table = 'vendorr_pivot';
     
 
     protected $guarded = [];
-
-    
 }

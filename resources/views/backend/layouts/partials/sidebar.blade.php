@@ -77,11 +77,19 @@
                 </li>
                 @endif
 
-                @if(auth()->user()->can('dashboard'))
+                {{-- @if(auth()->user()->can('dashboard'))
                 <li>
                     <a href="{{ route('backend.cut-off.index') }}" class="waves-effect">
                         <i class="far fa-folder"></i>
                         <span key="t-dashboards">List Apporval</span>
+                    </a>
+                </li>
+                @endif --}}
+                @if(auth()->user()->can('dashboard'))
+                <li>
+                    <a href="{{ route('backend.cut-off.index') }}" class="waves-effect">
+                        <i class="far fa-folder"></i>
+                        <span key="t-dashboards">List Finance</span>
                     </a>
                 </li>
                 @endif
