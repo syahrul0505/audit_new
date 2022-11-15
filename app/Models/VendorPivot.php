@@ -13,4 +13,9 @@ class VendorPivot extends Model
     
 
     protected $guarded = [];
+
+    public function vendor()
+    {
+        return $this->belongsTo(Vendor::class);
+    }
 }

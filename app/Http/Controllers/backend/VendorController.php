@@ -94,11 +94,13 @@ class VendorController extends Controller
                     'tanggal_po' => $request->tanggal_po[$key],
                     'no_invoice' => $request->no_invoice[$key],
                     'tanggal_kirim' => $request->tanggal_kirim[$key],
-                    
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
                 ];
+                $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]); //iniuntuk apa buat pengecekan data nya sama atau ngga sama yang di Api
             }
-            $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]);
-            
+            // dd($check);
+            // VendorPivot::insert($vendorPivot);
             if ($check){
                 echo "success";
                 // echo $check;
@@ -109,9 +111,9 @@ class VendorController extends Controller
                     echo "Gagal Save";
                     return redirect()->route('backend.vendor.create')->with('failed','Data Is Not Competible');
                 }
-            // return redirect()->route('backend.forecast.index')->with(['success' => 'Data berhasil dibuat !']);
+            return redirect()->route('backend.forecast.index')->with(['success' => 'Data berhasil dibuat !']);
 
-        //$vendor->save();
+        $vendor->save();
 
     }
 

@@ -5,17 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vendor extends Model
+class PurchaseOrder extends Model
 {
     use HasFactory;
 
-    protected $table = 'vendorr';
-    
+    protected $table = 'purchase_order';
 
     protected $guarded = [];
 
-    public function vendorPivot()
+    public function purchaseOrderPivot()
     {
-        return $this->hasMany(VendorPivot::class);
+        return $this->hasMany(PurchaseOrderPivot::class);
     }
+
+    
 }

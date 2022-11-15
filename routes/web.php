@@ -22,6 +22,8 @@ use App\Http\Controllers\backend\ReportInventoryProductController;
 use App\Http\Controllers\backend\VendorController;
 use App\Http\Controllers\backend\CutOffController;
 use App\Http\Controllers\backend\WarehouseController;
+use App\Http\Controllers\backend\PurchaseOrderController;
+use App\Http\Controllers\backend\ListFinanceController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -94,6 +96,12 @@ use Illuminate\Support\Facades\Route;
             
             // inventory Product
             Route::resource('inventory_product', InventoryProductController::class);
+
+             // inventory Product
+             Route::resource('list_finance', ListFinanceController::class);
+
+             // Purchase Order
+             Route::resource('purchase_order', PurchaseOrderController::class);
 
              // Vendor
              Route::resource('vendor', VendorController::class);

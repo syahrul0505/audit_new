@@ -38,7 +38,7 @@
 
                         @can('departement-create')
                         <div class="col-lg-6 col-md-6 col-sm-6 d-flex justify-content-end">
-                            <a href="{{ route('backend.purchase_order.create') }}" class="btn btn-md btn-info">
+                            <a href="{{ route('backend.list_finance.create') }}" class="btn btn-md btn-info">
                                 <i class="fa fa-plus"></i> 
                                 Add New
                             </a>
@@ -63,10 +63,9 @@
                                 <tr>
                                     <th>No</th>
                                     {{-- <th>Employee Name</th> --}}
-                                    <th>Po Number</th>
-                                    <th>Category</th>
-                                    <th>Nama Barang</th>
-                                    <th>Site</th>
+                                    <th>Grand Total Invoice</th>
+                                    <th>No Faktur Pajak</th>
+                                    <th>Tanggal Kirim</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -74,7 +73,7 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($purchase_order as $purchase_orders)
+                                {{-- @foreach ($purchase_order as $purchase_orders)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $purchase_orders->po_no ?? ''}}</td>
@@ -108,7 +107,7 @@
                                     </td>
                                     @endif
                                 </tr>
-                                @endforeach
+                                @endforeach --}}
                             </tbody>
                         </table>
                     </div>
