@@ -81,40 +81,75 @@ class VendorController extends Controller
         // }
 
         
+            // $vendor = new Vendor();
+            // $vendor->email = $request->email;
+            // $vendor->description = $request->description;
+            
+            // // $vendorPivot = [];
+            // // dd($vendor->id);
+            // foreach ($request->no_po as $key => $value) {
+                
+            //     $vendorPivot[] = [
+            //         'vendor_id' => $vendor->id,
+            //         'no_po' => $request->no_po[$key],
+            //         'tanggal_po' => $request->tanggal_po[$key],
+            //         'no_invoice' => $request->no_invoice[$key],
+            //         'tanggal_kirim' => $request->tanggal_kirim[$key],
+            //         'created_at' => date('Y-m-d H:i:s'),
+            //         'updated_at' => date('Y-m-d H:i:s')
+            //     ];
+            //     $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]); //iniuntuk apa buat pengecekan data nya sama atau ngga sama yang di Api
+            // }
+            // // dd($check);
+            // // VendorPivot::insert($vendorPivot);
+            // if ($check){
+            //     echo "success";
+            //     // echo $check;
+            //         $vendor->save();
+            //         VendorPivot::insert($vendorPivot);
+            //         return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
+            //     }else{
+            //         echo "Gagal Save";
+            //         return redirect()->route('backend.vendor.create')->with('failed','Data Is Not Competible');
+            //     }
+            // return redirect()->route('backend.forecast.index')->with(['success' => 'Data berhasil dibuat !']);
+
+        DB::beginTransaction();
+        try {
+            
             $vendor = new Vendor();
             $vendor->email = $request->email;
             $vendor->description = $request->description;
-            
+            $vendor->save();
+            // $vendorPivot = [];
+            // dd($vendor->id);
             $vendorPivot = [];
             foreach ($request->no_po as $key => $value) {
-
-                $vendorPivot[] = [
-                    'vendor_id' => $vendor->id,
-                    'no_po' => $request->no_po[$key],
-                    'tanggal_po' => $request->tanggal_po[$key],
-                    'no_invoice' => $request->no_invoice[$key],
-                    'tanggal_kirim' => $request->tanggal_kirim[$key],
-                    'created_at' => date('Y-m-d H:i:s'),
-                    'updated_at' => date('Y-m-d H:i:s')
-                ];
+                
                 $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]); //iniuntuk apa buat pengecekan data nya sama atau ngga sama yang di Api
-            }
-            // dd($check);
-            // VendorPivot::insert($vendorPivot);
-            if ($check){
-                echo "success";
-                // echo $check;
-                    $vendor->save();
-                    VendorPivot::insert($vendorPivot);
-                    return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
+                if ($check){
+                    array_push($vendorPivot, [
+                        'vendor_id' => $vendor->id,
+                        'no_po' => $request->no_po[$key],
+                        'tanggal_po' => $request->tanggal_po[$key],
+                        'no_invoice' => $request->no_invoice[$key],
+                        'tanggal_kirim' => $request->tanggal_kirim[$key],
+                        'created_at' => date('Y-m-d H:i:s'),
+                        'updated_at' => date('Y-m-d H:i:s')
+                    ]);
                 }else{
-                    echo "Gagal Save";
+                    DB::rollback();
                     return redirect()->route('backend.vendor.create')->with('failed','Data Is Not Competible');
                 }
-            return redirect()->route('backend.forecast.index')->with(['success' => 'Data berhasil dibuat !']);
-
-        $vendor->save();
-
+            }
+            // dd($vendorPivot);
+            VendorPivot::insert($vendorPivot);
+            DB::commit();
+            return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
+        } catch (\Throwable $th) {
+            DB::rollback();
+            return redirect()->route('backend.vendor.create')->with('failed','Data Is Not Competible');
+        }
     }
 
     public function edit($id)
@@ -122,6 +157,9 @@ class VendorController extends Controller
         $data['page_title'] = 'Edit Vendor';
         $data['breadcumb'] = 'Edit Vendor';
         $data['vendor'] = Vendor::findOrFail($id);
+
+        // dd($data['vendor']->vendorPivot());
+        // $data['vendorpv'] = VendorPivot::findOrFail($id);
 
         return view('backend.vendor.edit', $data);
     }

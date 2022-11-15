@@ -97,7 +97,7 @@ use Illuminate\Support\Facades\Route;
             // inventory Product
             Route::resource('inventory_product', InventoryProductController::class);
 
-             // inventory Product
+             // List Finance
              Route::resource('list_finance', ListFinanceController::class);
 
              // Purchase Order

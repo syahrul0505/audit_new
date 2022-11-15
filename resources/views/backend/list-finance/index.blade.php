@@ -13,7 +13,7 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">home</li>
                     <li class="breadcrumb-item">/</li>
-                    <li class="breadcrumb-item"><a href="{{ route('backend.forecast.index') }}">Forecast</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('backend.material.index') }}">Material</a></li>
                 </ol>
             </div>
 
@@ -26,7 +26,6 @@
     <div class="row mt-4">
         <div class="col-12">
             <div class="card">
-                
                 <div class="card-header" style="background-color: #2a3042dc !important; border-radius:10px 10px 0px 0px;">
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 mt-1 text-white" style="font-size:1.2rem;">
@@ -38,17 +37,14 @@
 
                         @can('departement-create')
                         <div class="col-lg-6 col-md-6 col-sm-6 d-flex justify-content-end">
-                            <a href="{{ route('backend.list_finance.create') }}" class="btn btn-md btn-info">
+                            <a href="{{ route('backend.product.create') }}" class="btn btn-md btn-info">
                                 <i class="fa fa-plus"></i> 
                                 Add New
                             </a>
                         </div>
-                        
                         @endcan
                     </div>
-                </div>
 
-                <div class="card-header" style="background-color: white !important; border-radius:10px 10px 0px 0px;">
                     <div class="row">
                         <div class="col-6">
                             @include('backend.components.flash-message')
@@ -62,10 +58,13 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    {{-- <th>Employee Name</th> --}}
-                                    <th>Grand Total Invoice</th>
-                                    <th>No Faktur Pajak</th>
-                                    <th>Tanggal Kirim</th>
+                                    <th>Product Code </th>
+                                    <th>Product Name</th>
+                                    <th>Gramsi</th>
+                                    <th>Thickness</th>
+                                    <th>Panjang</th>
+                                    <th>Lebar</th>
+                                    <th>Description</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -73,24 +72,13 @@
                             </thead>
 
                             <tbody>
-                                {{-- @foreach ($purchase_order as $purchase_orders)
+                                @foreach ($vendor as $vendors)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $purchase_orders->po_no ?? ''}}</td>
-                                    <td>{{ $purchase_orders->category ??''}}</td>
-                                    <td>{{ $purchase_orders->nama_barang ?? ''}}</td>
-                                    <td>{{ $purchase_orders->site ?? ''}}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
                                         <div class="btn-group">
-
-                                            <a href="{{route('backend.purchase_order.show', $purchase_orders->id)}}"
-                                                class="btn btn-info text-white">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-
                                             @can('departement-edit')
-                                            <a href="{{ route('backend.purchase_order.edit', $purchase_orders->id) }}"
+                                            <a href="{{ route('backend.vendor.edit', $vendors->id) }}"
                                                 class="btn btn-warning text-white">
                                                 <i class="far fa-edit"></i>
                                                 Edit
@@ -98,7 +86,7 @@
                                             @endcan
 
                                             @can('departement-delete')
-                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Purchase Order', '{{ $purchase_orders->name }}', '/aduitt/admin/purchase_order/' + {{ $purchase_orders->id }}, '/aduitt/admin/purchase_order/')">
+                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Product', '{{ $vendors->name }}', '/aduitt/admin/master-data/product/' + {{ $vendors->id }}, '/aduitt/admin/master-data/product/')">
                                                 <i class="far fa-trash-alt"></i>
                                                 Delete
                                             </a>
@@ -107,7 +95,7 @@
                                     </td>
                                     @endif
                                 </tr>
-                                @endforeach --}}
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

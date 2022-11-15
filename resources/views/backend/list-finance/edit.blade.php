@@ -86,20 +86,20 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @if ($purchase_order->purchaseOrderPivot->count() > 0)
-                                            @foreach ($purchase_order->purchaseOrderPivot as $key => $purchaseOrderPivot)
+                                        @if ($vendor->vendorPivot->count() > 0)
+                                            @foreach ($vendor->vendorPivot as $key => $vendorPivot)
                                             <tr>
                                                 <td>
-                                                    <input class="form-control {{ $errors->has('qty') ? 'is-invalid' : '' }}" placeholder="Input Qty" type="number" name="qty[]" id="qty1" value="{{$purchaseOrderPivot->qty}}">
+                                                    <input class="form-control {{ $errors->has('qty') ? 'is-invalid' : '' }}" placeholder="Input Qty" type="number" name="qty[]" id="qty1" value="{{$vendorPivot->qty}}">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control {{ $errors->has('harga') ? 'is-invalid' : '' }}" placeholder="Input Harga" type="number" name="harga[]" id="qty1" value="{{$purchaseOrderPivot->harga}}">
+                                                    <input class="form-control {{ $errors->has('harga') ? 'is-invalid' : '' }}" placeholder="Input Harga" type="number" name="harga[]" id="qty1" value="{{$vendorPivot->harga}}">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control {{ $errors->has('total') ? 'is-invalid' : '' }}" placeholder="Total" type="number" name="total[]" id="qty1" value="{{$purchaseOrderPivot->total}}">
+                                                    <input class="form-control {{ $errors->has('total') ? 'is-invalid' : '' }}" placeholder="Total" type="number" name="total[]" id="qty1" value="{{$vendorPivot->total}}">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" placeholder="Date" type="date" name="date[]" id="qty1" value="{{$purchaseOrderPivot->po_date}}">
+                                                    <input class="form-control {{ $errors->has('date') ? 'is-invalid' : '' }}" placeholder="Date" type="date" name="po_date[]" id="qty1" value="{{$vendorPivot->po_date}}">
                                                 </td>
                                                 
                                                 <td>

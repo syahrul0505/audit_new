@@ -32,7 +32,7 @@
 
                 @if(auth()->user()->can('dashboard'))
                 <li>
-                    <a href="{{ route('backend.vendor.create') }}" class="waves-effect">
+                    <a href="{{ route('backend.vendor.index') }}" class="waves-effect">
                         <i class="bx bx-box"></i>
                         <span key="t-dashboards">Vendor</span>
                     </a>

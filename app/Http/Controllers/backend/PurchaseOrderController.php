@@ -45,6 +45,7 @@ class PurchaseOrderController extends Controller
             
             $purchaseOrder->save();
 
+            // dd($purchaseOrder->id);
             $purchaseOrderPivot = [];
             foreach ($request->qty as $key => $value) {
 
