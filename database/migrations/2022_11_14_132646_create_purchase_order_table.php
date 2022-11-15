@@ -15,10 +15,10 @@ class CreatePurchaseOrderTable extends Migration
     {
         Schema::create('purchase_order', function (Blueprint $table) {
             $table->id();
-            $table->string('po_no')->unsigned()->nullable();
-            $table->string('category')->unsigned()->nullable();
-            $table->string('nama_barang')->unsigned()->nullable();
-            $table->string('site')->unsigned()->nullable();
+            $table->string('po_no')->nullable();
+            $table->string('category')->nullable();
+            $table->string('nama_barang')->nullable();
+            $table->string('site')->nullable();
 
             $table->timestamps();
         });

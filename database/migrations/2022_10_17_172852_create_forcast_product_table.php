@@ -15,9 +15,9 @@ class CreateForcastProductTable extends Migration
     {
         Schema::create('forcast_product', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('forecast_id')->unsigned()->nullable();
-            $table->bigInteger('material_id')->unsigned()->nullable();
-            $table->string('description')->unsigned()->nullable();
+            $table->unsignedBigInteger('forecast_id')->nullable();
+            $table->unsignedBigInteger('material_id')->nullable();
+            $table->string('description')->nullable();
 
             $table->foreign('forecast_id')->references('id')->on('forcast')->onDelete('cascade');
             $table->foreign('material_id')->references('id')->on('material')->onDelete('cascade');

@@ -15,8 +15,8 @@ class CreateStockOutMaterialTable extends Migration
     {
         Schema::create('stock_out_material', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("material_id")->unsigned()->nullable();
-            $table->bigInteger("employee_id")->unsigned()->nullable();
+            $table->unsignedBigInteger("material_id")->nullable();
+            $table->unsignedBigInteger("employee_id")->nullable();
             $table->bigInteger("material_outgoing");
             $table->bigInteger("current_stock")->nullable();
             $table->text('description')->nullable();

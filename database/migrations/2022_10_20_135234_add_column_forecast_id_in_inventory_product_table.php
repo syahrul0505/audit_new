@@ -14,7 +14,7 @@ class AddColumnForecastIdInInventoryProductTable extends Migration
     public function up()
     {
         Schema::table('inventory_product', function (Blueprint $table) {
-            $table->bigInteger('forecast_id')->unsigned()->nullable();
+            $table->unsignedBigInteger('forecast_id')->nullable();
 
             $table->foreign('forecast_id')->references('id')->on('forcast')->onDelete('cascade');
         });

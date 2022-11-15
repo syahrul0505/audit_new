@@ -15,8 +15,8 @@ class CreateVendorrTable extends Migration
     {
         Schema::create('vendorr', function (Blueprint $table) {
             $table->id();
-            $table->string('email')->unsigned()->nullable();
-            $table->string('description')->unsigned()->nullable();
+            $table->string('email')->nullable();
+            $table->string('description')->nullable();
 
             $table->timestamps();
         });

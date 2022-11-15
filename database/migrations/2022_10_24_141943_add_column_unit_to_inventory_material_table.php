@@ -14,7 +14,7 @@ class AddColumnUnitToInventoryMaterialTable extends Migration
     public function up()
     {
         Schema::table('inventory_material', function (Blueprint $table) {
-            $table->string('unit')->unsigned()->nullable();
+            $table->string('unit')->nullable();
             
         });
     }

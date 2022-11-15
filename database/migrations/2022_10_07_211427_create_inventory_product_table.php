@@ -15,7 +15,7 @@ class CreateInventoryProductTable extends Migration
     {
         Schema::create('inventory_product', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("product_id")->unsigned()->nullable();
+            $table->unsignedBigInteger("product_id")->nullable();
             $table->string("date");
             $table->bigInteger("begin_stock")->nullable();
             $table->bigInteger("total_stock")->nullable();

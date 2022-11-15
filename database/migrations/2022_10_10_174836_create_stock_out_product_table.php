@@ -15,8 +15,8 @@ class CreateStockOutProductTable extends Migration
     {
         Schema::create('stock_out_product', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("product_id")->unsigned()->nullable();
-            $table->bigInteger("employee_id")->unsigned()->nullable();
+            $table->unsignedBigInteger("product_id")->nullable();
+            $table->unsignedBigInteger("employee_id")->nullable();
             $table->bigInteger("product_outgoing");
             $table->bigInteger("current_stock")->nullable();
             $table->text('description')->nullable();

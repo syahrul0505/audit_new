@@ -15,7 +15,7 @@ class CreateInventoryMaterialTable extends Migration
     {
         Schema::create('inventory_material', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("material_id")->unsigned()->nullable();
+            $table->unsignedBigInteger("material_id")->nullable();
             $table->string("date");
             $table->bigInteger("begin_stock")->nullable();
             $table->bigInteger("total_stock")->nullable();

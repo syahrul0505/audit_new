@@ -15,11 +15,11 @@ class CreatePurchaseOrderPivotTable extends Migration
     {
         Schema::create('purchase_order_pivot', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('purchase_order_id')->unsigned()->nullable();
-            $table->bigInteger('qty')->unsigned()->nullable();
-            $table->bigInteger('harga')->unsigned()->nullable();
-            $table->bigInteger('total')->unsigned()->nullable();
-            $table->string('po_date')->unsigned()->nullable();
+            $table->unsignedBigInteger('purchase_order_id')->nullable();
+            $table->bigInteger('qty')->nullable();
+            $table->bigInteger('harga')->nullable();
+            $table->bigInteger('total')->nullable();
+            $table->string('po_date')->nullable();
 
             $table->foreign('purchase_order_id')->references('id')->on('purchase_order')->onDelete('cascade');
             $table->timestamps();

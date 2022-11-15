@@ -15,11 +15,11 @@ class CreateVendorTable extends Migration
     {
         Schema::create('vendor', function (Blueprint $table) {
             $table->id();
-            $table->string('tanggal_po')->unsigned()->nullable();
-            $table->string('no_po')->unsigned()->nullable();
-            $table->string('no_inv_vendor')->unsigned()->nullable();
-            $table->string('tanggal_kirim')->unsigned()->nullable();
-            $table->string('email')->unsigned()->nullable();
+            $table->string('tanggal_po')->nullable();
+            $table->string('no_po')->nullable();
+            $table->string('no_inv_vendor')->nullable();
+            $table->string('tanggal_kirim')->nullable();
+            $table->string('email')->nullable();
 
             $table->timestamps();
         });

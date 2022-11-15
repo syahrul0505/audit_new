@@ -15,11 +15,11 @@ class CreateVendorrPivotTable extends Migration
     {
         Schema::create('vendorr_pivot', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('vendor_id')->unsigned()->nullable();
-            $table->string('no_po')->unsigned()->nullable();
-            $table->string('tanggal_po')->unsigned()->nullable();
-            $table->string('no_invoice')->unsigned()->nullable();
-            $table->string('tanggal_kirim')->unsigned()->nullable();
+            $table->unsignedBigInteger('vendor_id')->nullable();
+            $table->string('no_po')->nullable();
+            $table->string('tanggal_po')->nullable();
+            $table->string('no_invoice')->nullable();
+            $table->string('tanggal_kirim')->nullable();
 
             $table->foreign('vendor_id')->references('id')->on('vendorr')->onDelete('cascade');
             $table->timestamps();

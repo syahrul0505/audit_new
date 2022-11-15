@@ -15,8 +15,8 @@ class CreateForcastTable extends Migration
     {
         Schema::create('forcast', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger("product_id")->unsigned()->nullable();
-            $table->bigInteger("employee_id")->unsigned()->nullable();
+            $table->unsignedBigInteger("product_id")->nullable();
+            $table->unsignedBigInteger("employee_id")->nullable();
             $table->string("date");
             $table->bigInteger("qty");
             $table->text('description')->nullable();
