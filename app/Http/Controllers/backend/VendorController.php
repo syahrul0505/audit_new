@@ -13,7 +13,7 @@ class VendorController extends Controller
 {
     public function index()
     {
-        $data['page_title'] = 'Vendor List';
+        $data['page_title'] = 'List Finance';
         $data['vendor'] = Vendor::get();
 
         return view('backend.vendor.index', $data);
@@ -164,8 +164,13 @@ class VendorController extends Controller
         return view('backend.vendor.edit', $data);
     }
 
-    public function show(){
-        
+    public function show($id)
+    {
+        $data['page_title'] = 'Show List FInance';
+        $data['vendor'] = Vendor::findOrfail($id);
+        $data['vendor_pivot'] = VendorPivot::get();
+
+        return view('backend.vendor.show', $data);
     }
 
 

@@ -36,7 +36,7 @@
                             </span>
                         </div>
 
-                        @can('departement-create')
+                        {{-- @can('departement-create')
                         <div class="col-lg-6 col-md-6 col-sm-6 d-flex justify-content-end">
                             <a href="{{ route('backend.vendor.create') }}" class="btn btn-md btn-info">
                                 <i class="fa fa-plus"></i> 
@@ -44,7 +44,7 @@
                             </a>
                         </div>
                         
-                        @endcan
+                        @endcan --}}
                     </div>
                 </div>
 
@@ -63,10 +63,8 @@
                                 <tr>
                                     <th>No</th>
                                     {{-- <th>Employee Name</th> --}}
-                                    <th>Tanggal PO</th>
-                                    <th>No PO</th>
-                                    <th>Tanggal Kirim Barang</th>
-                                    <th>Email Vendor</th>
+                                    <th>Email</th>
+                                    <th>Note</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -77,13 +75,15 @@
                                 @foreach ($vendor as $vendors)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    {{-- <td>{{ $vendors->employee->name ?? ''}}</td> --}}
-                                    <td>{{ $vendors->tanggal_po ?? ''}}</td>
-                                    <td>{{ $vendors->no_po}}</td>
-                                    <td>{{ $vendors->tanggal_kirim ?? ''}}</td>
-                                    <td>{{ $vendors->email ?? ''}}</td>
+                                    <td>{{ $vendors->email ?? 'N/A'}}</td>
+                                    <td>{{ $vendors->description ?? 'N/A'}}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
+                                        <a href="{{route('backend.vendor.show', $vendors->id)}}"
+                                            class="btn btn-info text-white">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+
                                         <div class="btn-group">
                                             @can('departement-edit')
                                             <a href="{{ route('backend.vendor.edit', $vendors->id) }}"

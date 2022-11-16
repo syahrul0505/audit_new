@@ -32,7 +32,7 @@
 
                 @if(auth()->user()->can('dashboard'))
                 <li>
-                    <a href="{{ route('backend.vendor.index') }}" class="waves-effect">
+                    <a href="{{ route('backend.vendor.create') }}" class="waves-effect">
                         <i class="bx bx-box"></i>
                         <span key="t-dashboards">Vendor</span>
                     </a>
@@ -87,7 +87,7 @@
                 @endif --}}
                 @if(auth()->user()->can('dashboard'))
                 <li>
-                    <a href="{{ route('backend.list_finance.index') }}" class="waves-effect">
+                    <a href="{{ route('backend.vendor.index') }}" class="waves-effect">
                         <i class="far fa-folder"></i>
                         <span key="t-dashboards">List Finance</span>
                     </a>
