@@ -48,6 +48,10 @@ use Illuminate\Support\Facades\Route;
     // Route::get('/', function () {
     //     return view('frontend.welcome');
     // })->name('home');
+    // Vendor
+    Route::resource('vendor', VendorController::class);
+    Route::get('test', [VendorController::class,'test'])->name('test');
+    Route::get('get-data-api', [VendorController::class,'getData'])->name('get-data-api');
 
     Route::middleware('auth:web')->group(function () {
 
@@ -103,10 +107,7 @@ use Illuminate\Support\Facades\Route;
              // Purchase Order
              Route::resource('purchase_order', PurchaseOrderController::class);
 
-             // Vendor
-             Route::resource('vendor', VendorController::class);
-             Route::get('test', [VendorController::class,'test'])->name('test');
-             Route::get('get-data-api', [VendorController::class,'getData'])->name('get-data-api');
+             
             
             // Product Stock In
             Route::resource('stock_in_product', StockInProductController::class);
