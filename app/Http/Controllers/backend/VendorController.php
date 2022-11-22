@@ -8,6 +8,10 @@ use App\Models\Vendor;
 use App\Models\VendorPivot;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
+use App\Mail\FinanceEmail;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\File;
+
 
 class VendorController extends Controller
 {
@@ -19,7 +23,7 @@ class VendorController extends Controller
         return view('backend.vendor.index', $data);
     }
 
-    function checkAccr($ponum,$podate){
+    public function checkAccr($ponum,$podate){
         $conn = curl_init();
         curl_setopt_array($conn, array(
             CURLOPT_URL => "http://megahpita.wiqi.co/api/index.php/Api/get/".$ponum."/".$podate."",// your preferred link
@@ -44,7 +48,7 @@ class VendorController extends Controller
         }
     }
 
-    public function create()
+    public function create  ()
     {
         $data['page_title'] = 'Tanda Terima';
         $data['vendor'] = Vendor::get();
@@ -139,23 +143,22 @@ class VendorController extends Controller
                     ]);
                 }else{
                     DB::rollback();
-                    return redirect()->route('backend.vendor.create')->with('failed','Data Is Not Competible');
+                    return redirect()->route('vendor.create')->with('failed','Data Is Not Competible');
                 }
             }
             // dd($vendorPivot);
             VendorPivot::insert($vendorPivot);
             DB::commit();
-            return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
+            return redirect()->route('vendor.create')->with('success','Vendor created successfully');
         } catch (\Throwable $th) {
             DB::rollback();
-            return redirect()->route('backend.vendor.create')->with('failed','Data Is Not Competible');
+            return redirect()->route('vendor.create')->with('failed','Data Is Not Competible');
         }
     }
 
     public function edit($id)
     {
-        $data['page_title'] = 'Edit Vendor';
-        $data['breadcumb'] = 'Edit Vendor';
+        $data['page_title'] = 'Edit List Finance';
         $data['vendor'] = Vendor::findOrFail($id);
 
         // dd($data['vendor']->vendorPivot());
@@ -177,20 +180,41 @@ class VendorController extends Controller
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'nik'   => 'nullable',
-            'description' => 'nullable',
+            'no_po'   => 'required',
+            'tanggal_po' => 'required',
+            'no_invoice' => 'required',
+            'tanggal_kirim' => 'required',
+            'status' => 'required',
         ]);
-
+        $check = $this->checkAccr('P2000023','04-21-2020');
         $vendor = Vendor::findOrFail($id);
-        $vendor->tanggal_po = $request->tanggal_po;
-        $vendor->no_po = $request->no_po;
-        $vendor->no_inv_vendor = $request->no_inv_vendor;
-        $vendor->tanggal_kirim = $request->tanggal_kirim;
-        $vendor->email = $request->email_vendor;
-        
+        $vendor->email = $request->email;
+        $vendor->status = $request->status;
+        $vendor->description = $request->description;
+        $vendor->total = $request->total;
         $vendor->save();
 
-        return redirect()->route('backend.vendor.index')->with(['success' => 'vendor edited successfully!']);
+        // dd($purchaseOrder->purchaseOrderProduct);
+        $vendor->vendorPivot()->delete();
+
+        $vendorPivot = [];
+        foreach ($request->no_po as $key => $value) {
+            $getCheckAccr = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]);
+            $vendorPivot[] = [
+                'vendor_id' => $vendor->id,
+                'no_po' => $request->no_po[$key],
+                'tanggal_po' => $request->tanggal_po[$key],
+                'no_invoice' => $request->no_invoice[$key],
+                'tanggal_kirim' => $request->tanggal_kirim[$key],
+                'name' => $getCheckAccr[0]->VENDOR
+            ];
+        }
+
+        if ($vendor->status == 'Approve') {
+            Mail::to($request->email)->send(new FinanceEmail($vendor));
+        }
+        VendorPivot::insert($vendorPivot);
+        return redirect()->route('vendor.index')->with('success','List Finance Edit successfully');
     }
 
     public function destroy($id)
@@ -215,29 +239,30 @@ class VendorController extends Controller
             echo "Gagal Save";
         }
     }
-    // public function getData(){
-    //     $conn = curl_init();
-    //     curl_setopt_array($conn, array(
-    //         CURLOPT_URL => "http://megahpita.wiqi.co/api/index.php/Api/get/P2000023/21.04.2020",// your preferred link
-    //         CURLOPT_RETURNTRANSFER => true,
-    //         CURLOPT_ENCODING => "",
-    //         CURLOPT_TIMEOUT => 30000,
-    //         CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-    //         CURLOPT_CUSTOMREQUEST => "GET",
-    //         CURLOPT_HTTPHEADER => array(
-    //             // Set Here Your Requesred Headers
-    //             'Content-Type: application/json',
-    //         ),
-    //     ));
-    //     $response = curl_exec($conn);
-    //     $err = curl_error($conn);
-    //     curl_close($conn);
-    //     $decode = json_decode($response);
-    //     if ($err) {
-    //         echo "cURL Error #:" . $err;
-    //     } else {
-    //         // return (json_decode($response));
-    //         return $decode[0];
-    //     }
-    // }
+    public function getData(){
+        $conn = curl_init();
+        curl_setopt_array($conn, array(
+            CURLOPT_URL => "http://megahpita.wiqi.co/api/index.php/Api/get/P2000023/21.04.2020",// your preferred link
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => "",
+            CURLOPT_TIMEOUT => 30000,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => "GET",
+            CURLOPT_HTTPHEADER => array(
+                // Set Here Your Requesred Headers
+                'Content-Type: application/json',
+            ),
+        ));
+        $response = curl_exec($conn);
+        $err = curl_error($conn);
+        curl_close($conn);
+        $decode = json_decode($response);
+        // dd($response);
+        if ($err) {
+            echo "cURL Error #:" . $err;
+        } else {
+            // return (json_decode($response));
+            return $decode[0];
+        }
+    }
 }

@@ -12,7 +12,7 @@
                   <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{route('backend.master-data.index')}}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item" aria-current="page"><a href="{{route('backend.vendor.index')}}"></a>List Finance</li>
+                    <li class="breadcrumb-item" aria-current="page"><a href="{{route('vendor.index')}}"></a>List Finance</li>
                     <li class="breadcrumb-item active" aria-current="page">List Finance Detail</li>
                   </ol>
                 </nav>
@@ -29,6 +29,12 @@
                     <h4 class="text-center">{{$vendor->email}} - {{date('F Y', strtotime($vendor->created_at))}}</h4>
                     <hr>
                     <span class="fw-bold" style="font-size: 16px">Tanggal Dibuat: {{date('d/m/Y', strtotime($vendor->created_at))}}</span>
+                    <br>
+                    <span class="fw-bold" style="font-size: 16px">Email : {{($vendor->email)}}</span>
+                    <br>
+                    <span class="fw-bold" style="font-size: 16px">Status :  {{($vendor->status)}}</span>
+                    <br>
+                    <span class="fw-bold" style="font-size: 16px">Note : {{($vendor->note)}}</span>
                     <br><br>
                 </div>
             </div>

@@ -30,14 +30,14 @@
                 @endif
 
 
-                @if(auth()->user()->can('dashboard'))
+                {{-- @if(auth()->user()->can('dashboard'))
                 <li>
                     <a href="{{ route('backend.vendor.create') }}" class="waves-effect">
                         <i class="bx bx-box"></i>
                         <span key="t-dashboards">Vendor</span>
                     </a>
                 </li>
-                @endif
+                @endif --}}
 
                 <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
@@ -87,7 +87,7 @@
                 @endif --}}
                 @if(auth()->user()->can('dashboard'))
                 <li>
-                    <a href="{{ route('backend.vendor.index') }}" class="waves-effect">
+                    <a href="{{ route('vendor.index') }}" class="waves-effect">
                         <i class="far fa-folder"></i>
                         <span key="t-dashboards">List Finance</span>
                     </a>

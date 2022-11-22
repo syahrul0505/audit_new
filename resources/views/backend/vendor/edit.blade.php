@@ -11,40 +11,12 @@
             <div class="card-header text-center " style="border-radius:10px 10px 0px 0px;">
                 <h4 class="card-title">{{$page_title}}</h4>
             </div>
-            <form method="POST" action="{{ route('backend.purchase_order.update', $vendor->id) }}" id="formPO">
+            <form method="POST" action="{{ route('vendor.update', $vendor->id) }}" id="formPO">
                 @csrf
                 @method('PATCH')
                 <div class="card-body">
-
                     @include('backend.components.form-message')
-                    <div class="row">
-                        
-                        <div class="col-lg-6">
-                            <div class="form-group mb-3">
-                                <label for="">Email</label>
-                                <input class="form-control @error('email') is-invalid @enderror"  type="text" name="email" value="{{ $vendor->email }}">
-        
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
 
-                            <div class="form-group mb-3">
-                                <label for="description">Description</label>
-                                <textarea name="description" class="form-control" rows="3" placeholder="Description">{{ $vendor->description }}</textarea>
-          
-                                @error('description')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                              </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
                     {{-- <h4>Material <small class="text-danger">*</small></h4> --}}
                     <hr>
                     <div class="row mt-2">
@@ -102,9 +74,63 @@
                         </div>
                     </div>
                 </div>
+                <div class="card-body">
+
+                    <div class="row">
+                        
+                        <div class="col-lg-6">
+                            <div class="form-group mb-3">
+                                <label for="">Email</label>
+                                <input class="form-control @error('email') is-invalid @enderror"  type="text" name="email" value="{{ $vendor->email }}">
+        
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label class="col-form-label">Status</label>
+                                <select class="form-select" id="type" name="status">
+                                    <option value="">Select Status</option>
+                                    <option value="Pending" class="text-warning" {{ $vendor->status == 'Pending' ? 'selected' : '' }}>Pending</option>
+                                    <option value="Approve" class="text-success" {{ $vendor->status == 'Approve' ? 'selected' : '' }}>Approve</option>
+                                    <option value="Reject" class="text-danger" {{ $vendor->status == 'Reject' ? 'selected' : '' }}>Reject</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="description">Description <small>(optional)</small></label>
+                                <textarea name="description" class="form-control" rows="3" placeholder="Description">{{ $vendor->description }}</textarea>
+          
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                        </div>
+
+
+                        <div class="col-lg-6">
+                            <div class="form-group mb-3">
+                                <label for="">Total</label>
+                                <input class="form-control @error('total') is-invalid @enderror"  type="number" name="total" value="{{ $vendor->total }}">
+        
+                                @error('total')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="card-footer" style="border-radius:0px 0px 10px 10px;background-color:#fff;">
                     <button type="submit" class="btn btn-success btn-footer" onclick="save()">Save</button>
-                    <a href="{{ route('backend.purchase_order.index') }}" class="btn btn-secondary btn-footer">Back</a>
+                    <a href="{{ route('vendor.index') }}" class="btn btn-secondary btn-footer">Back</a>
                 </div>
             </form>
         </div>
@@ -146,10 +172,10 @@
             $("#contactTable").find('tbody')
                 .append(
                     $('<tr>' +
-                        '<td><input class="form-control" placeholder="Input Qty" type="number" name="qty[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
-                        '<td><input class="form-control" placeholder="Input Harga" type="number" name="harga[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
-                        '<td><input class="form-control" placeholder="Total" type="number" name="total[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
-                        '<td><input class="form-control" placeholder="Po Date" type="number" name="po_date[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
+                        '<td><input class="form-control" placeholder="Input No Po" type="text" name="no_po[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
+                        '<td><input class="form-control" placeholder="Input Tanggal Po" type="date" name="tanggal_po[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
+                        '<td><input class="form-control" placeholder="No Invoice" type="text" name="no_invoice[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
+                        '<td><input class="form-control" placeholder="Po Date" type="date" name="tanggal_kirim[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         // '<td><div class="input-group"><span class="input-group-text" id="basic-addon1">IDR</span><input type="number" class="form-control" min="0" name="unit_price[]" id="unit_price'+rowCount+'" placeholder="Input unit price" aria-describedby="basic-addon1" onkeyup="calculatePrice('+rowCount+')"></div></td>' +
                         // '<td><div class="input-group"><span class="input-group-text" id="basic-addon1">IDR</span><input type="number" class="form-control" min="0" name="total_price[]" id="total_price'+rowCount+'" placeholder="Total" readonly aria-describedby="basic-addon1"></div></td>' +
                         '<td style="max-width: 6% !important"><button type="button" class="btn btn-outline-danger btn-remove" onclick="$(this).parent().parent().remove();"><i class="fa fa-minus"></i></button></td>' +

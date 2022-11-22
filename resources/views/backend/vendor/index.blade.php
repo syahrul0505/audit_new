@@ -13,7 +13,7 @@
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">home</li>
                     <li class="breadcrumb-item">/</li>
-                    <li class="breadcrumb-item"><a href="{{ route('backend.vendor.index') }}">Vendor</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('vendor.index') }}">Vendor</a></li>
                 </ol>
             </div>
 
@@ -64,7 +64,9 @@
                                     <th>No</th>
                                     {{-- <th>Employee Name</th> --}}
                                     <th>Email</th>
+                                    <th>Status</th>
                                     <th>Note</th>
+                                    <th>Total</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -76,17 +78,33 @@
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $vendors->email ?? 'N/A'}}</td>
+                                    
+                                    @if ($vendors->status == 'Pending')
+                                    
+                                    <td class="text-warning"><b>{{ $vendors->status ?? 'N/A'}}</b></td>
+
+                                    @elseif($vendors->status == 'Approve')
+                                    <td class="text-success"><b>{{ $vendors->status ?? 'N/A'}}</b></td>
+                                    
+                                    @elseif($vendors->status == 'Reject')
+                                    <td class="text-danger"><b>{{ $vendors->status ?? 'N/A'}}</b></td>
+                                    
+                                    @else
+                                    <td><b>N/A</b></td>
+                                    @endif
+                                    
                                     <td>{{ $vendors->description ?? 'N/A'}}</td>
+                                    <td>{{ $vendors->total ?? 'N/A'}}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
-                                        <a href="{{route('backend.vendor.show', $vendors->id)}}"
+                                        <a href="{{route('vendor.show', $vendors->id)}}"
                                             class="btn btn-info text-white">
                                             <i class="fas fa-eye"></i>
                                         </a>
 
                                         <div class="btn-group">
                                             @can('departement-edit')
-                                            <a href="{{ route('backend.vendor.edit', $vendors->id) }}"
+                                            <a href="{{ route('vendor.edit', $vendors->id) }}"
                                                 class="btn btn-warning text-white">
                                                 <i class="far fa-edit"></i>
                                                 Edit
@@ -94,7 +112,7 @@
                                             @endcan
 
                                             @can('departement-delete')
-                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Vendor', '{{ $vendors->name }}', '/aduitt/admin/vendor/' + {{ $vendors->id }}, '/aduitt/admin/vendor/')">
+                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Vendor', '{{ $vendors->name }}', '/aduitt/vendor/' + {{ $vendors->id }}, '/aduitt/vendor/')">
                                                 <i class="far fa-trash-alt"></i>
                                                 Delete
                                             </a>

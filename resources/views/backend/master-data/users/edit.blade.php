@@ -123,7 +123,7 @@
                 @csrf
                 <div class="card-body">
 
-                    @include('components.flash-message')
+                    @include('backend.components.flash-message')
 
                     <div class="form-group mb-3">
                         <label for="password">Old Password</label>

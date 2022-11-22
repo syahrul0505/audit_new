@@ -50,7 +50,7 @@ use Illuminate\Support\Facades\Route;
     // })->name('home');
     // Vendor
     Route::resource('vendor', VendorController::class);
-    Route::get('test', [VendorController::class,'test'])->name('test');
+    Route::get('test', [VendorController::class,'checkAccr'])->name('test');
     Route::get('get-data-api', [VendorController::class,'getData'])->name('get-data-api');
 
     Route::middleware('auth:web')->group(function () {
