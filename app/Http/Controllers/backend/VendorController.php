@@ -147,6 +147,7 @@ class VendorController extends Controller
                     return redirect()->route('vendor.create')->with('failed','Data Is Not Competible');
                 }
             }
+            dd($vendorPivot);
             // dd($vendorPivot);
             VendorPivot::insert($vendorPivot);
             DB::commit();
