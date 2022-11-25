@@ -67,9 +67,7 @@
                                     <th>Status</th>
                                     <th>Note</th>
                                     <th>Total</th>
-                                    @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
-                                    @endif
                                 </tr>
                             </thead>
 
@@ -95,11 +93,15 @@
                                     
                                     <td>{{ $vendors->description ?? 'N/A'}}</td>
                                     <td>{{ $vendors->total ?? 'N/A'}}</td>
-                                    @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
                                         <a href="{{route('vendor.show', $vendors->id)}}"
                                             class="btn btn-info text-white">
                                             <i class="fas fa-eye"></i>
+                                        </a>
+
+                                        <a href="{{route('vendor.show', $vendors->id)}}"
+                                            class="btn btn-secondary text-white">
+                                            <i class="bx bxs-file-pdf"></i>
                                         </a>
 
                                         <div class="btn-group">
@@ -119,7 +121,6 @@
                                             @endcan
                                         </div>
                                     </td>
-                                    @endif
                                 </tr>
                                 @endforeach
                             </tbody>

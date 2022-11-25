@@ -3,6 +3,7 @@
 namespace App\Mail;
 
 use App\Models\Vendor;
+use App\Models\VendorPivot;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -34,6 +35,7 @@ class FinanceEmail extends Mailable
     {
         // dd($this->data);
         $data = Vendor::get();
+        // $data = VendorPivot::get();
         // dd($wo);
         return $this->from('teamngeskuy5@gmail.com')
         ->subject('Finance')

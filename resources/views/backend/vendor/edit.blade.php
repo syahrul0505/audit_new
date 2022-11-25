@@ -100,6 +100,17 @@
                                 </select>
                             </div>
 
+                                <div class="form-group mb-3">
+                                    <label for="">No Faktur Pajak</label>
+                                    <input class="form-control @error('no_pajak') is-invalid @enderror"  type="text" id="phone" name="no_faktur" value="{{ ($vendor->no_faktur) }}" >
+            
+                                    @error('no_pajak')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+
                             <div class="form-group mb-3">
                                 <label for="description">Description <small>(optional)</small></label>
                                 <textarea name="description" class="form-control" rows="3" placeholder="Description">{{ $vendor->description }}</textarea>
@@ -126,6 +137,9 @@
                                 @enderror
                             </div>
                         </div>
+
+                        
+
                     </div>
                 </div>
                 <div class="card-footer" style="border-radius:0px 0px 10px 10px;background-color:#fff;">
@@ -196,6 +210,10 @@
 
             $('#total_price'+number).val(total);
         }
+
+        $(":input").inputmask();
+
+        $("#phone").inputmask({"mask": "999.999-99.99999999"});
     </script>
 
 @endsection

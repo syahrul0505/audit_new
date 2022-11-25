@@ -1,53 +1,63 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-    <style>
-        
-    </style>
-</head>
-<body>
-    <div class="card-body">
-        <div class="table-r esponsive">
-            <table class="table datatable table-hover" style="border: 1px solid black">
-                <thead>
-                    <tr>
-                        <th>Email</th>
-                        <th>Status</th>
-                        <th>Note</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td style="margin-left: 200px;">{{ $data['email'] }}</td>
-                        <td style="margin-left: 200px;">{{ $data['status'] }}</td>
-                        @if ( $data['status'] == 'Approve')
-                                <td><h5>
-                                <span style="color: #19e0fa;">{{ $data['status'] }}</span></h5>
-                                </td>
-                                @elseif($data['status'] == 'WO Belum Dikerjakan')
-                                <td>
-                                    <h5>
-                                    <span style="color: #ff3224;">{{ $data['status'] }}</span>
-                                    </h5>
-                                </td>
-                                @elseif($data['status'] == 'WO Sudah Selesai')
-                                <td>
-                                    <h5>
-                                    <span style="color: #00f73a;">{{ $data['status'] }}</span>
-                                    </h5>
-                                </td>
-                                @endif
-                        {{-- <td style="margin-left: 200px; color:blue">{{ $data['status'] }}</td> --}}
-                        <td style="margin-left: 200px;">{{ $data['description   '] }}</td>
-
-                    </tr>
-                </tbody>
-            </table>
+<div class="row mt-4">
+    <div class="col-lg-6">
+        <div style="border-radius: 15px">
+            <div class="card-body">
+                <h4 class="text-center">{{$data->email}} - {{date('F Y', strtotime($data->created_at))}}</h4>
+                <hr>
+                <span class="fw-bold" style="font-size: 16px">Tanggal Dibuat: {{date('d/m/Y', strtotime($data->created_at))}}</span>
+                <br>
+                <span class="fw-bold" style="font-size: 16px">Email : {{($data->email ?? 'N/A')}}</span>
+                <br>
+                <span class="fw-bold" style="font-size: 16px">Status :  {{($data->status)}}</span>
+                <br>
+                <span class="fw-bold" style="font-size: 16px">No Faktur : {{($data->no_faktur ?? 'N/A')}}</span>
+                <br>
+                <span class="fw-bold" style="font-size: 16px">Note : {{($data->description ?? 'N/A')}}</span>
+                {{-- {{ dd($data->vendorPivot) }} --}}
+                <br><br>
+            </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+    {{-- <div class="card" style="border-radius:15px;">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table  table-hover mb-0" id="HistoryTable">
+                        <thead>
+                            <tr>
+                                <th>NO</th>
+                                <th>No Po</th>
+                                <th>Tanggal Po</th>
+                                <th>No Invoice</th>
+                                <th>Tanggal Kirim</th>
+                            </tr>
+                        </thead>
+                            <tbody>
+                                {{ dd($data->dataPivot) }}
+                                @if ($data->dataPivot->count() > 0)
+                                            @foreach ($data->dataPivot as $key => $dataPivot)
+                                            <tr>
+                                                <td>
+                                                    {{ $loop->iteration }}
+                                                </td>
+                                                <td>
+                                                    {{$dataPivot->no_po}}
+                                                </td>
+                                                <td>
+                                                    {{$dataPivot->tanggal_po}}
+                                                </td>
+                                                <td>
+                                                    {{$dataPivot->no_invoice}}
+                                                </td>
+                                                <td>
+                                                    {{$dataPivot->tanggal_kirim}}
+                                                </td>
+                                                
+                                            </tr>
+                                            @endforeach
+                                        @endif
+                            </tbody>
+                    </table>
+                </div>
+            </div>
+        </div> --}}

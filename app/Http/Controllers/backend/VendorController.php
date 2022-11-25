@@ -138,6 +138,7 @@ class VendorController extends Controller
                         'tanggal_po' => $request->tanggal_po[$key],
                         'no_invoice' => $request->no_invoice[$key],
                         'tanggal_kirim' => $request->tanggal_kirim[$key],
+                        'name' => $check[0]->VENDOR,  
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s')
                     ]);
@@ -192,6 +193,7 @@ class VendorController extends Controller
         $vendor->status = $request->status;
         $vendor->description = $request->description;
         $vendor->total = $request->total;
+        $vendor->no_faktur = $request->no_faktur;
         $vendor->save();
 
         // dd($purchaseOrder->purchaseOrderProduct);
@@ -206,7 +208,7 @@ class VendorController extends Controller
                 'tanggal_po' => $request->tanggal_po[$key],
                 'no_invoice' => $request->no_invoice[$key],
                 'tanggal_kirim' => $request->tanggal_kirim[$key],
-                'name' => $getCheckAccr[0]->VENDOR
+                'name' => $getCheckAccr[0]->VENDOR  
             ];
         }
 
