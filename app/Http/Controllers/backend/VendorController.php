@@ -120,7 +120,7 @@ class VendorController extends Controller
 
         DB::beginTransaction();
         try {
-            
+            dd();
             $vendor = new Vendor();
             $vendor->email = $request->email;
             $vendor->description = $request->description;
@@ -147,7 +147,7 @@ class VendorController extends Controller
                     return redirect()->route('vendor.create')->with('failed','Data Is Not Competible');
                 }
             }
-            dd($vendorPivot);
+            // dd($vendorPivot);
             // dd($vendorPivot);
             VendorPivot::insert($vendorPivot);
             DB::commit();

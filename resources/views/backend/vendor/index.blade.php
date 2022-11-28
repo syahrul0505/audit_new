@@ -99,7 +99,7 @@
                                             <i class="fas fa-eye"></i>
                                         </a>
 
-                                        <a href="{{route('vendor.show', $vendors->id)}}"
+                                        <a href=""
                                             class="btn btn-secondary text-white">
                                             <i class="bx bxs-file-pdf"></i>
                                         </a>
