@@ -3,7 +3,7 @@
         <div style="border-radius: 15px">
             <div class="card-body">
                 {{-- {{ dd($data['email'][0]) }} --}}
-                <img src="{{ public_path('img/MPI.png') }}" style="width: 200px; height:100px;" alt="">
+                <img src="{{ asset('img/MPI.png') }}" style="width: 200px; height:100px;" alt="">
                 {{-- <h1>tes</h1> --}}
             </div>
         </div>
