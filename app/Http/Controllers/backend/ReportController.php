@@ -42,6 +42,6 @@ class ReportController extends Controller
     public function ReportExport() {  
         $data['inventory_product'] = InventoryProduct::get();  
         $pdf = Pdf::loadView('backend.report.pdf', $data);
-        return $pdf->download('Report Inventory Product.pdf');
+        // return $pdf->download('Report Inventory Product.pdf');
     }
 }

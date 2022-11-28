@@ -95,7 +95,7 @@ use Illuminate\Support\Facades\Route;
                 Route::patch('change-password', [UserController::class, 'changePassword'])->name('users.change-password');
                 Route::resource('users', UserController::class)->except([
                     'show'
-                ]);;
+                ]);
             });
             
             // inventory Product
@@ -107,7 +107,8 @@ use Illuminate\Support\Facades\Route;
              // Purchase Order
              Route::resource('purchase_order', PurchaseOrderController::class);
 
-             
+            // vendor
+            Route::get('att-pdf',[VendorController::class,'attPdf'])->name('vendor-pdf');
             
             // Product Stock In
             Route::resource('stock_in_product', StockInProductController::class);

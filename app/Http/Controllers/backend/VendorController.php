@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Mail\FinanceEmail;
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Support\Facades\Storage;
 
 class VendorController extends Controller
 {
@@ -147,7 +148,7 @@ class VendorController extends Controller
                     return redirect()->route('vendor.create')->with('failed','Data Is Not Competible');
                 }
             }
-            dd($vendorPivot);
+            // dd($vendorPivot);
             // dd($vendorPivot);
             VendorPivot::insert($vendorPivot);
             DB::commit();
@@ -178,15 +179,25 @@ class VendorController extends Controller
         return view('backend.vendor.show', $data);
     }
 
+    public function attPdf($data){
+        // dd($data);
+        $pdf = Pdf::loadView('backend.vendor.pdf',$data);
+        // return $pdf->download('invoice.pdf');
+        Storage::put('public/Finance/List-Finance-'.$data['no_faktur'].'.pdf',$pdf->stream());
+    }
 
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
+            'email'   => 'required',
+            'status' => 'nullable',
+            'description' => 'nullable',
+            'total' => 'nullable',
+            'no_faktur' => 'nullable',
             'no_po'   => 'required',
             'tanggal_po' => 'required',
             'no_invoice' => 'required',
             'tanggal_kirim' => 'required',
-            'status' => 'required',
         ]);
         $check = $this->checkAccr('P2000023','04-21-2020');
         $vendor = Vendor::findOrFail($id);
@@ -196,8 +207,9 @@ class VendorController extends Controller
         $vendor->total = $request->total;
         $vendor->no_faktur = $request->no_faktur;
         $vendor->save();
-
-        // dd($purchaseOrder->purchaseOrderProduct);
+       
+        // dd($validateData);
+        // Vendor::create($validateData);
         $vendor->vendorPivot()->delete();
 
         $vendorPivot = [];
@@ -213,12 +225,19 @@ class VendorController extends Controller
             ];
         }
 
-        if ($vendor->status == 'Approve') {
-            Mail::to($request->email)->send(new FinanceEmail($vendor));
+        if ($vendor->status == 'Approve') { 
+            // dd($validateData['no_faktur']);
+            $this->attPdf($validateData);
+            // dd($this->attPdf($validateData));
+            
+            Mail::to($request->email)->send(new FinanceEmail($validateData));
+            Storage::delete('public/Finance/List-Finance-'.$validateData['no_faktur'].'.pdf');
         }
         VendorPivot::insert($vendorPivot);
         return redirect()->route('vendor.index')->with('success','List Finance Edit successfully');
     }
+
+    
 
     public function destroy($id)
     {

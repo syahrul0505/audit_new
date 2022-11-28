@@ -2,23 +2,14 @@
     <div class="col-lg-6">
         <div style="border-radius: 15px">
             <div class="card-body">
-                <h4 class="text-center">{{$data->email}} - {{date('F Y', strtotime($data->created_at))}}</h4>
-                <hr>
-                <span class="fw-bold" style="font-size: 16px">Tanggal Dibuat: {{date('d/m/Y', strtotime($data->created_at))}}</span>
-                <br>
-                <span class="fw-bold" style="font-size: 16px">Email : {{($data->email ?? 'N/A')}}</span>
-                <br>
-                <span class="fw-bold" style="font-size: 16px">Status :  {{($data->status)}}</span>
-                <br>
-                <span class="fw-bold" style="font-size: 16px">No Faktur : {{($data->no_faktur ?? 'N/A')}}</span>
-                <br>
-                <span class="fw-bold" style="font-size: 16px">Note : {{($data->description ?? 'N/A')}}</span>
-                {{-- {{ dd($data->vendorPivot) }} --}}
-                <br><br>
+                {{-- {{ dd($data['email'][0]) }} --}}
+                <img src="{{ public_path('img/MPI.png') }}" style="width: 200px; height:100px;" alt="">
+                {{-- <h1>tes</h1> --}}
             </div>
         </div>
     </div>
 </div>
+
     {{-- <div class="card" style="border-radius:15px;">
             <div class="card-body">
                 <div class="table-responsive">
