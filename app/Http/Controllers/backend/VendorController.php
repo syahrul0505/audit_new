@@ -121,7 +121,7 @@ class VendorController extends Controller
 
         DB::beginTransaction();
         try {
-            
+            dd();
             $vendor = new Vendor();
             $vendor->email = $request->email;
             $vendor->description = $request->description;
