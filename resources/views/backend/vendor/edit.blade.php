@@ -17,7 +17,6 @@
                 <div class="card-body">
                     @include('backend.components.form-message')
 
-                    {{-- <h4>Material <small class="text-danger">*</small></h4> --}}
                     <img src="{{ asset('img/MPI.png') }}" style="width: 200px; height:100px;" alt="">
                     <hr>
                     <div class="row mt-2">

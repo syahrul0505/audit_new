@@ -13,6 +13,8 @@
                 <br>
                 <span class="fw-bold" style="font-size: 16px">No Faktur Pajak : {{($no_faktur ?? 'N/A')}}</span>
                 <br>
+                <span class="fw-bold" style="font-size: 16px">Total : {{($total ?? 'N/A')}}</span>
+                <br>
                 <span class="fw-bold" style="font-size: 16px">Note : {{($description ?? 'N/A')}}</span>
                 {{-- <span class="fw-bold" style="font-size: 16px">Note : {{($no_po ?? 'N/A')}}</span> --}}
                 <br><br>
