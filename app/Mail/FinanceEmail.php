@@ -47,7 +47,7 @@ class FinanceEmail extends Mailable
         // return $pdf->download('invoice.pdf');
         
         return $this->from('teamngeskuy5@gmail.com')
-        ->subject('Finance')
+        ->subject('Finance - PT Megah Pita Indonesia')
         ->attach(asset('storage/Finance/List-Finance-'.$this->data['no_faktur'].'.pdf'), [
             'as' => 'List-Finance-'.$this->data['no_faktur'].'.pdf',
             'mime' => 'application/pdf',
