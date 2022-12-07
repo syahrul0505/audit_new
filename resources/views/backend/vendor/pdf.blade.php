@@ -35,8 +35,8 @@
                 <br>
                 <span class="fw-bold" style="font-size: 16px">No Faktur Pajak : {{($no_faktur ?? 'N/A')}}</span>
                 <br>
-                <span class="fw-bold" style="font-size: 16px">Total : Rp.{{($total ?? 'N/A')}}</span>
-                <br>
+                {{-- <span class="fw-bold" style="font-size: 16px">Total : Rp.{{($total ?? 'N/A')}}</span>
+                <br> --}}
                 <span class="fw-bold" style="font-size: 16px">Note : {{($description ?? 'N/A')}}</span>
                 <br><br>
             </div>
@@ -55,11 +55,12 @@
                         <th style="padding-right: 30px !important; text-align:left !important;">Tanggal Po</th>
                         <th style="padding-right: 30px !important; text-align:left !important;">No Invoice</th>
                         <th style="padding-right: 30px !important; text-align:left !important;">Tanggal Kirim</th>
-                        {{-- <th style="padding-right: 30px !important; text-align:left !important;">Jumlah</th> --}}
+                        <th style="padding-right: 30px !important; text-align:left !important;">Amount</th>
                     </tr>
                 </thead>
                     <tbody style="">
                         @foreach ($no_po as $key => $np) 
+                        {{-- {{ dd($amount) }} --}}
                             <tr>
                                 <td style="padding-right: 30px !important; text-align:left !important;">
                                     {{ $loop->iteration }}
@@ -74,11 +75,11 @@
                                     {{$no_invoice[$key]}}
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important;">
-                                    {{$tanggal_kirim[$key]}}
+                                    {{$tanggal_kirim[$key] ?? ''}}
                                 </td>
-                                {{-- <td style="padding-right: 30px !important; text-align:left !important;">
-                                    {{$total ?? ''}}
-                                </td> --}}
+                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                    {{number_format($amount, 2) ?? ''}}
+                                </td>
                             </tr>
                             @endforeach
                             {{-- <tr>

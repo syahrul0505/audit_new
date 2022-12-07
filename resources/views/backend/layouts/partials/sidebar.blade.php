@@ -100,7 +100,7 @@
                         <span key="t-dashboards"> Finance</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
-                        <li><a href="{{ route('vendor.index') }}" key="t-default">Purchase Order</a></li>
+                        <li><a href="{{ route('vendor.index') }}" key="t-default">List Finance</a></li>
                     </ul>
                 </li>
 

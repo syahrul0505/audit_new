@@ -68,56 +68,6 @@ class VendorController extends Controller
             'tanggal_kirim' => 'required',
         ]);
 
-        // foreach ($request->no_po as $key => $value) {
-        //     $vendor = new Vendor();
-        //     $vendor->tanggal_po = $request->tanggal_po[$key];
-        //     $vendor->no_po = $request->no_po[$key];
-        //     $vendor->no_inv_vendor = $request->no_inv[$key];
-        //     // $vendor->tanggal_kirim = $request->tanggal_kirim[$key];
-        //     $vendor->email = $request->email_vendor;
-        //     $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]);
-        // }
-        // if ($check){
-        //     echo "success";
-        //     // echo $check;
-        //     return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
-        // }else{
-        //     echo "Gagal Save";
-        // }
-
-        
-            // $vendor = new Vendor();
-            // $vendor->email = $request->email;
-            // $vendor->description = $request->description;
-            
-            // // $vendorPivot = [];
-            // // dd($vendor->id);
-            // foreach ($request->no_po as $key => $value) {
-                
-            //     $vendorPivot[] = [
-            //         'vendor_id' => $vendor->id,
-            //         'no_po' => $request->no_po[$key],
-            //         'tanggal_po' => $request->tanggal_po[$key],
-            //         'no_invoice' => $request->no_invoice[$key],
-            //         'tanggal_kirim' => $request->tanggal_kirim[$key],
-            //         'created_at' => date('Y-m-d H:i:s'),
-            //         'updated_at' => date('Y-m-d H:i:s')
-            //     ];
-            //     $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]); //iniuntuk apa buat pengecekan data nya sama atau ngga sama yang di Api
-            // }
-            // // dd($check);
-            // // VendorPivot::insert($vendorPivot);
-            // if ($check){
-            //     echo "success";
-            //     // echo $check;
-            //         $vendor->save();
-            //         VendorPivot::insert($vendorPivot);
-            //         return redirect()->route('backend.vendor.index')->with('success','Vendor created successfully');
-            //     }else{
-            //         echo "Gagal Save";
-            //         return redirect()->route('backend.vendor.create')->with('failed','Data Is Not Competible');
-            //     }
-            // return redirect()->route('backend.forecast.index')->with(['success' => 'Data berhasil dibuat !']);
 
         DB::beginTransaction();
         try {
@@ -131,7 +81,7 @@ class VendorController extends Controller
             $vendorPivot = [];
             foreach ($request->no_po as $key => $value) {
                 
-                $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]); //iniuntuk apa buat pengecekan data nya sama atau ngga sama yang di Api
+                $check = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]); //untuk pengecekan data nya sama atau ngga sama yang di Api
                 if ($check){
                     array_push($vendorPivot, [
                         'vendor_id' => $vendor->id,
@@ -140,6 +90,7 @@ class VendorController extends Controller
                         'no_invoice' => $request->no_invoice[$key],
                         'tanggal_kirim' => $request->tanggal_kirim[$key],
                         'name' => $check[0]->VENDOR,  
+                        'amount' => $check[0]->AMOUNT,  
                         'created_at' => date('Y-m-d H:i:s'),
                         'updated_at' => date('Y-m-d H:i:s')
                     ]);
@@ -198,13 +149,15 @@ class VendorController extends Controller
             'tanggal_po' => 'required',
             'no_invoice' => 'required',
             'tanggal_kirim' => 'required',
+            'amount' => 'nullable'
         ]);
+
         $check = $this->checkAccr('P2000023','04-21-2020');
+        $validateData['amount'] = $check[0]->AMOUNT;
         $vendor = Vendor::findOrFail($id);
         $vendor->email = $request->email;
         $vendor->status = $request->status;
         $vendor->description = $request->description;
-        $vendor->total = $request->total;
         $vendor->no_faktur = $request->no_faktur;
         $vendor->save();
        
@@ -221,7 +174,8 @@ class VendorController extends Controller
                 'tanggal_po' => $request->tanggal_po[$key],
                 'no_invoice' => $request->no_invoice[$key],
                 'tanggal_kirim' => $request->tanggal_kirim[$key],
-                'name' => $getCheckAccr[0]->VENDOR  
+                'name' => $getCheckAccr[0]->VENDOR,  
+                'amount' => $getCheckAccr[0]->AMOUNT  
             ];
         }
 
