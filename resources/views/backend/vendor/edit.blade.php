@@ -16,9 +16,9 @@
                 @method('PATCH')
                 <div class="card-body">
                     @include('backend.components.form-message')
-                    <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addField()">
+                    {{-- <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addField()">
                         <i class="fas fa-plus-square"></i>
-                    </button>
+                    </button> --}}
                     <img src="{{ asset('img/MPI.png') }}" style="width: 200px; height:100px;" alt="">
                     <hr>
                     <div class="row mt-2">
