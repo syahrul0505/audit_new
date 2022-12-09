@@ -204,7 +204,25 @@ class VendorController extends Controller
         return response()->json(['status' => '200']);
     }
 
-    
+    public function vendorExport(Request $request)
+    {
+        // $data['page_title'] = 'Report List';
+        // $data['vendor'] = Vendor::get();
+        $data ['vendor']= Vendor::findOrfail('id','asc')->get();
+
+        // return view('backend.report.index', $data);
+        if ($request->pdf) {
+            $pdf = Pdf::loadView('backend.vendor.pdf-show', $data);
+            return $pdf->download('Finance-report.pdf');
+            // return $pdf->stream('invoice.pdf');
+        } else {
+            return view('vendor.index', $data);
+        }
+
+        
+
+        
+    }
 
     public function test(Request $request){
         $check = $this->checkAccr($request->po_no,$request->po_date);

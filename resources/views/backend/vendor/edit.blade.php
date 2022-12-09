@@ -45,7 +45,15 @@
                                             @foreach ($vendor->vendorPivot as $key => $vendorPivot)
                                             <tr>
                                                 <td>
-                                                    <input class="form-control {{ $errors->has('no_po') ? 'is-invalid' : '' }}" placeholder="Input no_po" type="text" name="no_po[]" id="qty1" value="{{$vendorPivot->no_po}}">
+                                                    <div class="row">
+
+                                                        <div class="col-lg-2">
+                                                            <p><b>PO-</b></p>
+                                                        </div>
+                                                        <div class="col-lg-10">
+                                                            <input class="form-control {{ $errors->has('no_po') ? 'is-invalid' : '' }}" placeholder="Input no_po" type="text" name="no_po[]" id="qty1" value="{{$vendorPivot->no_po}}">
+                                                        </div>
+                                                    </div>
                                                 </td>
                                                 <td>
                                                     <input class="form-control {{ $errors->has('tanggal_po') ? 'is-invalid' : '' }}" placeholder="Input tanggal_po" type="date" name="tanggal_po[]" id="qty1" value="{{$vendorPivot->tanggal_po}}">
@@ -188,7 +196,7 @@
             $("#contactTable").find('tbody')
                 .append(
                     $('<tr>' +
-                        '<td><input class="form-control" placeholder="Input No Po" type="text" name="no_po[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
+                        '<td><div class="row"><div class="col-lg-2"><p><b>PO-</b></p></div><div class="col-lg-10"><input class="form-control" placeholder="Input No Po" type="text" name="no_po[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></div></div></td>' +
                         '<td><input class="form-control" placeholder="Input Tanggal Po" type="date" name="tanggal_po[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         '<td><input class="form-control" placeholder="No Invoice" type="text" name="no_invoice[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         '<td><input class="form-control" placeholder="Po Date" type="date" name="tanggal_kirim[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +

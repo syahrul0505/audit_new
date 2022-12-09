@@ -39,6 +39,23 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-2">
+            <div class="card animated fadeInLeft" style="border-radius: 15px">
+                <div class="card-body">
+                    <form action="{{ route('backend.vendor-export') }}" method="get">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group">
+                                    <label class="">&nbsp</label>
+                                    <div class="d-flex flex-wrap gap-3">
+                                        <button type="submit" name="pdf" value="pdf" class="btn btn-danger waves-effect waves-light">Export PDF</button>
+                                    </div>
+                                </div>
+                            </div>
+                    </form> 
+                </div>
+            </div>
+        </div>
         @if ($vendor->description != '')
         <div class="col-lg-6">
             <div class="card" style="border-radius: 15px">

@@ -109,6 +109,7 @@ use Illuminate\Support\Facades\Route;
 
             // vendor
             Route::get('att-pdf',[VendorController::class,'attPdf'])->name('vendor-pdf');
+            Route::get('/export-pdf', [VendorController::class, 'vendorExport'])->name('vendor-export');
             
             // Product Stock In
             Route::resource('stock_in_product', StockInProductController::class);
