@@ -99,10 +99,10 @@
                                             <i class="fas fa-eye"></i>
                                         </a>
 
-                                        <a href=""
+                                        {{-- <a href=""
                                             class="btn btn-secondary text-white">
                                             <i class="bx bxs-file-pdf"></i>
-                                        </a>
+                                        </a> --}}
 
                                         <div class="btn-group">
                                             @can('departement-edit')
