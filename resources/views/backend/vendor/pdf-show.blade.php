@@ -16,7 +16,7 @@
                     </td>   
                 </tr>
             </table>
-            {{ dd($vendor->tanggal_kirim) }}
+            {{-- {{ dd($vendor->tanggal_kirim) }} --}}
             {{-- <div style="display: flex !important; flex-wrap: nowrap !important;">
                 <div style="">
                 </div>
@@ -28,17 +28,17 @@
                     
                 </div>
                 <hr>
-                <span class="fw-bold" style="font-size: 16px">Tanggal Dibuat: {{date('d/m/Y', strtotime($tanggal_kirim[0]))}}</span>
+                <span class="fw-bold" style="font-size: 16px">Tanggal Dibuat: {{date('d/m/Y', strtotime($vendor->vendorPivot[0]->tanggal_kirim))}}</span>
                 <br>
-                <span class="fw-bold" style="font-size: 16px">Email : {{($email ?? 'N/A')}}</span>
+                <span class="fw-bold" style="font-size: 16px">Email : {{($vendor->email ?? 'N/A')}}</span>
                 <br>
-                <span class="fw-bold" style="font-size: 16px">Status :  {{($status)}}</span>
+                <span class="fw-bold" style="font-size: 16px">Status :  {{($vendor->status)}}</span>
                 <br>
-                <span class="fw-bold" style="font-size: 16px">No Faktur Pajak : {{($no_faktur ?? 'N/A')}}</span>
+                <span class="fw-bold" style="font-size: 16px">No Faktur Pajak : {{($vendor->no_faktur ?? 'N/A')}}</span>
                 <br>
                 {{-- <span class="fw-bold" style="font-size: 16px">Total : Rp.{{($total ?? 'N/A')}}</span>
                 <br> --}}
-                <span class="fw-bold" style="font-size: 16px">Note : {{($description ?? 'N/A')}}</span>
+                <span class="fw-bold" style="font-size: 16px">Note : {{($vendor->description ?? 'N/A')}}</span>
                 <br><br>
             </div>
         </div>
@@ -51,187 +51,194 @@
             <table class="table  table-hover mb-0" id="HistoryTable" style="">
                 <thead style="">
                     <tr>
-                        <th style="padding-right: 30px !important; text-align:left !important;">NO</th>
-                        <th style="padding-right: 30px !important; text-align:left !important;">No Po</th>
-                        <th style="padding-right: 30px !important; text-align:left !important;">Tanggal Po</th>
-                        <th style="padding-right: 30px !important; text-align:left !important;">No Invoice</th>
-                        <th style="padding-right: 30px !important; text-align:left !important;">Tanggal Kirim</th>
-                        <th style="padding-right: 30px !important; text-align:left !important;">Amount</th>
+                        <th style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">NO</th>
+                        <th style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">No Po</th>
+                        <th style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">Tanggal Po</th>
+                        <th style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">No Invoice</th>
+                        <th style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">Tanggal Kirim</th>
+                        <th style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">Amount</th>
                     </tr>
                 </thead>
                     <tbody style="">
-                        @foreach ($no_po as $key => $np) 
+                        @php
+                        $sum = 0;   
+                        @endphp
+                        @foreach ($vendor->vendorPivot as $np) 
+                        @php
+                        $sum += $np->amount;   
+                        @endphp
                         {{-- {{ dd($amount) }} --}}
                             <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     {{ $loop->iteration }}
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
-                                    {{$no_po[$key]}}
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{$np->no_po}}
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
-                                    {{$tanggal_po[$key]}}
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{$np->tanggal_po}}
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
-                                    {{$no_invoice[$key]}}
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{$np->no_invoice}}
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
-                                    {{$tanggal_kirim[$key] ?? ''}}
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{$np->tanggal_kirim ?? ''}}
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
-                                    {{number_format($amount, 2) ?? ''}}
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{number_format($np->amount, 2) ?? ''}}
                                 </td>
                             </tr>
                             @endforeach
-                            {{-- <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                            <tr>
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     &nbsp; 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     &nbsp;
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     &nbsp;
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     Total : 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
-                                    Rp.200.000
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{number_format($sum, 2) ?? ''}}
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;" colspan="2">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000" colspan="2">
                                     Pembayaran Ke :
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     PPN 11%
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
-                                    Rp.2.000.000
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{number_format($sum * 0.11, 2) ?? ''}}
+
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;" colspan="2">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000" colspan="2">
                                     BCA PT.MEGAH Indonesia
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;" colspan="2">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000" colspan="2">
                                     AC.No.241,300,8,999
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    &nbsp;
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    &nbsp;
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
                                 </td>
                             </tr>
                             <tr>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     Total Invoice : 
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important;">
-                                    Rp.300.000
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{number_format(($sum * 0.11) + $sum, 2) ?? ''}}
                                 </td>
                             </tr>
                     </tbody>
@@ -255,4 +262,4 @@
             </td>
         </tr>
     </table>
-</div> --}}
+</div>

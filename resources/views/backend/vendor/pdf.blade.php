@@ -58,9 +58,16 @@
                         <th style="padding-right: 30px !important; text-align:left !important;">Amount</th>
                     </tr>
                 </thead>
+                    @php
+                        $sum = 0;   
+                    @endphp
                     <tbody style="">
                         @foreach ($no_po as $key => $np) 
                         {{-- {{ dd($amount) }} --}}
+                        @php
+                        $sum += $amount;   
+                        @endphp
+                        
                             <tr>
                                 <td style="padding-right: 30px !important; text-align:left !important;">
                                     {{ $loop->iteration }}
@@ -82,7 +89,7 @@
                                 </td>
                             </tr>
                             @endforeach
-                            {{-- <tr>
+                            <tr>
                                 <td style="padding-right: 30px !important; text-align:left !important;">
                                    
                                 </td>
@@ -119,7 +126,7 @@
                                     Total : 
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important;">
-                                    Rp.200.000
+                                    {{number_format($sum, 2) ?? ''}}
                                 </td>
                             </tr>
                             <tr>
@@ -230,7 +237,7 @@
                                     Total Invoice : 
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important;">
-                                    Rp.300.000
+                                    {{-- {{sum(number_format($amount, 2) )?? ''}} --}}
                                 </td>
                             </tr>
                     </tbody>
@@ -254,4 +261,4 @@
             </td>
         </tr>
     </table>
-</div> --}}
+</div>

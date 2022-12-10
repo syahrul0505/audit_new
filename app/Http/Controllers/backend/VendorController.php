@@ -132,9 +132,9 @@ class VendorController extends Controller
 
     public function attPdf($data){
         // dd($data);
-        $pdf = Pdf::loadView('backend.vendor.pdf',$data);
+        $pdf = Pdf::loadView('backend.vendor.pdf-show', $data);
         // return $pdf->download('invoice.pdf');
-        Storage::put('public/Finance/List-Finance-'.$data['no_faktur'].'.pdf',$pdf->stream());
+        Storage::put('public/Finance/List-Finance-'.$data['vendor']->no_faktur.'.pdf',$pdf->stream());
     }
 
     public function update(Request $request, $id)
@@ -153,7 +153,6 @@ class VendorController extends Controller
         ]);
 
         $check = $this->checkAccr('P2000023','04-21-2020');
-        $validateData['amount'] = $check[0]->AMOUNT;
         $vendor = Vendor::findOrFail($id);
         $vendor->email = $request->email;
         $vendor->status = $request->status;
@@ -179,15 +178,16 @@ class VendorController extends Controller
             ];
         }
 
-        if ($vendor->status == 'Approve') { 
-            // dd($validateData['no_faktur']);
-            $this->attPdf($validateData);
-            // dd($this->attPdf($validateData));
-            
-            Mail::to($request->email)->send(new FinanceEmail($validateData));
-            Storage::delete('public/Finance/List-Finance-'.$validateData['no_faktur'].'.pdf');
-        }
         VendorPivot::insert($vendorPivot);
+        if ($vendor->status == 'Approve') { 
+            // Untuk PDF
+            $data['vendor'] = $vendor;
+            $this->attPdf($data);
+            
+            // Untuk Kirim EMail
+            Mail::to($request->email)->send(new FinanceEmail($vendor));
+            Storage::delete('public/Finance/List-Finance-'.$vendor->no_faktur.'.pdf');
+        }
         return redirect()->route('vendor.index')->with('success','List Finance Edit successfully');
     }
 
@@ -204,24 +204,12 @@ class VendorController extends Controller
         return response()->json(['status' => '200']);
     }
 
-    public function vendorExport(Request $request)
+    public function vendorExport($id)
     {
-        // $data['page_title'] = 'Report List';
-        // $data['vendor'] = Vendor::get();
-        $data ['vendor']= Vendor::findOrfail('id','asc')->get();
-
-        // return view('backend.report.index', $data);
-        if ($request->pdf) {
-            $pdf = Pdf::loadView('backend.vendor.pdf-show', $data);
-            return $pdf->download('Finance-report.pdf');
-            // return $pdf->stream('invoice.pdf');
-        } else {
-            return view('vendor.index', $data);
-        }
-
-        
-
-        
+        $data['vendor']= Vendor::findOrfail($id);
+        // dd($data['vendor']->vendorPivot, $data['vendor']);
+        $pdf = Pdf::loadView('backend.vendor.pdf-show', $data);
+        return $pdf->download('Finance-report.pdf');
     }
 
     public function test(Request $request){
