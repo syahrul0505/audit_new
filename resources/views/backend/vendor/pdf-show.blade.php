@@ -266,8 +266,8 @@
         <tr>
             <td>
                 <p style="margin-left:465px; margin-top: 35px; margin-bottom: 0px;">Jakarta, {{ date('d F Y') }}</p>
-                <p style="margin-left:465px; margin-top: 0px; margin-bottom: 0px;">Yang menerima,</p>
-                <p style="margin-left:465px; margin-top: 60px; margin-bottom: 0px;">( <span style="margin-left: 170px;">)</span></p>
+                <p style="margin-left:465px; margin-top: 0px; margin-bottom: 0px;">dibuat Oleh,</p>
+                <p style="margin-left:465px; margin-top: 60px; margin-bottom: 0px;">( <span style="margin-left: 50px;" > {{ $vendor->dibuat }} <span style="margin-left: 50px;">)</span> </span></p>
             </td>
         </tr>
     </table>
