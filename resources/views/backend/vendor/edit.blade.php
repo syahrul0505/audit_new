@@ -36,9 +36,13 @@
                                             <th>Tanggal Po</th>
                                             <th>No Invoice</th>
                                             <th>Tanggal Kirim</th>
+                                            <th>Amount</th>
                                             <th>ACTION</th>
                                         </tr>
                                     </thead>
+                                    <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addField()">
+                                        <i class="fas fa-plus-square"></i>
+                                    </button>
                                     <tbody>
                                         {{-- {{ dd($vendor->vendorPivot) }} --}}
                                         @if ($vendor->vendorPivot->count() > 0)
@@ -59,10 +63,14 @@
                                                     <input class="form-control {{ $errors->has('tanggal_po') ? 'is-invalid' : '' }}" placeholder="Input tanggal_po" type="date" name="tanggal_po[]" id="qty1" value="{{$vendorPivot->tanggal_po}}">
                                                 </td>
                                                 <td>
-                                                    <input class="form-control {{ $errors->has('no_invoice') ? 'is-invalid' : '' }}" placeholder="no_invoice" type="number" name="no_invoice[]" id="qty1" value="{{$vendorPivot->no_invoice}}">
+                                                    <input class="form-control {{ $errors->has('no_invoice') ? 'is-invalid' : '' }}" placeholder="no_invoice" type="text" name="no_invoice[]" id="qty1" value="{{$vendorPivot->no_invoice}}">
                                                 </td>
                                                 <td>
                                                     <input class="form-control {{ $errors->has('tanggal_kirim') ? 'is-invalid' : '' }}" placeholder="Date" type="date" name="tanggal_kirim[]" id="qty1" value="{{$vendorPivot->tanggal_kirim}}">
+                                                </td>
+
+                                                <td>
+                                                    <input class="form-control {{ $errors->has('amount') ? 'is-invalid' : '' }}" placeholder="Date" type="number" name="amount[]" id="qty1" value="{{$vendorPivot->amount}}">
                                                 </td>
                                                 
                                                 <td>
@@ -134,6 +142,21 @@
 
                         </div>
 
+                        <div class="col-lg-6">
+                            <div class="col-lg-6">
+                                <div class="form-group mb-3">
+                                    <label for="">Dibuat Oleh</label>
+                                    <input class="form-control @error('dibuat') is-invalid @enderror"  type="text" id="phone" name="dibuat" value="{{ ($vendor->dibuat) }}" >
+                                    
+                                    @error('dibuat')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+
 
                         {{-- <div class="col-lg-6">
                             <div class="form-group mb-3">
@@ -200,6 +223,7 @@
                         '<td><input class="form-control" placeholder="Input Tanggal Po" type="date" name="tanggal_po[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         '<td><input class="form-control" placeholder="No Invoice" type="text" name="no_invoice[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         '<td><input class="form-control" placeholder="Po Date" type="date" name="tanggal_kirim[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
+                        '<td><input class="form-control" placeholder="Amount" type="number" name="amount[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         // '<td><div class="input-group"><span class="input-group-text" id="basic-addon1">IDR</span><input type="number" class="form-control" min="0" name="unit_price[]" id="unit_price'+rowCount+'" placeholder="Input unit price" aria-describedby="basic-addon1" onkeyup="calculatePrice('+rowCount+')"></div></td>' +
                         // '<td><div class="input-group"><span class="input-group-text" id="basic-addon1">IDR</span><input type="number" class="form-control" min="0" name="total_price[]" id="total_price'+rowCount+'" placeholder="Total" readonly aria-describedby="basic-addon1"></div></td>' +
                         '<td style="max-width: 6% !important"><button type="button" class="btn btn-outline-danger btn-remove" onclick="$(this).parent().parent().remove();"><i class="fa fa-minus"></i></button></td>' +

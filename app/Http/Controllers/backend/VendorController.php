@@ -158,6 +158,7 @@ class VendorController extends Controller
         $vendor->status = $request->status;
         $vendor->description = $request->description;
         $vendor->no_faktur = $request->no_faktur;
+        $vendor->dibuat = $request->dibuat;
         $vendor->save();
        
         // dd($validateData);
@@ -173,8 +174,9 @@ class VendorController extends Controller
                 'tanggal_po' => $request->tanggal_po[$key],
                 'no_invoice' => $request->no_invoice[$key],
                 'tanggal_kirim' => $request->tanggal_kirim[$key],
-                'name' => $getCheckAccr[0]->VENDOR,  
-                'amount' => $getCheckAccr[0]->AMOUNT  
+                'amount' => $request->amount[$key],
+                'name' => $getCheckAccr[0]->VENDOR    
+                // 'amount' => $getCheckAccr[0]->AMOUNT  
             ];
         }
 

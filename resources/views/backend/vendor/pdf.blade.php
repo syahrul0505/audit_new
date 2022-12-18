@@ -11,7 +11,7 @@
                             PT. Megah Pita Indonesia
                         </h2>
                         <p style="margin-left:10px; margin-top: 0px; margin-bottom: 0px;">
-                            Jl. Indo Karya 4 No.7, Papanggo, Kec. Tj. Priok, Kota Jkt Utara, Daerah Khusus Ibukota Jakarta 14340
+                            Jl. Pangeran Jayakarta 68 Blok B 11 Jakarta Pusat 10730 Telp : 021 6007212
                         </p>
                     </td>   
                 </tr>
@@ -33,8 +33,8 @@
                 <br>
                 <span class="fw-bold" style="font-size: 16px">Status :  {{($status)}}</span>
                 <br>
-                <span class="fw-bold" style="font-size: 16px">No Faktur Pajak : {{($no_faktur ?? 'N/A')}}</span>
-                <br>
+                {{-- <span class="fw-bold" style="font-size: 16px">No Faktur Pajak : {{($no_faktur ?? 'N/A')}}</span> --}}
+                {{-- <br> --}}
                 {{-- <span class="fw-bold" style="font-size: 16px">Total : Rp.{{($total ?? 'N/A')}}</span>
                 <br> --}}
                 <span class="fw-bold" style="font-size: 16px">Note : {{($description ?? 'N/A')}}</span>

@@ -11,7 +11,7 @@
                             PT. Megah Pita Indonesia
                         </h2>
                         <p style="margin-left:10px; margin-top: 0px; margin-bottom: 0px;">
-                            Jl. Indo Karya 4 No.7, Papanggo, Kec. Tj. Priok, Kota Jkt Utara, Daerah Khusus Ibukota Jakarta 14340
+                            Jl. Pangeran Jayakarta 68 Blok B 11 Jakarta Pusat 10730 Telp : 021 6007212
                         </p>
                     </td>   
                 </tr>
@@ -34,12 +34,11 @@
                 <br>
                 <span class="fw-bold" style="font-size: 16px">Status :  {{($vendor->status)}}</span>
                 <br>
-                <span class="fw-bold" style="font-size: 16px">No Faktur Pajak : {{($vendor->no_faktur ?? 'N/A')}}</span>
-                <br>
                 {{-- <span class="fw-bold" style="font-size: 16px">Total : Rp.{{($total ?? 'N/A')}}</span>
                 <br> --}}
-                <span class="fw-bold" style="font-size: 16px">Note : {{($vendor->description ?? 'N/A')}}</span>
-                <br><br>
+                <br>
+                <h3 style="text-align: center"><b> Tanda Terima:</b></h3>
+                <h3 style="text-align: center"><b> No. ..........</b></h3>
             </div>
         </div>
     </div>
@@ -76,13 +75,13 @@
                                     {{$np->no_po}}
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
-                                    {{$np->tanggal_po}}
+                                    {{ date('d-m-Y', strtotime($np->tanggal_po)) }}
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     {{$np->no_invoice}}
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
-                                    {{$np->tanggal_kirim ?? ''}}
+                                    {{ date('d-m-Y', strtotime($np->tanggal_kirim)) }}
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     {{number_format($np->amount, 2) ?? ''}}
@@ -123,27 +122,30 @@
                                     
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
-                                    Total : 
+                                    {{-- Total :  --}} &nbsp;
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
-                                    {{number_format($sum, 2) ?? ''}}
+                                    {{-- {{number_format($sum, 2) ?? ''}} --}} &nbsp;
                                 </td>
                             </tr>
                             <tr>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000" colspan="2">
-                                    Pembayaran Ke :
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{-- Pembayaran Ke : --}} &nbsp;
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
-                                    PPN 11%
+                                    {{-- PPN 11%  --}} &nbsp;
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
-                                    {{number_format($sum * 0.11, 2) ?? ''}}
+                                    {{-- {{number_format($sum * 0.11, 2) ?? ''}} --}} &nbsp;
+
+                                </td>
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
 
                                 </td>
                             </tr>
@@ -151,11 +153,14 @@
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000" colspan="2">
-                                    BCA PT.MEGAH Indonesia
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                    {{-- BCA PT.MEGAH Indonesia --}} &nbsp;
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
+                                </td>
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
@@ -168,11 +173,14 @@
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                    
                                 </td>
-                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000" colspan="2">
-                                    AC.No.241,300,8,999
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000" >
+                                    {{-- AC.No.241,300,8,999 --}} &nbsp;
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                     
+                                </td>
+                                <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
+                                
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
                                 
@@ -251,7 +259,8 @@
     <table>
         <tr>
             <td>
-                <p style="margin-left:20px; margin-top: 10px; margin-bottom: 0px;">NOTE: SURAT JALAN,INVOICE</p>
+                {{-- <p style="margin-left:20px; margin-top: 10px; margin-bottom: 0px;">NOTE: SURAT JALAN,INVOICE</p> --}}
+                <textarea name="description" class="form-control" style="width: 380px; height: 100px;"  placeholder="Description">NOTE : {{ $vendor->description }}</textarea>
             </td>
         </tr>
         <tr>
