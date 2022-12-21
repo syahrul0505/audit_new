@@ -84,7 +84,7 @@
                                     {{ date('d-m-Y', strtotime($np->tanggal_kirim)) }}
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
-                                    {{number_format($np->amount, 2) ?? ''}}
+                                    {{number_format($np->amount) ?? ''}}
                                 </td>
                             </tr>
                             @endforeach
@@ -246,7 +246,7 @@
                                     Total Invoice : 
                                 </td>
                                 <td style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">
-                                    {{number_format(($sum * 0.11) + $sum, 2) ?? ''}}
+                                    {{number_format($sum) ?? ''}}
                                 </td>
                             </tr>
                     </tbody>

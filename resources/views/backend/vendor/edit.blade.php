@@ -70,7 +70,7 @@
                                                 </td>
 
                                                 <td>
-                                                    <input class="form-control {{ $errors->has('amount') ? 'is-invalid' : '' }}" placeholder="Date" type="number" name="amount[]" id="qty1" value="{{$vendorPivot->amount}}">
+                                                    <input class="form-control {{ $errors->has('amount') ? 'is-invalid' : '' }}" placeholder="Amount" type="text" name="amount[]" id="amount{{ $key+1 }}" value="{{$vendorPivot->amount}}">
                                                 </td>
                                                 
                                                 <td>
@@ -98,10 +98,21 @@
                         
                         <div class="col-lg-6">
                             <div class="form-group mb-3">
-                                <label for="">Email</label>
+                                <label for="">Email <small class="text-danger">*(Wajib Isi)</small></label>
                                 <input class="form-control @error('email') is-invalid @enderror"  type="text" name="email" value="{{ $vendor->email }}">
         
                                 @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="">Name Vendor <small class="text-danger">*(Wajib Isi)</small></label>
+                                <input class="form-control @error('name_vendor') is-invalid @enderror"  type="text" name="name_vendor" value="{{ $vendor->name_vendor }}">
+        
+                                @error('name_vendor')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -146,7 +157,7 @@
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
                                     <label for="">Dibuat Oleh</label>
-                                    <input class="form-control @error('dibuat') is-invalid @enderror"  type="text" id="phone" name="dibuat" value="{{ ($vendor->dibuat) }}" >
+                                    <input class="form-control @error('dibuat') is-invalid @enderror"  type="text" name="dibuat" value="{{ ($vendor->dibuat) }}" >
                                     
                                     @error('dibuat')
                                     <span class="invalid-feedback" role="alert">
@@ -189,23 +200,23 @@
     <script>
 
         var val12=[];
-        changeOptionValue();
+        // changeOptionValue();
 
-         function changeOptionValue()
-        {
-            // Ngambil Variable dari controller
-            // 
-            // Remove All DIsabled Option
-            p_id.forEach(product => {
-                $(".select_part option[value='"+product+"']").prop('disabled', false);
-                $("#noteDisabled").text('masuk');
-            });
-            // Disabled selected option
-            val1.forEach(item => {
-                $(".select_part option[value='"+item+"']").attr('disabled', 'disabled');
-            });
+        //  function changeOptionValue()
+        // {
+        //     // Ngambil Variable dari controller
+        //     // 
+        //     // Remove All DIsabled Option
+        //     p_id.forEach(product => {
+        //         $(".select_part option[value='"+product+"']").prop('disabled', false);
+        //         $("#noteDisabled").text('masuk');
+        //     });
+        //     // Disabled selected option
+        //     val1.forEach(item => {
+        //         $(".select_part option[value='"+item+"']").attr('disabled', 'disabled');
+        //     });
 
-        }
+        // }
         function save()
         {
             val12.forEach(item => {
@@ -223,16 +234,18 @@
                         '<td><input class="form-control" placeholder="Input Tanggal Po" type="date" name="tanggal_po[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         '<td><input class="form-control" placeholder="No Invoice" type="text" name="no_invoice[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         '<td><input class="form-control" placeholder="Po Date" type="date" name="tanggal_kirim[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
-                        '<td><input class="form-control" placeholder="Amount" type="number" name="amount[]" id="qty'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
+                        '<td><input class="form-control" placeholder="Amount" type="text" name="amount[]" id="amount'+rowCount+'" onkeyup="calculatePrice('+rowCount+')"></td>' +
                         // '<td><div class="input-group"><span class="input-group-text" id="basic-addon1">IDR</span><input type="number" class="form-control" min="0" name="unit_price[]" id="unit_price'+rowCount+'" placeholder="Input unit price" aria-describedby="basic-addon1" onkeyup="calculatePrice('+rowCount+')"></div></td>' +
                         // '<td><div class="input-group"><span class="input-group-text" id="basic-addon1">IDR</span><input type="number" class="form-control" min="0" name="total_price[]" id="total_price'+rowCount+'" placeholder="Total" readonly aria-describedby="basic-addon1"></div></td>' +
                         '<td style="max-width: 6% !important"><button type="button" class="btn btn-outline-danger btn-remove" onclick="$(this).parent().parent().remove();"><i class="fa fa-minus"></i></button></td>' +
                         '</tr>'
                     )
                 )
-                changeOptionValue();
+                // changeOptionValue();
 
+                $("#amount"+rowCount).inputmask({"mask": "9.999.999.999,99"});
         }
+
     </script>
 
     <script>
@@ -248,6 +261,11 @@
         $(":input").inputmask();
 
         $("#phone").inputmask({"mask": "999.999-99.99999999"});
+        var rowCount = $('#contactTable tr').length;
+        for (let index = 1; index < rowCount; index++) {
+            $("#amount"+index).inputmask({"mask": "9.999.999.999,99"});
+        }
+
     </script>
 
 @endsection

@@ -164,22 +164,23 @@ class VendorController extends Controller
         // dd($validateData);
         // Vendor::create($validateData);
         $vendor->vendorPivot()->delete();
-
         $vendorPivot = [];
         foreach ($request->no_po as $key => $value) {
             $getCheckAccr = $this->checkAccr($request->no_po[$key],$request->tanggal_po[$key]);
+            $replaceTitik = str_replace('.', '',$request->amount[$key]);
+            $replaceComma = str_replace(',', '',$replaceTitik);
             $vendorPivot[] = [
                 'vendor_id' => $vendor->id,
                 'no_po' => $request->no_po[$key],
                 'tanggal_po' => $request->tanggal_po[$key],
                 'no_invoice' => $request->no_invoice[$key],
                 'tanggal_kirim' => $request->tanggal_kirim[$key],
-                'amount' => $request->amount[$key],
+                'amount' => $replaceComma,
                 'name' => $getCheckAccr[0]->VENDOR    
                 // 'amount' => $getCheckAccr[0]->AMOUNT  
             ];
+            // dd($vendorPivot);
         }
-
         VendorPivot::insert($vendorPivot);
         if ($vendor->status == 'Approve') { 
             // Untuk PDF
