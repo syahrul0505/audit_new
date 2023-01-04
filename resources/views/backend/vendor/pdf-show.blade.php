@@ -38,7 +38,11 @@
                 <br> --}}
                 <br>
                 <h3 style="text-align: center"><b> Tanda Terima:</b></h3>
-                <h3 style="text-align: center"><b> No. ..........</b></h3>
+                @if ($vendor->status == 'Approve')
+                    <h3 style="text-align: center"><b> No. {{ $vendor->no_po }}</b></h3>
+                @else
+                    <h3 style="text-align: center"><b> N/A</b></h3>
+                @endif
             </div>
         </div>
     </div>

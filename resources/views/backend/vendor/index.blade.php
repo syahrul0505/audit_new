@@ -94,13 +94,13 @@
                                     <td>{{ $vendors->description ?? 'N/A'}}</td>
                                     <td>{{ $vendors->total ?? 'N/A'}}</td>
                                     <td>
-                                        <a href="{{route('vendor.show', $vendors->id)}}"
+                                        {{-- <a href="{{route('vendor.show', $vendors->id)}}"
                                             class="btn btn-info text-white">
                                             <i class="fas fa-eye"></i>
-                                        </a>
+                                        </a> --}}
 
                                         <a href="{{ route('backend.vendor-export', $vendors->id) }}" target="blank"
-                                            class="btn btn-secondary text-white">
+                                            class="btn btn-info text-white">
                                             <i class="bx bxs-file-pdf"></i>
                                         </a>
 

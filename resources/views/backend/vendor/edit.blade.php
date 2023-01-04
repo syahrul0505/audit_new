@@ -40,9 +40,9 @@
                                             <th>ACTION</th>
                                         </tr>
                                     </thead>
-                                    <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addField()">
+                                    {{-- <button type="button" class="btn btn-outline-success" id="btn-add-document" onclick="addField()">
                                         <i class="fas fa-plus-square"></i>
-                                    </button>
+                                    </button> --}}
                                     <tbody>
                                         {{-- {{ dd($vendor->vendorPivot) }} --}}
                                         @if ($vendor->vendorPivot->count() > 0)
@@ -153,7 +153,7 @@
 
                         </div>
 
-                        <div class="col-lg-6">
+                        {{-- <div class="col-lg-6">
                             <div class="col-lg-6">
                                 <div class="form-group mb-3">
                                     <label for="">Dibuat Oleh</label>
@@ -166,7 +166,7 @@
                                     @enderror
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
 
 
                         {{-- <div class="col-lg-6">

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Vendor;
 use App\Models\VendorPivot;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use App\Mail\FinanceEmail;
@@ -151,14 +152,68 @@ class VendorController extends Controller
             'tanggal_kirim' => 'required',
             'amount' => 'nullable'
         ]);
-
+        $name = Auth::user()->name;
         $check = $this->checkAccr('P2000023','04-21-2020');
         $vendor = Vendor::findOrFail($id);
         $vendor->email = $request->email;
         $vendor->status = $request->status;
         $vendor->description = $request->description;
         $vendor->no_faktur = $request->no_faktur;
-        $vendor->dibuat = $request->dibuat;
+        $vendor->dibuat = $name;
+
+        if ($request->status == 'Approve' || $vendor->status == 'Approve') {
+            $bulan = date('m', strtotime($vendor->updated_at));
+    
+                    switch ($bulan) {
+                        case ($bulan == '01'):
+                            $romawi = 'I';
+                            break;
+                        case ($bulan == '02'):
+                            $romawi = 'II';
+                            break;
+                        case ($bulan == '03'):
+                            $romawi = 'III';
+                            break;
+                        case ($bulan == '04'):
+                            $romawi = 'IV';
+                            break;
+                        case ($bulan == '05'):
+                            $romawi = 'V';
+                            break;
+                        case ($bulan == '06'):
+                            $romawi = 'VI';
+                            break;
+                        case ($bulan == '07'):
+                            $romawi = 'VII';
+                            break;
+                        case ($bulan == '08'):
+                            $romawi = 'VIII';
+                            break;
+                        case ($bulan == '09'):
+                            $romawi = 'IX';
+                            break;
+                        case ($bulan == '10'):
+                            $romawi = 'X';
+                            break;
+                        case ($bulan == '11'):
+                            $romawi = 'XI';
+                            break;
+                        case ($bulan == '12'):
+                            $romawi = 'XII';
+                            break;
+                        
+                        default:
+                            $romawi = '';
+                            break;
+                    }
+    
+                    // $nomer = "MPI/PO/$romawi/". $this->generatePoNo();
+                    $nomer = $this->generatePoNo($romawi);
+                    if ($vendor->no_po != null) {
+                        $vendor->no_po = $nomer;
+                    }
+        }
+
         $vendor->save();
        
         // dd($validateData);
@@ -250,5 +305,36 @@ class VendorController extends Controller
             // return (json_decode($response));
             return $decode[0];
         }
+    }
+
+    private function generatePoNo($romawi)
+    {
+        $orderObj = DB::table('vendorr')
+            ->select('no_po')
+            // ->where('no_po', '!=', 'draft')
+            ->where('no_po', 'ILIKE', 'MPI/PO/' . $romawi . '/' . '%')
+            ->orderBy('no_po', 'desc')
+            ->latest('id')->first();
+            // dd($orderObj, $romawi);
+        if ($orderObj) {
+            $orderNr = explode('/', $orderObj->no_po);
+            $removed1char = substr($orderNr[3], 0);
+            // $numberIncreament = str_pad($removed1char + 1, 4, "0", STR_PAD_LEFT);
+            // increamenet number if now is thousand
+            // if ($removed1char < 1000) {
+            $numberIncreament = str_pad($removed1char + 1, 2, "0", STR_PAD_LEFT);
+            // } else {
+                // $numberIncreament = str_pad($removed1char + 1, "0", STR_PAD_LEFT);
+            // }
+
+
+
+
+            $generateOrder_nr  = 'MPI/PO/'. $romawi . '/' . $numberIncreament;
+        } else {
+            $generateOrder_nr  = 'MPI/PO/'. $romawi . '/' . str_pad(1, 2, "0", STR_PAD_LEFT);
+        }
+
+        return $generateOrder_nr;
     }
 }
