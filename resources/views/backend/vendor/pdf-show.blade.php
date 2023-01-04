@@ -55,7 +55,7 @@
                 <thead style="">
                     <tr>
                         <th style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">NO</th>
-                        <th style="padding-right: 30px !important; text-align:left !important; width: 100px; border: 1px solid #000">No Po</th>
+                        <th style="padding-right: 30px !important; text-align:left !important; width: 80px; border: 1px solid #000">No Po</th>
                         <th style="padding-right: 30px !important; text-align:left !important; width: 80px; border: 1px solid #000">Tanggal Po</th>
                         <th style="padding-right: 30px !important; text-align:left !important; border: 1px solid #000">No Invoice</th>
                         <th style="padding-right: 30px !important; text-align:left !important; width: 100px; border: 1px solid #000">Tanggal Kirim</th>
