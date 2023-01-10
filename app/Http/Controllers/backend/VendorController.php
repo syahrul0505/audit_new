@@ -309,10 +309,14 @@ class VendorController extends Controller
 
     private function generatePoNo($romawi)
     {
-        $orderObj = DB::table('vendorr')
-            ->select('no_po')
-            // ->where('no_po', '!=', 'draft')
-            ->where('no_po', 'ILIKE', 'MPI/PO/' . $romawi . '/' . '%')
+        // $orderObj = DB::table('vendorr')
+        //     ->select('no_po')
+        //     // ->where('no_po', '!=', 'draft')
+        //     ->where('no_po', 'ILIKE', 'MPI/PO/' . $romawi . '/' . '%')
+        //     ->orderBy('no_po', 'desc')
+        //     ->latest('id')->first();
+
+            $orderObj = Vendor::where('no_po', 'ILIKE', 'MPI/PO/' . $romawi . '/' . '%')
             ->orderBy('no_po', 'desc')
             ->latest('id')->first();
             // dd($orderObj, $romawi);
