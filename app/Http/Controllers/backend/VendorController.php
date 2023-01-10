@@ -316,7 +316,7 @@ class VendorController extends Controller
         //     ->orderBy('no_po', 'desc')
         //     ->latest('id')->first();
 
-            $orderObj = Vendor::where('no_po', 'ILIKE', "MPI/PO/$romawi/%")
+            $orderObj = Vendor::where('no_po', 'LIKE', "MPI/PO/$romawi/%")
             ->orderBy('no_po', 'desc')
             ->latest('id')->first();
             // dd($orderObj, $romawi);
