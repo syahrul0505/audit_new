@@ -61,7 +61,7 @@
                                     <th>Product Code </th>
                                     <th>Product Name</th>
                                     {{-- <th>Dimension</th> --}}
-                                    <th>Description</th>
+                                    <th>Unit</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif

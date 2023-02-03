@@ -73,6 +73,18 @@
                         @enderror
                     </div>
 
+
+                    <div class="form-group mb-3">
+                        <label for="unit">Unit</label>
+                        <input class="form-control @error('unit') is-invalid @enderror" id="unit" type="text" name="description" placeholder="unit" required value="{{ old('unit') }}">
+
+                        @error('unit')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+{{--                     
                     <div class="form-group mb-3">
                         <label for="description">Description</label>
                         <textarea name="description" class="form-control" rows="3" placeholder="Description"></textarea>
@@ -82,7 +94,7 @@
                                 <strong>{{ $message }}</strong>
                             </span>
                         @enderror
-                    </div>
+                    </div> --}}
                    
                 <div class="card-footer bg-gray1" style="border-radius:0px 0px 10px 10px;">
                     <button type="submit" id="submit_button" class="btn btn-success btn-footer">Add</button>
