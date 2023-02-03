@@ -58,8 +58,8 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Product Code </th>
-                                    <th>Product Name</th>
+                                    <th>Material Code </th>
+                                    <th>Material Name</th>
                                     <th>Gramsi</th>
                                     <th>Thickness</th>
                                     <th>Panjang</th>

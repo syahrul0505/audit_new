@@ -41,7 +41,7 @@
                     @include('backend.components.form-message')
 
                     <div class="form-group mb-3">
-                        <label for="code">Product Code</label>
+                        <label for="code">Material Code</label>
                         <input class="form-control @error('code') is-invalid @enderror" id="code" type="text" name="code" placeholder="Product Code" required value="{{ old('code') }}">
 
                         @error('code')
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="name">Product Name</label>
+                        <label for="name">Material Name</label>
                         <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Product Name" required value="{{ old('name') }}">
 
                         @error('name')

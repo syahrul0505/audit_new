@@ -47,8 +47,8 @@ cursor: crosshair;
                     @include('backend.components.form-message')
                   
                     <div class="form-group mb-3">
-                        <label for="code">Product Code</label>
-                        <input class="form-control @error('code') is-invalid @enderror" id="code" type="text" name="code" placeholder="Product Code " required value="{{ old('code') ?? $product->code }}">
+                        <label for="code">Material Code</label>
+                        <input class="form-control @error('code') is-invalid @enderror" id="code" type="text" name="code" placeholder="Material Code " required value="{{ old('code') ?? $product->code }}">
 
                         @error('code')
                             <span class="invalid-feedback" role="alert">
@@ -58,8 +58,8 @@ cursor: crosshair;
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="name">Product Name</label>
-                        <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Product Name " required value="{{ old('name') ?? $product->name }}">
+                        <label for="name">Material Name</label>
+                        <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Material Name " required value="{{ old('name') ?? $product->name }}">
 
                         @error('name')
                             <span class="invalid-feedback" role="alert">

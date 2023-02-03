@@ -58,9 +58,9 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Material Code </th>
-                                    <th>Material Name</th>
-                                    <th>Dimension</th>
+                                    <th>Product Code </th>
+                                    <th>Product Name</th>
+                                    {{-- <th>Dimension</th> --}}
                                     <th>Description</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
