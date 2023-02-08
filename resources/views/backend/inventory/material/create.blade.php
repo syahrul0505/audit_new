@@ -43,7 +43,7 @@
                     <div class="form-group mb-3">
                         <label>Product</label>
 
-                        <select class="form-control @error('material_id') is-invalid @enderror" name="material_id">
+                        <select class="form-select @error('material_id') is-invalid @enderror" name="material_id">
                             <option disabled selected>Choose Material</option>
                             @foreach ($material as $materials)
                             <option value="{{ $materials->id }}"

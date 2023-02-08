@@ -21,7 +21,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $data['page_title'] = 'Product List';
+        $data['page_title'] = 'Product Create';
         $data['product'] = Product::get();
 
         return view('backend.master-data.product.create', $data);
@@ -37,10 +37,8 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->code = $request->code;
-        $product->gramasi = $request->gramasi;
-        $product->thickness = $request->thickness;
-        $product->lebar = $request->lebar;
-        $product->panjang = $request->panjang;
+        $product->dimension = $request->dimension;
+        $product->unit = $request->unit;
         $product->description = $request->description;
         
         $product->save();
@@ -50,7 +48,7 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $data['page_title'] = 'Edit Forecast';
+        $data['page_title'] = 'Edit Product';
         $data['product'] = Product::findOrfail($id);
 
         return view('backend.master-data.product.edit', $data);
@@ -67,10 +65,7 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->code = $request->code;
-        $product->gramasi = $request->gramasi;
-        $product->thickness = $request->thickness;
-        $product->lebar = $request->lebar;
-        $product->panjang = $request->panjang;
+        $product->unit = $request->unit;
         $product->description = $request->description;
         
         $product->save();

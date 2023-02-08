@@ -58,10 +58,12 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Product Code </th>
-                                    <th>Product Name</th>
-                                    {{-- <th>Dimension</th> --}}
-                                    <th>Unit</th>
+                                    <th>Material Code </th>
+                                    <th>Material Name</th>
+                                    <th>Gramasi</th>
+                                    <th>Thickness</th>
+                                    <th>Lebar</th>
+                                    <th>Panjang</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -74,8 +76,10 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $materials->code}}</td>
                                     <td>{{ $materials->name}}</td>
-                                    <td>{{ $materials->dimension}}</td>
-                                    <td>{{ $materials->description }}</td>
+                                    <td>{{ $materials->gramasi}}</td>
+                                    <td>{{ $materials->thickness ?? ''}}</td>
+                                    <td>{{ $materials->lebar }}</td>
+                                    <td>{{ $materials->panjang }}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
                                         <div class="btn-group">

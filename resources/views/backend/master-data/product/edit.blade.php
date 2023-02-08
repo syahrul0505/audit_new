@@ -69,10 +69,10 @@ cursor: crosshair;
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="gramasi">Gramasi</label>
-                        <input class="form-control @error('gramasi') is-invalid @enderror" id="gramasi" step="0.01" type="number" name="gramasi" placeholder="0,00 " required value="{{ old('gramasi') ?? $product->gramasi }}">
+                        <label for="dimension">Dimension</label>
+                        <input class="form-control @error('dimension') is-invalid @enderror" id="dimension" type="text" name="dimension" placeholder="Dimension " required value="{{ old('dimension') ?? $product->dimension }}">
 
-                        @error('gramasi')
+                        @error('dimension')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -80,10 +80,10 @@ cursor: crosshair;
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="thickness">Thickness</label>
-                        <input class="form-control @error('thickness') is-invalid @enderror" id="thickness" step="0.01" type="number" name="thickness" placeholder="0,00 " required value="{{ old('thickness') ?? $product->thickness }}">
+                        <label for="unit">Unit</label>
+                        <input class="form-control @error('unit') is-invalid @enderror" id="unit" type="text" name="unit" placeholder="unit " required value="{{ old('unit') ?? $product->unit }}">
 
-                        @error('thickness')
+                        @error('unit')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -91,29 +91,7 @@ cursor: crosshair;
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="panjang">Panjang</label>
-                        <input class="form-control @error('panjang') is-invalid @enderror" id="panjang" step="0.01" type="number" name="panjang" placeholder="0,00 " required value="{{ old('panjang') ?? $product->panjang }}">
-
-                        @error('panjang')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="lebar">Lebar</label>
-                        <input class="form-control @error('lebar') is-invalid @enderror" id="lebar" step="0.01" type="number" name="lebar" placeholder="0,00 " required value="{{ old('lebar') ?? $product->lebar }}">
-
-                        @error('lebar')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
-                      <label for="description">Description</label>
+                      <label for="description">Description <small>(optional)</small></label>
                       <textarea name="description" class="form-control" rows="3" placeholder="Description">{{ $product->description }}</textarea>
 
                       @error('description')

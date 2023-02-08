@@ -99,7 +99,7 @@
                     <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-layer-group text-white"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text font-size-18 text-bold">Product</span>
+                        <span class="info-box-text font-size-18 text-bold">Material</span>
 
                         <span class="font-size-12" style="color: rgba(175, 174, 174, 0.788); line-height:normal;">Create, read, update, and delete Material.</span>
                     </div>
@@ -113,7 +113,7 @@
                     <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-boxes text-white"></i></span>
 
                     <div class="info-box-content">
-                        <span class="info-box-text font-size-18 text-bold">Material</span>
+                        <span class="info-box-text font-size-18 text-bold">Product</span>
 
                         <span class="font-size-12" style="color: rgba(175, 174, 174, 0.788); line-height:normal;">Create, read, update, and delete Product.</span>
                     </div>

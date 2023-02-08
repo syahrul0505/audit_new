@@ -8,6 +8,8 @@ use App\Models\Material;
 use App\Models\Employee;
 use App\Models\StockInMaterial;
 use App\Models\InventoryMaterial;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class StockInMaterialController extends Controller
 {
@@ -62,5 +64,16 @@ class StockInMaterialController extends Controller
         ];
         return response($data);
 
+    }
+
+    public function destroy($id)
+    {
+        DB::transaction(function () use ($id) {
+            $stock_in_naterial = StockInMaterial::findOrFail($id);
+            $stock_in_naterial->delete();
+        });
+        
+        Session::flash('success', 'Stock Out Material deleted successfully!');
+        return response()->json(['status' => '200']);
     }
 }

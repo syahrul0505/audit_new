@@ -32,7 +32,7 @@
     <div class="col-lg-6 col-xl-6 col-sm-12">
         <div class="card card-primary">
             <div class="card-header text-center bg-gray1" style="border-radius:10px 10px 0px 0px;">
-                <h3 class="card-title text-white">Add Absen</h3>
+                <h3 class="card-title text-white">Add Material</h3>
             </div>
             <form method="POST" action="{{ route('backend.product.store') }}" novalidate>
                 @csrf
@@ -41,7 +41,7 @@
                     @include('backend.components.form-message')
 
                     <div class="form-group mb-3">
-                        <label for="code">Material Code</label>
+                        <label for="code">Prodct Code</label>
                         <input class="form-control @error('code') is-invalid @enderror" id="code" type="text" name="code" placeholder="Product Code" required value="{{ old('code') }}">
 
                         @error('code')
@@ -52,7 +52,7 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="name">Material Name</label>
+                        <label for="name">Prodct Name</label>
                         <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Product Name" required value="{{ old('name') }}">
 
                         @error('name')
@@ -63,10 +63,10 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="gramasi">Gramasi</label>
-                        <input class="form-control @error('gramasi') is-invalid @enderror" id="gramasi" type="number" name="gramasi" placeholder="0,00" step="0.01" required value="{{ old('gramasi') }}">
+                        <label for="dimension">Dimension</label>
+                        <input class="form-control @error('dimension') is-invalid @enderror" id="dimension" type="text" name="dimension" placeholder="Dimension" required value="{{ old('dimension') }}">
 
-                        @error('gramasi')
+                        @error('dimension')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
@@ -74,32 +74,10 @@
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="thickness">Thickness</label>
-                        <input class="form-control @error('thickness') is-invalid @enderror" id="thickness" type="number" name="thickness" placeholder="0,00" step="0.01" required value="{{ old('thickness') }}">
+                        <label for="unit">Unit</label>
+                        <input class="form-control @error('unit') is-invalid @enderror" id="unit" type="text" name="unit" placeholder="unit" required value="{{ old('unit') }}">
 
-                        @error('thickness')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="lebar">Lebar</label>
-                        <input class="form-control @error('lebar') is-invalid @enderror" id="lebar" type="number" name="lebar" placeholder="0,00" step="0.01" required value="{{ old('lebar') }}">
-
-                        @error('lebar')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
-                    </div>
-
-                    <div class="form-group mb-3">
-                        <label for="panjang">Panjang</label>
-                        <input class="form-control @error('panjang') is-invalid @enderror" id="panjang" type="number" name="panjang" placeholder="0,00" step="0.01" required value="{{ old('panjang') }}">
-
-                        @error('panjang')
+                        @error('unit')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

@@ -8,6 +8,8 @@ use App\Models\InventoryMaterial;
 use App\Models\StockOutMaterial;
 use App\Models\Employee;
 use App\Models\Material;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 
 class StockOutMaterialController extends Controller
 {
@@ -48,5 +50,16 @@ class StockOutMaterialController extends Controller
         $inventory_material->save();
 
         return redirect()->route('backend.stock_out_material.index')->with('success','Stock Out Material created successfully');
+    }
+
+    public function destroy($id)
+    {
+        DB::transaction(function () use ($id) {
+            $stock_out_material = StockOutMaterial::findOrFail($id);
+            $stock_out_material->delete();
+        });
+        
+        Session::flash('success', 'Stock Out Material deleted successfully!');
+        return response()->json(['status' => '200']);
     }
 }
