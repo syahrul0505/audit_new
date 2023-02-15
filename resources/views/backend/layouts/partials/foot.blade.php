@@ -49,7 +49,9 @@
 <script src="{{ asset('js/datatables-checkboxes.js') }}"></script>
 <!-- materialdesign icon js-->
 {{-- <script src="{{ asset('backend/js/pages/materialdesign.init.js') }}"></script> --}}
-
+{{-- Toastify CDN --}}
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
 <script src="{{ asset('backend/js/app.js') }}"></script>
 <script>
 
@@ -77,7 +79,8 @@
         $('#departementTable').DataTable({
             "paging":   true,
             "ordering": true,
-            "info":     true
+            "info":     true,
+            // "dom": '<"top">rt<"bottom"flp i><"clear">'
         });
         
         $('#HistoryTable').DataTable({
@@ -192,5 +195,67 @@
         });
     }
 </script>
+{{-- <script type="text/javascript">
+
+    $(document).ready(function () {
+     
+    window.setTimeout(function() {
+        $(".alert").fadeTo(1000, 0).slideUp(1000, function(){
+            $(this).remove(); 
+        });
+    }, 10022220);
+     
+    });
+</script> --}}
+@if(session()->has('success'))
+    <script>
+            Toastify({
+                text: "{{ session()->get('success') }}",
+                close: true,
+                gravity: "top", // `top` or `bottom`
+                position: "right", // `left`, `center` or `right`
+                stopOnFocus: true, // Prevents dismissing of toast on hover
+                style: {
+                    background: "#D5F3E9",
+                    color: "#1f7556"
+                },
+                duration: 3000
+            }).showToast();
+    </script>
+@endif
+
+@if(session()->has('warning'))
+<script>
+        Toastify({
+            text: "{{ session()->get('warning') }}",
+            close: true,
+            gravity: "top", // `top` or `bottom`
+            position: "right", // `left`, `center` or `right`
+            stopOnFocus: true, // Prevents dismissing of toast on hover
+            style: {
+                background: "#FBEFDB",
+                color: "#916c2e"
+            },
+            duration: 3000
+        }).showToast();
+</script>
+@endif
+
+@if(session()->has('failed'))
+<script>
+    Toastify({
+        text: "{{ session()->get('failed') }}",
+        close: true,
+        gravity: "top", // `top` or `bottom`
+        position: "right", // `left`, `center` or `right`
+        stopOnFocus: true, // Prevents dismissing of toast on hover
+        style: {
+            background: "#fde1e1",
+            color: "#924040"
+        },
+        duration: 3000
+    }).showToast();
+</script>
+@endif
 @stack('scripts')
 @yield('script')

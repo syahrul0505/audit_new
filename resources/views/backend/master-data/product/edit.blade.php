@@ -47,7 +47,7 @@ cursor: crosshair;
                     @include('backend.components.form-message')
                   
                     <div class="form-group mb-3">
-                        <label for="code">Material Code</label>
+                        <label for="code">Product Code</label>
                         <input class="form-control @error('code') is-invalid @enderror" id="code" type="text" name="code" placeholder="Material Code " required value="{{ old('code') ?? $product->code }}">
 
                         @error('code')
@@ -58,7 +58,7 @@ cursor: crosshair;
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="name">Material Name</label>
+                        <label for="name">Product Name</label>
                         <input class="form-control @error('name') is-invalid @enderror" id="name" type="text" name="name" placeholder="Material Name " required value="{{ old('name') ?? $product->name }}">
 
                         @error('name')
@@ -69,10 +69,43 @@ cursor: crosshair;
                     </div>
 
                     <div class="form-group mb-3">
-                        <label for="dimension">Dimension</label>
-                        <input class="form-control @error('dimension') is-invalid @enderror" id="dimension" type="text" name="dimension" placeholder="Dimension " required value="{{ old('dimension') ?? $product->dimension }}">
+                        <label for="merk">Merk</label>
+                        <input class="form-control @error('merk') is-invalid @enderror" id="merk" type="text" name="merk" placeholder="Merk" required value="{{ old('merk') ?? $product->merk }}">
 
-                        @error('dimension')
+                        @error('merk')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="jenis_barang">Jenis Barang</label>
+                        <input class="form-control @error('jenis_barang') is-invalid @enderror" id="jenis_barang" type="text" name="jenis_barang" placeholder="Jenis Barang" required value="{{ old('jenis_barang') ?? $product->jenis_barang }}">
+
+                        @error('jenis_barang')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="ukuran_barang">Ukuran Barang </label>
+                        <input class="form-control @error('ukuran_barang') is-invalid @enderror" id="ukuran_barang" type="text" name="ukuran_barang" placeholder="Ukuran Barang" required value="{{ old('ukuran_barang') ?? $product->ukuran_barang }}">
+
+                        @error('ukuran_barang')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="qty">Quantity</label>
+                        <input class="form-control @error('qty') is-invalid @enderror" id="qty" type="text" name="qty" placeholder="Quantity" required value="{{ old('qty') ?? $product->qty }}">
+
+                        @error('qty')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

@@ -24,6 +24,7 @@ use App\Http\Controllers\backend\CutOffController;
 use App\Http\Controllers\backend\WarehouseController;
 use App\Http\Controllers\backend\PurchaseOrderController;
 use App\Http\Controllers\backend\ListFinanceController;
+use App\Http\Controllers\backend\CustomerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -89,6 +90,9 @@ use Illuminate\Support\Facades\Route;
                 
                 // Product
                 Route::resource('product', ProductController::class);
+
+                // Customer
+                Route::resource('customer', CustomerController::class);
                 
                 
                 // Users

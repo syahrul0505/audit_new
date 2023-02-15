@@ -37,7 +37,10 @@ class ProductController extends Controller
         $product = new Product();
         $product->name = $request->name;
         $product->code = $request->code;
-        $product->dimension = $request->dimension;
+        $product->merk = $request->merk;
+        $product->jenis_barang = $request->jenis_barang;
+        $product->ukuran_barang = $request->ukuran_barang;
+        $product->qty = $request->qty;
         $product->unit = $request->unit;
         $product->description = $request->description;
         
@@ -65,6 +68,10 @@ class ProductController extends Controller
         $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->code = $request->code;
+        $product->merk = $request->merk;
+        $product->jenis_barang = $request->jenis_barang;
+        $product->ukuran_barang = $request->ukuran_barang;
+        $product->qty = $request->qty;
         $product->unit = $request->unit;
         $product->description = $request->description;
         
@@ -80,7 +87,7 @@ class ProductController extends Controller
             $product->delete();
         });
         
-        Session::flash('success', 'Product deleted successfully!');
+        Session::flash('failed', 'Product deleted successfully!');
         return response()->json(['status' => '200']);
     }
 

@@ -150,5 +150,6 @@
         $('#available_stock').val(stok_tersedia + Number(qty));
     }
 
+
 </script>
 @endsection
