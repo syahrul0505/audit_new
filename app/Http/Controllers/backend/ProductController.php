@@ -21,7 +21,7 @@ class ProductController extends Controller
 
     public function create()
     {
-        $data['page_title'] = 'Product Create';
+        $data['page_title'] = 'Add New Product';
         $data['product'] = Product::get();
 
         return view('backend.master-data.product.create', $data);
@@ -32,14 +32,22 @@ class ProductController extends Controller
         $request->validate([
             'name' => 'required',
             'code' => 'required',
+            'category_product' => 'required',
+            'jenis_barang' => 'required',
+            'ukuran_barang' => 'required',
+            'satuan_barang' => 'required',
+            'qty' => 'required',
+            'unit' => 'required',
            
         ]);
         $product = new Product();
         $product->name = $request->name;
         $product->code = $request->code;
+        $product->category_product = $request->category_product;
         $product->merk = $request->merk;
         $product->jenis_barang = $request->jenis_barang;
         $product->ukuran_barang = $request->ukuran_barang;
+        $product->satuan_barang = $request->satuan_barang;
         $product->qty = $request->qty;
         $product->unit = $request->unit;
         $product->description = $request->description;
@@ -61,16 +69,24 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'product_id'   => 'nullable',
-            'description' => 'nullable',
+            'name' => 'required',
+            'code' => 'required',
+            'category_product' => 'required',
+            'jenis_barang' => 'required',
+            'ukuran_barang' => 'required',
+            'satuan_barang' => 'required',
+            'qty' => 'required',
+            'unit' => 'required',
         ]);
 
         $product = Product::findOrFail($id);
         $product->name = $request->name;
         $product->code = $request->code;
+        $product->category_product = $request->category_product;
         $product->merk = $request->merk;
         $product->jenis_barang = $request->jenis_barang;
         $product->ukuran_barang = $request->ukuran_barang;
+        $product->satuan_barang = $request->satuan_barang;
         $product->qty = $request->qty;
         $product->unit = $request->unit;
         $product->description = $request->description;

@@ -1,6 +1,18 @@
 @extends('backend.layouts.app')
 
 @section('style')
+<style>
+    .description{
+        width: 25%;
+    }
+
+    @media only screen and (max-width: 500px) {
+        .description{
+            width: 100% !important;
+            background-color: aqua !important;
+        }
+    }
+</style>
 @endsection
 
 @section('breadcumb')
@@ -30,7 +42,7 @@
                     <div class="row">
                         <div class="col-6 mt-1 text-white my-auto" style="font-size:1.2rem;">
                             <span class="tx-bold tx-dark text-white text-lg">
-                                <i class="far fa-building text-lg"></i>
+                                <i class="fas fa-boxes text-lg"></i>
                                 {{$page_title}} 
                             </span>
                         </div>
@@ -64,8 +76,8 @@
                                     <th>Jenis Barang</th>
                                     <th>Ukuran Barang</th>
                                     <th>Quantity</th>
-                                    <th>Unit</th>
-                                    <th>description</th>
+                                    {{-- <th>Unit</th> --}}
+                                    <th class="description">Description</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -80,9 +92,9 @@
                                     <td>{{ $products->name}}</td>
                                     <td>{{ $products->merk ?? 'N/A'}}</td>
                                     <td>{{ $products->jenis_barang}}</td>
-                                    <td>{{ $products->ukuran_barang}}</td>
-                                    <td>{{ $products->qty}}</td>
-                                    <td>{{ $products->unit}}</td>
+                                    <td>{{ $products->ukuran_barang. ($products->satuan_barang)}}</td>
+                                    <td>{{ $products->qty }} ({{ $products->unit}})</td>
+                                    {{-- <td>{{ $products->unit}}</td> --}}
                                     <td>{{ $products->description }}</td>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>

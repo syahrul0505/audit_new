@@ -41,9 +41,9 @@
                 </div>
             </div> --}}
 
-            <div class="dropdown d-none d-lg-inline-block ms-1">
+            <div class="">
                 <button type="button" class="btn header-item noti-icon waves-effect" data-bs-toggle="fullscreen">
-                    <i class="bx bx-fullscreen font-size-16 align-middle me-1"><span key="t-profile">Fullscreen</span> </i> 
+                    <i class="bx bx-fullscreen font-size-16"> </i> <span key="t-profile">Fullscreen</span>
                 </button>
                  <i class="bx bx-user font-size-16 align-middle me-1"></i> <span key="t-profile">Profile</span>
             </div>

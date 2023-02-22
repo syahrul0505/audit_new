@@ -152,7 +152,7 @@
             @if(auth()->user()->can('user-list'))
             <div class="col-md-4 col-sm-6 col-12 p-1" onclick="location.href='{{ route('backend.customer.index') }}';">
                 <div class="info-box bg-gradient-info master-data">
-                    <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-user text-white"></i></span>
+                    <span class="info-box-icon" style="background-color:rgb(0, 98, 128); "><i class="fas fa-users text-white"></i></span>
 
                     <div class="info-box-content">
                         <span class="info-box-text font-size-18 text-bold">Customer</span>

@@ -6,14 +6,14 @@
 @section('breadcumb')
 <div class="row">
     <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+        <div class="page-title-box d-sm-flex align-items-center              ">
             <h4 class="mb-sm-0 font-size-18">{{ ($breadcumb ?? '') }}</h4>
 
             <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">home</li>
                     <li class="breadcrumb-item">/</li>
-                    <li class="breadcrumb-item"><a href="{{ route('backend.material.index') }}">Material</a></li>
+                    <li class="breadcrumb-item"><a href="{{ route('backend.material.index') }}">Customer</a></li>
                 </ol>
             </div>
 
@@ -30,7 +30,7 @@
                     <div class="row">
                         <div class="col-lg-6 col-md-6 col-sm-6 mt-1 text-white" style="font-size:1.2rem;">
                             <span class="tx-bold tx-dark text-white text-lg">
-                                <i class="far fa-building text-lg"></i>
+                                <i class="fas fa-users text-lg"></i>
                                 {{$page_title}}
                             </span>
                         </div>
@@ -39,7 +39,7 @@
                         <div class="col-lg-6 col-md-6 col-sm-6 d-flex justify-content-end">
                             <a href="{{ route('backend.customer.create') }}" class="btn btn-md btn-info">
                                 <i class="fa fa-plus"></i> 
-                                Add New
+                                Add New Customer
                             </a>
                         </div>
                         @endcan
@@ -47,7 +47,7 @@
 
                     <div class="row">
                         <div class="col-6">
-                            @include('backend.components.flash-message')
+                            {{-- @include('backend.components.flash-message') --}}
                         </div>
                     </div>
                 </div>
@@ -58,9 +58,11 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Customer </th>
+                                    <th>Customer Type </th>
                                     <th>Name</th>
+                                    <th>City</th>
                                     <th>Alamat</th>
+                                    <th>Pos Code</th>
                                     <th>No Tlp</th>
                                     <th>Name PPIC</th>
                                     <th>Email</th>
@@ -78,7 +80,9 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $customers->customer}}</td>
                                     <td>{{ $customers->name}}</td>
+                                    <td>{{ $customers->kota}}</td>
                                     <td>{{ $customers->alamat ?? 'N/A'}}</td>
+                                    <td>{{ $customers->kode_pos }}</td>
                                     <td>{{ $customers->no_tlp}}</td>
                                     <td>{{ $customers->name_ppic}}</td>
                                     <td>{{ $customers->email}}</td>

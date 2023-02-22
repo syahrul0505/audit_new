@@ -32,6 +32,8 @@ class CustomerController extends Controller
         $request->validate([
             'customer' => 'required',
             'name' => 'required',
+            'kota' => 'required',
+            'kode_pos' => 'required',
             'alamat' => 'required',
             'no_tlp' => 'required',
             'name_ppic' => 'required',
@@ -42,7 +44,9 @@ class CustomerController extends Controller
         $customer = new Customer();
         $customer->customer = $request->customer;
         $customer->name = $request->name;
+        $customer->kota = $request->kota;
         $customer->alamat = $request->alamat;
+        $customer->kode_pos = $request->kode_pos;
         $customer->no_tlp = $request->no_tlp;
         $customer->name_ppic = $request->name_ppic;
         $customer->email = $request->email;
@@ -77,7 +81,9 @@ class CustomerController extends Controller
         $customer = Customer::findOrFail($id);
         $customer->customer = $request->customer;
         $customer->name = $request->name;
+        $customer->kota = $request->kota;
         $customer->alamat = $request->alamat;
+        $customer->kode_pos = $request->kode_pos;
         $customer->no_tlp = $request->no_tlp;
         $customer->name_ppic = $request->name_ppic;
         $customer->email = $request->email;

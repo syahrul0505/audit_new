@@ -13,10 +13,10 @@ cursor: crosshair;
 @section('breadcumb')
 <div class="row">
     <div class="col-12">
-        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+        <div class="page-title-box d-sm-flex align-items-center">
             <h4 class="mb-sm-0 font-size-18">{{ ($breadcumb ?? '') }}</h4>
 
-            <div class="page-title-right">
+            {{-- <div class="page-title-right">
                 <ol class="breadcrumb m-0">
                     <li class="breadcrumb-item">home</li>
                     <li class="breadcrumb-item">/</li>
@@ -24,6 +24,10 @@ cursor: crosshair;
                     <li class="breadcrumb-item">/</li>
                     <li class="breadcrumb-item active"><a href="{{ route('backend.users.index') }}">{{ ($breadcumb ?? '') }}</a></li>
                 </ol>
+            </div> --}}
+
+            <div class="page-title-right">
+                <a href="{{ route('backend.customer.index') }}" class="btn btn-secondary btn-footer"> <i class="bx bx-undo"></i> Back</a>
             </div>
 
         </div>
@@ -33,7 +37,7 @@ cursor: crosshair;
 
 @section('content')
 <div class="row mt-4">
-    <div class="col-md-6">
+    <div class="col-md-6 mx-auto">
         <div class="card card-primary">
             <div class="card-header text-center bg-gray1" style="border-radius:10px 10px 0px 0px;">
                 <h3 class="card-title text-white">{{ $page_title }}</h3>
@@ -70,6 +74,17 @@ cursor: crosshair;
                     </div>
 
                     <div class="form-group mb-3">
+                        <label for="kota">City</label>
+                        <input class="form-control @error('kota') is-invalid @enderror" id="kota" type="text" name="kota" placeholder="City" required value="{{ old('kota') ?? $customer->kota }}">
+
+                        @error('kota')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
                         <label for="alamat">Adress</label>
                         <textarea name="alamat" class="form-control" rows="3" placeholder="Adress">{{ $customer->alamat }}</textarea>
   
@@ -79,6 +94,17 @@ cursor: crosshair;
                             </span>
                         @enderror
                       </div>
+
+                    <div class="form-group mb-3">
+                        <label for="kode_pos">Pos Code</label>
+                        <input class="form-control @error('kode_pos') is-invalid @enderror" id="kode_pos" type="number" name="kode_pos" placeholder="Pos Code" required value="{{ old('kode_pos') ?? $customer->kode_pos }}">
+
+                        @error('kode_pos')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
   
 
                     <div class="form-group mb-3">
@@ -132,9 +158,9 @@ cursor: crosshair;
                 </div>
                 <!-- /.card-body -->
 
-                <div class="card-footer bg-gray1" style="border-radius:0px 0px 10px 10px;">
+                <div class="card-footer bg-gray1 text-end" style="border-radius:0px 0px 10px 10px;">
                     <button type="submit" id="submit_button" class="btn btn-success btn-footer">Save</button>
-                    <a href="{{ route('backend.customer.index') }}" class="btn btn-secondary btn-footer">Back</a>
+                    {{-- <a href="{{ route('backend.customer.index') }}" class="btn btn-secondary btn-footer">Back</a> --}}
                 </div>
             </form>
         </div>
