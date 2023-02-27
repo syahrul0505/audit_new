@@ -48,6 +48,7 @@ class CustomerController extends Controller
         $customer->alamat = $request->alamat;
         $customer->kode_pos = $request->kode_pos;
         $customer->no_tlp = $request->no_tlp;
+        $customer->office_number = $request->office_number;
         $customer->name_ppic = $request->name_ppic;
         $customer->email = $request->email;
         $customer->term_of_payment = $request->term_of_payment;

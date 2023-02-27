@@ -63,7 +63,7 @@
                                     <th>City</th>
                                     <th>Alamat</th>
                                     <th>Pos Code</th>
-                                    <th>No Tlp</th>
+                                    <th>Hanphone Number</th>
                                     <th>Name PPIC</th>
                                     <th>Email</th>
                                     <th>Term Of Payment</th>

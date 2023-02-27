@@ -108,10 +108,21 @@ cursor: crosshair;
   
 
                     <div class="form-group mb-3">
-                        <label for="no_tlp">Phone Number</label>
-                        <input class="form-control @error('no_tlp') is-invalid @enderror" id="no_tlp" type="number" name="no_tlp" placeholder="Phone Number" required value="{{ old('no_tlp') ?? $customer->no_tlp }}">
+                        <label for="no_tlp">Hanphone Number</label>
+                        <input class="form-control @error('no_tlp') is-invalid @enderror" id="no_tlp" type="number" name="no_tlp" placeholder="Hanphone Number" required value="{{ old('no_tlp') ?? $customer->no_tlp }}">
 
                         @error('no_tlp')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="office_number">Office Number</label>
+                        <input class="form-control @error('office_number') is-invalid @enderror" id="office_number" type="number" name="office_number" placeholder="Office Number" required value="{{ old('office_number') ?? $customer->office_number }}">
+
+                        @error('office_number')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>
