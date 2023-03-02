@@ -116,12 +116,12 @@ class EmployeeController extends Controller
             'nik' => 'nullable',
             'name' => 'required',
             'npwp' => 'required',
-            'jenis_kelamin' => 'required',
-            'alamat' => 'required',
-            'no_hp' => 'required',
-            "upload_ktp" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:5000",
-            "upload_npwp" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:5000",
-            "upload_cv" => "required|max:10000",
+            // 'jenis_kelamin' => 'required',
+            // 'alamat' => 'required',
+            // 'no_hp' => 'required',
+            // "upload_ktp" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:5000",
+            // "upload_npwp" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:5000",
+            // "upload_cv" => "required|max:10000",
         ]);
 
         $employee = Employee::findOrFail($id);

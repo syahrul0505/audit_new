@@ -48,7 +48,7 @@ cursor: crosshair;
 
                 <div class="card-body">
 
-                    @include('backend.components.form-message')
+                    {{-- @include('backend.components.form-message') --}}
                   
                     <div class="form-group mb-3">
                         <label class="col-form-label">Customer</label>
