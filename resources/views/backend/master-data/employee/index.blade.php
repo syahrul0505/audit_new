@@ -1,6 +1,22 @@
 @extends('backend.layouts.app')
 
 @section('style')
+<style>
+    .description{
+        width: 25%;
+    }
+
+    .date_of{
+        width: 15%;
+    }
+
+    @media only screen and (max-width: 414px) {
+        .description{
+            width: 100% !important;
+            /* background-color: aqua !important; */
+        }
+    }
+</style>
 @endsection
 
 @section('breadcumb')
@@ -47,7 +63,7 @@
 
                     <div class="row">
                         <div class="col-6">
-                            @include('backend.components.flash-message')
+                            {{-- @include('backend.components.flash-message') --}}
                         </div>
                     </div>
                 </div>
@@ -58,9 +74,17 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Nik </th>
-                                    <th>Employee</th>
-                                    <th>Description</th>
+                                    <th>NIK </th>
+                                    <th>Employee Name </th>
+                                    <th>NPWP</th>
+                                    <th>Gender</th>
+                                    <th class="date_of">Date Of Birth</th>
+                                    <th>Address</th>
+                                    <th>Phone Number</th>
+                                    <th>Image KTP</th>
+                                    <th>Image NPWP</th>
+                                    <th>CV/RESUME</th>
+                                    <th class="description">Description</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
                                     @endif
@@ -68,17 +92,101 @@
                             </thead>
 
                             <tbody>
-                                @foreach ($employee as $employee)
+                                @foreach ($employee as $employees)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $employee->nik}}</td>
-                                    <td>{{ $employee->name}}</td>
-                                    <td>{{ $employee->description }}</td>
+                                    <td>{{ $employees->nik}}</td>
+                                    <td>{{ $employees->name}}</td>
+                                    <td>{{ $employees->npwp}}</td>
+                                    <td>{{ $employees->jenis_kelamin}}</td>
+                                    <td>{{ $employees->tanggal_lahir}}</td>
+                                    <td>{{ $employees->alamat}}</td>
+                                    <td>{{ $employees->no_hp}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-center-{{ $employees->id }}">KTP</button>
+                                        <div class="modal fade bs-example-modal-center-{{ $employees->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="card">
+                                                        @if ($employees->upload_ktp != null)
+                                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/'.$employees->upload_ktp) }}" alt="Card image cap">
+                                                        @else
+                                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/user.png') }}" alt="Card image cap">
+                                                        
+                                                        @endif
+                                                        <div class="card-body">
+                                                            
+                                                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                            <a href="{{ asset('img/employee/'.($employees->upload_ktp ?? 'user.png')) }}" download="KTP" class="btn btn-primary waves-effect waves-light">Download</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-npwp{{ $employees->id }}">NPWP</button>
+                                        <div class="modal fade bs-example-modal-npwp{{ $employees->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="card">
+                                                        @if ($employees->upload_npwp != null)
+                                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/'.$employees->upload_npwp) }}" alt="Card image cap">
+                                                        @else
+                                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/user.png') }}" alt="Card image cap">
+                                                        
+                                                        @endif
+                                                        <div class="card-body">
+                                                            
+                                                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                            <a href="{{ asset('img/employee/'.($employees->upload_npwp ?? 'user.png')) }}" download="NPWP" class="btn btn-primary waves-effect waves-light">Download</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+
+                                    <td>
+                                        {{-- <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-cv{{ $employees->id }}">CV/RESUME</button>
+                                        <div class="modal fade bs-example-modal-cv{{ $employees->id }}" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered">
+                                                <div class="modal-content">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            @if (substr($employees->upload_cv, -3) == 'pdf')
+                                                            <div class="d-flex flex-wrap gap-3 ml-3">
+                                                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                                <a href="{{ asset('img/employee/'.($employees->upload_cv ?? 'user.png')) }}" download="CV/RESUME" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf">{{ $employees->upload_cv }}</i></a>
+                                                            </div>
+                                                            @else
+                                                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                            <img class="card-img-top img-fluid" src="{{ asset('img/employee/'.$employees->upload_cv) }}" alt="Card image cap">
+                                                            @endif
+                                                            
+                                                            
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> --}}
+                                        @if (substr($employees->upload_cv, -3) == 'pdf')
+                                        <div class="d-flex flex-wrap gap-3 ml-3">
+                                            {{-- <button type="submit" name="pdf" value="pdf" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf">{{ $employees->upload_cv }}</button></i> --}}
+                                            <a href="{{ asset('img/employee/'.($employees->upload_cv ?? 'user.png')) }}" target="_blank" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf">{{ $employees->upload_cv }}</i></a>
+                                        </div>
+                                        @else
+                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/user.png') }}" alt="Card image cap">
+                                        @endif
+                                    </td>
+                                    <td>{{ $employees->description }}</td>
+
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <td>
                                         <div class="btn-group">
                                             @can('departement-edit')
-                                            <a href="{{ route('backend.employee.edit', $employee->id) }}"
+                                            <a href="{{ route('backend.employee.edit', $employees->id) }}"
                                                 class="btn btn-warning text-white">
                                                 <i class="far fa-edit"></i>
                                                 Edit
@@ -86,7 +194,7 @@
                                             @endcan
 
                                             @can('departement-delete')
-                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Employee', '{{ $employee->name }}', '/aduitt/admin/master-data/employee/' + {{ $employee->id }}, '/aduitt/admin/master-data/employee/')">
+                                            <a href="#" class="btn btn-danger f-12" onclick="modalDelete('Employee', '{{ $employees->name }}', '/aduitt/admin/master-data/employee/' + {{ $employees->id }}, '/aduitt/admin/master-data/employee/')">
                                                 <i class="far fa-trash-alt"></i>
                                                 Delete
                                             </a>
@@ -95,6 +203,8 @@
                                     </td>
                                     @endif
                                 </tr>
+
+                                
                                 @endforeach
                             </tbody>
                         </table>
@@ -104,7 +214,6 @@
         </div>
     </div>
 
-    
 @endsection
 
 @section('script')

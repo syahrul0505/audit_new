@@ -84,6 +84,7 @@ use Illuminate\Support\Facades\Route;
                 
                 // Employee
                 Route::resource('employee', EmployeeController::class);
+                Route::get('download-img', [EmployeeController::class , 'downloadImage'])->name('download-img');
 
                 // Material
                 Route::resource('material', MaterialController::class);

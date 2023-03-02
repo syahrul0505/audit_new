@@ -64,6 +64,7 @@
                                     <th>Alamat</th>
                                     <th>Pos Code</th>
                                     <th>Hanphone Number</th>
+                                    <th>Office Number</th>
                                     <th>Name PPIC</th>
                                     <th>Email</th>
                                     <th>Term Of Payment</th>
@@ -84,6 +85,7 @@
                                     <td>{{ $customers->alamat ?? 'N/A'}}</td>
                                     <td>{{ $customers->kode_pos }}</td>
                                     <td>{{ $customers->no_tlp}}</td>
+                                    <td>{{ $customers->office_number}}</td>
                                     <td>{{ $customers->name_ppic}}</td>
                                     <td>{{ $customers->email}}</td>
                                     <td>{{ $customers->term_of_payment}}</td>

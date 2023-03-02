@@ -112,7 +112,7 @@
                         <div class="col-lg-6 col-6">
                             <div class="form-group mb-3">
                                 <label for="ukuran_barang">Ukuran Barang</label>
-                                <input class="form-control @error('ukuran_barang') is-invalid @enderror" id="ukuran_barang" type="text" name="ukuran_barang" placeholder="Ukuran Barang" required value="{{ old('ukuran_barang') }}">
+                                <input class="form-control @error('ukuran_barang') is-invalid @enderror" id="inputBox" id="ukuran_barang" type="number" name="ukuran_barang" placeholder="Ukuran Barang" required value="{{ old('ukuran_barang') }}">
                                 
                                 @error('ukuran_barang')
                                 <span class="invalid-feedback" role="alert">
@@ -146,7 +146,7 @@
                         <div class="col-lg-6 col-6">
                             <div class="form-group mb-3">
                                 <label for="qty">Quantity</label>
-                                <input class="form-control @error('qty') is-invalid @enderror" id="qty" type="number" name="qty" placeholder="qty" required value="{{ old('qty') }}">
+                                <input class="form-control @error('qty') is-invalid @enderror" id="qty"  type="number" name="qty" placeholder="qty" required value="{{ old('qty') }}">
                                 
                                 @error('qty')
                                 <span class="invalid-feedback" role="alert">
@@ -213,5 +213,30 @@
 @endsection
 
 @section('script')
+<script>
 
+    // ukuran barang
+    var inputBox = document.getElementById("inputBox");
+    var qty = document.getElementById("qty");
+
+    var invalidChars = [
+    "-",
+    "+",
+    "e",
+    ];
+
+    inputBox.addEventListener("keydown", function(e) {
+    if (invalidChars.includes(e.key)) {
+        e.preventDefault();
+    }
+    });
+
+    qty.addEventListener("keydown", function(e) {
+    if (invalidChars.includes(e.key)) {
+        e.preventDefault();
+    }
+    });
+
+    
+</script>
 @endsection
