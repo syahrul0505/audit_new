@@ -84,6 +84,7 @@
                                     <th>Image KTP</th>
                                     <th>Image NPWP</th>
                                     <th>CV/RESUME</th>
+                                    <th>Document</th>
                                     <th class="description">Description</th>
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))
                                     <th>Action</th>
@@ -99,7 +100,7 @@
                                     <td>{{ $employees->name}}</td>
                                     <td>{{ $employees->npwp}}</td>
                                     <td>{{ $employees->jenis_kelamin}}</td>
-                                    <td>{{ $employees->tanggal_lahir}}</td>
+                                    <td>{{ date('d-m-Y', strtotime($employees->tanggal_lahir));}}</td>
                                     <td>{{ $employees->alamat}}</td>
                                     <td>{{ $employees->no_hp}}</td>
                                     <td>
@@ -110,15 +111,17 @@
                                                     <div class="card">
                                                         @if ($employees->upload_ktp != null)
                                                         <img class="card-img-top img-fluid" src="{{ asset('img/employee/'.$employees->upload_ktp) }}" alt="Card image cap">
-                                                        @else
-                                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/user.png') }}" alt="Card image cap">
-                                                        
-                                                        @endif
                                                         <div class="card-body">
                                                             
                                                             <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
                                                             <a href="{{ asset('img/employee/'.($employees->upload_ktp ?? 'user.png')) }}" download="KTP" class="btn btn-primary waves-effect waves-light">Download</a>
                                                         </div>
+                                                        @else
+                                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/user.png') }}" alt="Card image cap">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        
+                                                        @endif
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -133,15 +136,17 @@
                                                     <div class="card">
                                                         @if ($employees->upload_npwp != null)
                                                         <img class="card-img-top img-fluid" src="{{ asset('img/employee/'.$employees->upload_npwp) }}" alt="Card image cap">
-                                                        @else
-                                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/user.png') }}" alt="Card image cap">
-                                                        
-                                                        @endif
                                                         <div class="card-body">
                                                             
                                                             <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
                                                             <a href="{{ asset('img/employee/'.($employees->upload_npwp ?? 'user.png')) }}" download="NPWP" class="btn btn-primary waves-effect waves-light">Download</a>
                                                         </div>
+                                                        @else
+                                                        <img class="card-img-top img-fluid" src="{{ asset('img/employee/user.png') }}" alt="Card image cap">
+                                                        <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
+                                                        
+                                                        @endif
+                                                        
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,37 +154,28 @@
                                     </td>
 
                                     <td>
-                                        {{-- <button type="button" class="btn btn-primary waves-effect waves-light" data-bs-toggle="modal" data-bs-target=".bs-example-modal-cv{{ $employees->id }}">CV/RESUME</button>
-                                        <div class="modal fade bs-example-modal-cv{{ $employees->id }}" tabindex="-1" role="dialog" aria-hidden="true">
-                                            <div class="modal-dialog modal-dialog-centered">
-                                                <div class="modal-content">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            @if (substr($employees->upload_cv, -3) == 'pdf')
-                                                            <div class="d-flex flex-wrap gap-3 ml-3">
-                                                                <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                                                                <a href="{{ asset('img/employee/'.($employees->upload_cv ?? 'user.png')) }}" download="CV/RESUME" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf">{{ $employees->upload_cv }}</i></a>
-                                                            </div>
-                                                            @else
-                                                            <button type="button" class="btn btn-secondary waves-effect" data-bs-dismiss="modal">Close</button>
-                                                            <img class="card-img-top img-fluid" src="{{ asset('img/employee/'.$employees->upload_cv) }}" alt="Card image cap">
-                                                            @endif
-                                                            
-                                                            
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
                                         @if (substr($employees->upload_cv, -3) == 'pdf')
                                         <div class="d-flex flex-wrap gap-3 ml-3">
-                                            {{-- <button type="submit" name="pdf" value="pdf" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf">{{ $employees->upload_cv }}</button></i> --}}
                                             <a href="{{ asset('img/employee/'.($employees->upload_cv ?? 'user.png')) }}" target="_blank" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf">{{ $employees->upload_cv }}</i></a>
                                         </div>
                                         @else
                                         <img class="card-img-top img-fluid" src="{{ asset('img/employee/user.png') }}" alt="Card image cap">
                                         @endif
                                     </td>
+                                    
+                                    <td>
+                                        @if (substr($employees->upload_document, -4) == 'docx' || 'pdf')
+                                            <div class="">
+                                                <a href="{{ asset('img/employee/'.$employees->upload_document ) }}" target="_blank" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf">{{ $employees->upload_document }}</i></a>
+                                            </div>
+                                        @else
+                                            <img class="card-img-top img-fluid" src="{{ asset('img/employee/'.$employees->upload_document) }}" alt="Card image cap">
+                                            <a href="{{ asset('img/employee/'.$employees->upload_document ) }}" download="Document" class="btn btn-primary waves-effect waves-light">Download</a>
+                                            </div>
+                                        @endif
+                                        
+                                    </td>
+
                                     <td>{{ $employees->description }}</td>
 
                                     @if(auth()->user()->can('departement-delete') || auth()->user()->can('departement-edit'))

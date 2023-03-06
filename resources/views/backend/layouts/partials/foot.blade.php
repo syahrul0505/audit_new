@@ -52,7 +52,15 @@
 {{-- Toastify CDN --}}
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+{{-- sweet alert --}}
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="{{ asset('backend/js/app.js') }}"></script>
+<style>
+    .btn-default{
+        background-color: #bdbab3 !important;
+    }
+</style>
 <script>
 
     //-- Loader 
@@ -122,13 +130,17 @@
     }
 
     function modalDelete(title, name, url, link) {
-        $.confirm({
+        $.confirm({ 
             title: `Delete ${title}?`,
             content: `Are you sure want to delete ${name}`,
             autoClose: 'cancel|8000',
+            cancelButtonClass: 'btn-danger',
+            
             buttons: {
                 delete: {
                     text: 'delete',
+                    btnClass: 'btn-danger',
+                    
                     action: function () {
                         $.ajax({
                             type: 'POST',
@@ -158,6 +170,46 @@
         });        
     }
 
+    // function modalDelete(val,num)
+    // {
+    //     Swal.fire({
+    //         title: `Delete ${title}?`,
+    //         text: `Do you want to delete ${name}`,
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         confirmButtonColor: '#d33',
+    //         cancelButtonColor: 'grey',
+    //         confirmButtonText: 'Yes, delete it!',
+    //         action: function () {
+    //                     $.ajax({
+    //                         type: 'POST',
+    //                         url: url,
+    //                         dataType: 'json',
+    //                         headers: {
+    //                             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    //                         },
+    //                         data: {
+    //                             "_method": 'delete',
+    //                             "_token": "{{ csrf_token() }}"
+    //                         },
+    //                         success: function (data) {
+    //                             window.location.href = link
+    //                         },
+    //                         error: function (data) {
+    //                             $.alert('Failed!');
+    //                             console.log(data);
+    //                         }
+    //                     });
+    //                 }
+            
+    //     }).then((result) => {
+    //         if (result.isConfirmed) {
+                
+    //             $(val).parent().parent().remove();
+    //         }
+    //         })
+    // }
+
     function logout() {
         $.confirm({
             icon: 'fas fa-sign-out-alt',
@@ -168,6 +220,8 @@
             buttons: {
                 logout: {
                     text: 'logout',
+                    btnClass: 'btn-danger',
+                    
                     action: function () {
                         $.ajax({
                             type: 'POST',

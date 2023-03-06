@@ -5,13 +5,13 @@ namespace App\Http\Controllers\backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Employee;
-Use File;
 use Response;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\File; 
 
 class EmployeeController extends Controller
 {
@@ -42,7 +42,8 @@ class EmployeeController extends Controller
             'no_hp' => 'required',
             "upload_ktp" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:5000",
             "upload_npwp" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:5000",
-            "upload_cv" => "required|max:10000",
+            "upload_cv" => "required|mimes:jpeg,jpg,png,pdf|max:10000",
+            "upload_document" => "required|mimes:jpeg,jpg,png,pdf,xlsx,docx|max:10000",
             // "upload_cv" => "required|mimetypes:application/pdf|max:10000|size:10000|image|mimes:jpeg,png,jpg,gif,svg",
            
         ]);
@@ -116,12 +117,13 @@ class EmployeeController extends Controller
             'nik' => 'nullable',
             'name' => 'required',
             'npwp' => 'required',
-            // 'jenis_kelamin' => 'required',
-            // 'alamat' => 'required',
-            // 'no_hp' => 'required',
-            // "upload_ktp" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:5000",
-            // "upload_npwp" => "required|image|mimes:jpeg,png,jpg,gif,svg|max:5000",
-            // "upload_cv" => "required|max:10000",
+            'jenis_kelamin' => 'required',
+            'alamat' => 'required',
+            'no_hp' => 'required',
+            "upload_ktp" => "nullable|image|mimes:jpeg,png,jpg|max:5000",
+            "upload_npwp" => "nullable|image|mimes:jpeg,png,jpg|max:5000",
+            "upload_cv" => "nullable|mimes:jpeg,jpg,png,pdf|max:10000",
+            "upload_document" => "nullable|mimes:jpeg,jpg,png,pdf,xlsx,docx|max:10000",
         ]);
 
         $employee = Employee::findOrFail($id);
@@ -133,7 +135,47 @@ class EmployeeController extends Controller
         $employee->alamat = $request->alamat;
         $employee->no_hp = $request->no_hp;
         $employee->description = $request->description;
+        // dd($request->all());
+        // Remove KTP if requested
+        if ($request->hapus_ktp == 'hapus') {
+            $image_path = public_path('img/employee/' . $employee->upload_ktp ); // Value is not URL but directory file path
+            // dd($image_path);
+            // dd(File::exists($image_path));
+            if (File::exists($image_path)) {
+                // dd($image_path);
+                File::delete($image_path);
+                $employee->upload_ktp = null;
+            }
+        }
+        // dd('stop');
+        // Remove NPWP if requested
+        if ($request->hapus_npwp == 'hapus') {
+            $image_path = public_path('img/employee/'.$employee->upload_npwp); // Value is not URL but directory file path
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+                $employee->upload_npwp = null;
+            }
+        }
 
+        // Remove CV/RESUME if requested
+        if ($request->hapus_cv == 'hapus') {
+            $image_path = public_path('img/employee/'.$employee->upload_cv); // Value is not URL but directory file path
+            // dd($image_path);
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+                $employee->upload_cv = null;
+            }
+        }
+
+        // Remove Document if requested
+        if ($request->hapus_document == 'hapus') {
+            $image_path = public_path('img/employee/'.$employee->upload_document); // Value is not URL but directory file path
+            if (File::exists($image_path)) {
+                File::delete($image_path);
+                $employee->upload_document = null;
+            }
+        }
+        // dd("stop");
         if ($request->hasFile('upload_ktp')) {
             // Delete Img
             if ($employee->upload_ktp) {
@@ -144,7 +186,7 @@ class EmployeeController extends Controller
             }
             
             $image = $request->file('upload_ktp');
-            $name = time() . '.' . $image->getClientOriginalExtension();
+            $name = 'ktp' . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('img/employee/');
             $image->move($destinationPath, $name);
             $employee->upload_ktp = $name;
@@ -160,7 +202,7 @@ class EmployeeController extends Controller
             }
             
             $image = $request->file('upload_npwp');
-            $name = time() . '.' . $image->getClientOriginalExtension();
+            $name = 'npwp' . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('img/employee/');
             $image->move($destinationPath, $name);
             $employee->upload_npwp = $name;
@@ -176,10 +218,26 @@ class EmployeeController extends Controller
             }
             
             $image = $request->file('upload_cv');
-            $name = time() . '.' . $image->getClientOriginalExtension();
+            $name = 'cv' . time() . '.' . $image->getClientOriginalExtension();
             $destinationPath = public_path('img/employee/');
             $image->move($destinationPath, $name);
             $employee->upload_cv = $name;
+        }
+
+        if ($request->hasFile('upload_document')) {
+            // Delete Img
+            if ($employee->upload_document) {
+                $image_path = public_path('img/employee/'.$employee->upload_document); // Value is not URL but directory file path
+                if (File::exists($image_path)) {
+                    File::delete($image_path);
+                }
+            }
+            
+            $image = $request->file('upload_document');
+            $name = 'document' . time() . '.' . $image->getClientOriginalExtension();
+            $destinationPath = public_path('img/employee/');
+            $image->move($destinationPath, $name);
+            $employee->upload_document = $name;
         }
         
         $employee->save();

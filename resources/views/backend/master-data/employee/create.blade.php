@@ -157,6 +157,21 @@
                     </div>
 
                     <div class="form-group mb-3">
+                        <label for="upload_cv">Upload CV/RESUME</label>
+                        <div class="input-group">
+                            <input type="file" class="form-control @error('upload_cv') is-invalid @enderror" value="{{ old('upload_resume') }}" id="upload_cv" name="upload_cv">
+                        </div>
+  
+                        @error('upload_cv')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+  
+                        <div class="small text-danger">*Required (Max 10mb)</div>
+                      </div>
+
+                    <div class="form-group mb-3">
                       <label for="description">Description</label>
                       <textarea name="description" class="form-control" rows="3" placeholder="Description"></textarea>
 

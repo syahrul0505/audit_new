@@ -117,43 +117,84 @@ cursor: crosshair;
                     </div>
 
                     <div class="form-group mb-3">
-                      <label for="upload_ktp">Image KTP :</label>
-                      <img src="{{ asset('img/employee/'.($employee->upload_ktp ?? 'user.png')) }}" width="110px" class="image img" />
-
-                      <div class="input-group mt-3">
-                          <input type="file" class="form-control" id="upload_ktp" name="upload_ktp">
+                      <label for="upload_ktp">Image KTP :</label><br>
+                      <img src="{{ asset('img/employee/'.($employee->upload_ktp ?? 'user.png')) }}" id="foto_ktp" width="110px" class="image img" />
+                      <img src="https://www.freeiconspng.com/uploads/no-image-icon-6.png" id="ktp_default" width="110px" class="image img d-none" />
+                        <button type="button" class="btn btn-danger" onclick="removeKtp()">delete</button>
+                        <div class="input-group mt-3">
+                            <input class="@error('upload_ktp') is-invalid @enderror" type="hidden" name="hapus_ktp" id="hapus_ktp" value="hapus" disabled>
+                            <input  type="file" class="form-control @error('upload_ktp') is-invalid @enderror" name="upload_ktp" >
                       </div>
-                      {{-- <div class="small text-secondary">Kosongkan jika tidak mau diisi</div> --}}
+                      <div class="small text-secondary">Max 5mb</div>
+
+                        @error('upload_ktp')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
                     
                     <div class="form-group mb-3">
-                      <label for="upload_npwp">Image NPWP :</label>
-                      <img src="{{ asset('img/employee/'.($employee->upload_npwp ?? 'user.png')) }}" width="110px" class="image img" />
-
+                      <label for="upload_npwp">Image NPWP :</label><br>
+                      <img src="{{ asset('img/employee/'.($employee->upload_npwp ?? 'user.png')) }}" id="foto_npwp" width="110px" class="image img" />
+                      <img src="https://www.freeiconspng.com/uploads/no-image-icon-6.png" id="npwp_default" width="110px" class="image img d-none" />
+                      <button type="button" class="btn btn-danger" onclick="removeNPWP()">delete</button>
                       <div class="input-group mt-3">
-                          <input type="file" class="form-control" id="upload_npwp" name="upload_npwp">
+                        <input type="hidden" class="form-control @error('upload_npwp') is-invalid @enderror" name="hapus_npwp" id="hapus_npwp" value="hapus" disabled>
+                        <input  type="file" class="form-control @error('upload_npwp') is-invalid @enderror" id="upload_npwp" name="upload_npwp">
                       </div>
-                      {{-- <div class="small text-secondary">Kosongkan jika tidak mau diisi</div> --}}
+                      <div class="small text-secondary">Max 5mb</div>
+
+                        @error('upload_npwp')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
 
                     <div class="form-group mb-3">
                       <label for="upload_cv">Image CV/RESUME :</label>
-                      {{-- <img src="{{ asset('img/employee/'.($employee->upload_cv ?? 'user.png')) }}" width="110px" class="image img" /> --}}
+                        <div class="d-flex flex-wrap gap-3 ml-3">
+                            {{-- <button type="submit" name="pdf" value="pdf" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf"> {{ $employee->upload_cv }}</button></i> --}}
+                            @if (!$employee->upload_cv)
+                                <label for="">No CV/RESUME Found!</label>
+                            @else
+                                <a href="{{ asset('img/employee/'.$employee->upload_cv) }}" download="CV RESUME" id="dokumen_cv"  class="btn btn-danger waves-effect waves-light" target="_blank"><i class="bx bxs-file-pdf"> {{ $employee->upload_cv }}</i></a>
+                                <label for="" class="d-none" id="label_cv">CV/RESUME has been deleted!</label>
+                                <button type="button" class="btn btn-danger" onclick="removeCV()">delete</button>
+                            @endif
+                        </div>
+                        <div class="input-group mt-3">
+                            <input  type="hidden" name="hapus_cv" class="@error('upload_cv') is-invalid @enderror" id="hapus_cv" value="hapus" disabled>
+                            <input  type="file" class="form-control @error('upload_cv') is-invalid @enderror" id="upload_cv" name="upload_cv">
+                        </div>
 
-                      @if (substr($employee->upload_cv, -3) == 'pdf')
-                          <div class="d-flex flex-wrap gap-3 ml-3">
-                              {{-- <button type="submit" name="pdf" value="pdf" class="btn btn-danger waves-effect waves-light"> <i class="bx bxs-file-pdf"> {{ $employee->upload_cv }}</button></i> --}}
-                              <a href="{{ asset('img/employee/'.($employee->upload_cv ?? 'user.png')) }}"  class="btn btn-danger waves-effect waves-light" target="_blank"><i class="bx bxs-file-pdf"> {{ $employee->upload_cv }}</i></a>
-
-                          </div>
-                          @else
-                          <img class="" src="{{ asset('img/employee/user.png') }}" width="110px" class="image img">
-                          @endif
-                      <div class="input-group mt-3">
-                          <input type="file" class="form-control" id="upload_cv" name="upload_cv">
-                      </div>
-                      {{-- <div class="small text-secondary">Kosongkan jika tidak mau diisi</div> --}}
+                        @error('upload_cv')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
                     </div>
+
+                    <div class="form-group mb-3">
+                        <label for="upload_document">Image Document :</label>
+                        @if (!$employee->upload_document)
+                            <label for="">No Document Found!</label>
+                        @else
+                            <a href="{{ asset('img/employee/'.$employee->upload_document ) }}" download="Document" id="dokumen" class="btn btn-danger waves-effect waves-light" target="_blank"><i class="bx bxs-file-pdf"> {{ $employee->upload_document }}</i></a>
+                            <label for="" class="d-none" id="label_doc">CV/RESUME has been deleted!</label>
+                            <button type="button" class="btn btn-danger" onclick="removeDoc()">delete</button>
+                        @endif
+                        <div class="input-group mt-3">
+                            <input  type="hidden" name="hapus_document" class="@error('upload_document') is-invalid @enderror" id="hapus_doc" value="hapus" disabled>
+                            <input  type="file" class="form-control @error('upload_document') is-invalid @enderror" id="upload_document" name="upload_document">
+                        </div>
+                        @error('upload_document')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                        @enderror
+                      </div>
                     
                     <div class="form-group mb-3">
                       <label for="description">Description</label>
@@ -208,5 +249,33 @@ cursor: crosshair;
         e.preventDefault();
     }
   });
+
+    // Belajar Jquery, jangan Javascript Vanilla
+    function removeKtp() {
+        $('#foto_ktp').addClass('d-none');
+        $('#ktp_default').removeClass('d-none');
+        $('#hapus_ktp').attr('disabled', false);
+    }
+    
+    // Hapus Foto NPWP 
+    function removeNPWP() {
+        $('#foto_npwp').addClass('d-none');
+        $('#npwp_default').removeClass('d-none');
+        $('#hapus_npwp').attr('disabled', false);
+    }
+    
+    // Hapus Foto CV 
+    function removeCV() {
+        $('#dokumen_cv').addClass('d-none');
+        $('#label_cv').removeClass('d-none');
+        $('#hapus_cv').attr('disabled', false);
+    }
+    
+    // Hapus Foto DOC
+    function removeDoc() {
+        $('#dokumen').addClass('d-none');
+        $('#label_doc').removeClass('d-none');
+        $('#hapus_doc').attr('disabled', false);
+    }
 </script>
 @endsection
