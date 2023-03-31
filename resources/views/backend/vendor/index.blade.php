@@ -48,13 +48,13 @@
                     </div>
                 </div>
 
-                <div class="card-header" style="background-color: white !important; border-radius:10px 10px 0px 0px;">
+                <!--<div class="card-header" style="background-color: white !important; border-radius:10px 10px 0px 0px;">
                     <div class="row">
                         <div class="col-6">
                             @include('backend.components.flash-message')
                         </div>
                     </div>
-                </div>
+                </div>-->
 
                 <div class="card-body">
                     <div class="table-responsive">
