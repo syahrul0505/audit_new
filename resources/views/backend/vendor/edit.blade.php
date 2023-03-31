@@ -243,7 +243,7 @@
                 )
                 // changeOptionValue();
 
-                $("#amount"+rowCount).inputmask({"mask": "000.000.000"});
+                $("#amount"+rowCount).inputmask({"mask": "9.999.999.999,99"});
         }
 
     </script>
@@ -263,7 +263,7 @@
         $("#phone").inputmask({"mask": "999.999-99.99999999"});
         var rowCount = $('#contactTable tr').length;
         for (let index = 1; index < rowCount; index++) {
-            $("#amount"+index).inputmask({"mask": "000.000.000"});
+            $("#amount"+index).inputmask({"mask": "9.999.999.999,99"});
         }
 
     </script>
