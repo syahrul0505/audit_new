@@ -129,6 +129,15 @@
                                 </select>
                             </div>
 
+                            <div class="form-group mb-3">
+                                <label class="col-form-label">Kategori Belanja</label>
+                                <select class="form-select" id="type" name="status">
+                                    <option value="">Select Kategori</option>
+                                    <option value="raw" class="text-warning">Raw Material</option>
+                                    <option value="operasional" class="text-success">Operasional Kantor</option>
+                                </select>
+                            </div>
+
                                 <div class="form-group mb-3">
                                     <label for="">No Faktur Pajak</label>
                                     <input class="form-control @error('no_pajak') is-invalid @enderror"  type="text" id="phone" name="no_faktur" value="{{ ($vendor->no_faktur) }}" >
