@@ -63,7 +63,7 @@
                                 <tr>
                                     <th>No</th>
                                     {{-- <th>Employee Name</th> --}}
-                                    <th>Email</th>
+                                    <th>Vendor Name</th>
                                     <th>Status</th>
                                     <th>Note</th>
                                     <th>Total</th>
@@ -75,7 +75,7 @@
                                 @foreach ($vendor as $vendors)
                                 <tr>
                                     <td>{{ $loop->iteration }}</td>
-                                    <td>{{ $vendors->email ?? 'N/A'}}</td>
+                                    <td>{{ $vendors->name_vendor ?? 'N/A'}}</td>
                                     
                                     @if ($vendors->status == 'Pending')
                                     
